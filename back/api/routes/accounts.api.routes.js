@@ -12,4 +12,6 @@ router.post('/session', [validateAccount], controllers.loginAccount);
 router.delete('/session', [validateToken], controllers.logoutAccount);
 
 
+
+
 export default router;
