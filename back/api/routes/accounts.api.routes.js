@@ -7,6 +7,6 @@ const router = Router();
 router.post('/accounts', [validateAccount] , controllers.createAccount);
 // router.get('/accounts', controllers.getAccounts);
 
-router.post('/accounts/login', controllers.loginAccount);
+router.post('/session', [validateAccount], controllers.loginAccount);
 
 export default router;
