@@ -1,15 +1,16 @@
 import {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
-import authService from '../services/auth.service'
+import authService from '../service/autenticacion.service'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import './LoginPage.css'
 
 function LoginPage(){
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
-
     const navigate = useNavigate()
+
 
     const onChangeUserName = (event) =>{
         setUserName(event.target.value)
@@ -19,10 +20,13 @@ function LoginPage(){
         setPassword(event.target.value)
     }
 
+
+
     useEffect(()=>{
         authService.logout()
         localStorage.removeItem('token')
     }, [])
+
 
     const onSubmit = (event) =>{
         event.preventDefault()
@@ -44,23 +48,26 @@ function LoginPage(){
     }
 
     return(
+       <div className="page">
         <div className="container">
-            <Form>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
+            <Form onSubmit={onSubmit}>
+            <h1 className="text-center">Iniciar Sesion</h1>
+              <Form.Group className="col-mb-6">
+                <Form.Label>Usuario:</Form.Label>
+                <Form.Control type="text" placeholder="Tu usuario" value={userName} onChange={onChangeUserName} />
               </Form.Group>
         
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
+              <Form.Group className="col-mb-6" >
+                <Form.Label>Contraseña</Form.Label>
+                <Form.Control type="password" placeholder="Tu clave" value={password} onChange={onChangePassword}/>
               </Form.Group>
-              <Button variant="primary" type="submit">
-                Ingresar
+
+              <Button type="submit" className='button'>
+                INGRESAR
               </Button>
             </Form>
         </div>
-        
+        </div>
     )
 }
 
