@@ -16,4 +16,4 @@ async function validateToken(req, res, next) {
     next();
 }
 
-export  { validateToken };
+export  { validateToken }
