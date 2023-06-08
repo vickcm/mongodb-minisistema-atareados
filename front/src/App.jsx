@@ -9,12 +9,7 @@ function App(){
     const navigate = useNavigate()
     
     const onLogOut = () =>{
-      fetch('http://locahost:2023/api/auth/logout', {
-        method: 'POST',
-        headers: {
-          'auth-token': localStorage.getItem('token')
-        }
-        })
+      authService.logout()
     
         localStorage.removeItem('token')
     

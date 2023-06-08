@@ -1,71 +1,78 @@
 import {useEffect, useState} from 'react'
-import { useNavigate } from 'react-router-dom'
-import authService from '../service/autenticacion.service'
+// import { useNavigate } from 'react-router-dom'
+// import authService from '../service/autenticacion.service'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './LoginPage.css'
 
 function LoginPage(){
-    const [userName, setUserName] = useState('')
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
-    const navigate = useNavigate()
+ 
 
 
-    const onChangeUserName = (event) =>{
-        setUserName(event.target.value)
+    const onChangeEmail = (event) =>{
+        setEmail(event.target.value)
     }
 
     const onChangePassword = (event) =>{
         setPassword(event.target.value)
+
+
     }
 
-
-
-    useEffect(()=>{
-        authService.logout()
-        localStorage.removeItem('token')
-    }, [])
-
-
-    const onSubmit = (event) =>{
-        event.preventDefault()
-
-        authService.login({userName, password})
-        .then(({token, account})=>{
-            console.log("Sesion iniciada", {token, account})
+    const onSubmit = (event) => {
+        event.preventDefault() 
+        fetch('http://localhost:2023/api/session', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({email,password})
+        })
+        .then(async response =>  {
+            if(!response.ok){
+                throw await response.json()
+            }
             
-            localStorage.setItem('token', token)
+           return  response.json()
+        }) 
+        .then(data => {
+            const dataParse = JSON.stringify(data)
 
-            navigate('/', {replace: true}) // reemplaza la pagina actual en el historial
+            console.log( 'sesión iniciada:' + dataParse)
+           
         })
-        .catch(e=>{
-            console.log("Error al iniciar sesion", error)
-            setError(e.error.message)
+        .catch(err => {
+            setError(err.error.message)
         })
 
+    } 
+        
 
-    }
+
 
     return(
        <div className="page">
         <div className="container">
-            <Form onSubmit={onSubmit}>
+            <Form onSubmit={onSubmit}> 
             <h1 className="text-center">Iniciar Sesion</h1>
               <Form.Group className="col-mb-6">
-                <Form.Label>Usuario:</Form.Label>
-                <Form.Control type="text" placeholder="Tu usuario" value={userName} onChange={onChangeUserName} />
+                <Form.Label>Email:</Form.Label>
+                <Form.Control type="email"  placeholder="Tu email" value={email} onChange={onChangeEmail} />
               </Form.Group>
         
               <Form.Group className="col-mb-6" >
                 <Form.Label>Contraseña</Form.Label>
+
                 <Form.Control type="password" placeholder="Tu clave" value={password} onChange={onChangePassword}/>
               </Form.Group>
-
+               <p> {error} </p>
               <Button type="submit" className='button'>
                 INGRESAR
               </Button>
-            </Form>
+             </Form> 
         </div>
         </div>
     )

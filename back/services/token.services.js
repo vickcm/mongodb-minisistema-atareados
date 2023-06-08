@@ -15,6 +15,7 @@ async function createToken(account) {
   return token;
 }
 
+
 async function verifiedToken(token) {
   try {
     const payload = jwt.verify(token, "secret");
