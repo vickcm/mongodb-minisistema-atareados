@@ -21,6 +21,9 @@ function LoginPage(){
 
     const onSubmit = (event) => {
         event.preventDefault() 
+
+        // refactorizar a servicio 
+        
         fetch('http://localhost:2023/api/session', {
             method: 'POST',
             headers: {
