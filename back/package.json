@@ -1,7 +1,7 @@
 {
-  "name": "alumnos-minisistema",
+  "name": "atareados-minisistema",
   "version": "1.0.0",
-  "description": "un mini sistema de alumnos",
+  "description": "app de desafíos y tareas",
   "type": "module",
   "scripts": {
     "server": "cls && nodemon --ignore data/ app.js",

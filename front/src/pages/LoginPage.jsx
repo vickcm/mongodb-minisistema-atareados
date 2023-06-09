@@ -53,7 +53,7 @@ function LoginPage(){
         <div className="page">
             <div className="container">
                 <Form onSubmit={onSubmit}> 
-                    <h1 className="text-center">Iniciar Sesion</h1>
+                    <h1 className="text-center">Iniciar Sesión</h1>
                     <Form.Group className="col-mb-6">
                         <Form.Label>Email:</Form.Label>
                         <Form.Control type="email"  placeholder="Tu email" value={email} onChange={onChangeEmail} />
@@ -64,7 +64,7 @@ function LoginPage(){
                     </Form.Group>
                     <p> {error} </p>
                     <Button type="submit" className='button'>
-                        INGRESAR
+                        Ingresar
                     </Button>
                 </Form> 
             </div>
