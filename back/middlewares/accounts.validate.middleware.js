@@ -12,7 +12,7 @@ async function validateAccount(req, res, next) {
     req.body = validatedAccount;
     next();
   } catch (error) {
-    res.status(400).json({ error: { message: "Datos de cuenta no válidos", details: error.errors } });
+    res.status(400).json({ error })
   }
 }
 

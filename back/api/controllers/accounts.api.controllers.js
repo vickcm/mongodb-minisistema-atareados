@@ -31,14 +31,9 @@ async function loginAccount(req, res) {
     res.status(200).send({ message: "Login realizado con éxito", data: responseAccount });
   } catch (error) {
     console.log("Login Account Error:", error);
+    res.status(400).json({ error: { message: error.message } })
+
     
-    if (error.message === "No existe una cuenta con ese email") {
-      res.status(400).json({ error: { message: "El email ingresado no existe" } });
-    } else if (error.message === "La contraseña es incorrecta") {
-      res.status(400).json({ error: { message: "La contraseña ingresada es incorrecta" } });
-    } else {
-      res.status(500).json({ error: { message: "Error en el servidor" } });
-    }
   }
 }
 
