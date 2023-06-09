@@ -1,7 +1,7 @@
 function Homepages() {
   return (
     <div>
-      <h1>Home Page</h1>
+      <h1>ACA PONEMOS LOS DESAFIOS CREADOS POR EL USUARIO</h1>
     </div>
   );
 }

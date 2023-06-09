@@ -1,5 +1,6 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
+import Home from "./Home/HomePage";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import authService from "./service/autentication.service";
@@ -44,6 +45,7 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      <Home />
       {/* Aquí coloca el contenido de la página */}
     </>
   );
