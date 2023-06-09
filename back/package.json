@@ -4,7 +4,8 @@
   "description": "un mini sistema de alumnos",
   "type": "module",
   "scripts": {
-    "server": "clear && nodemon --ignore data/ app.js"
+    "server": "cls && nodemon --ignore data/ app.js",
+    "servermac":"clear && nodemon --ignore data/ app.js"
   },
   "author": "",
   "license": "ISC",
