@@ -5,6 +5,8 @@ import './LoginPage.css'
 import { useNavigate } from 'react-router-dom';
 
 function LoginPage(){
+    const navigate = useNavigate()
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
@@ -18,7 +20,6 @@ function LoginPage(){
     }
 
     const onSubmit = (event) => {
-        const navigate = useNavigate()
         event.preventDefault() 
         fetch('http://localhost:2023/api/session', {
             method: 'POST',

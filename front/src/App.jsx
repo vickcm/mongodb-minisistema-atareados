@@ -1,7 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import authService from './service/autenticacion.service';
+import authService from './service/autentication.service';
 import { useNavigate, Link} from 'react-router-dom';
 
 
@@ -11,6 +11,7 @@ function App(){
     
     const onLogOut = () =>{
       authService.logout()
+      console.log('sesión cerrada', localStorage.getItem('token'))
     
         localStorage.removeItem('token')
     
