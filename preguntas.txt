@@ -1,0 +1,4 @@
+cómo hacer para cuando haya un error en la contraseña, no salga el mensaje primero del matches del schema. 
+este mensaje de error, está cancelando el resto de los mensajes. 
+cuando la contraseña cumple con los requerimientos, si muestra perfectamente los dos mensajes. error en contraseña o error en usuario. 
+
