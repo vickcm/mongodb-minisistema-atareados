@@ -1,9 +1,8 @@
-import {useEffect, useState} from 'react'
-// import { useNavigate } from 'react-router-dom'
-// import authService from '../service/autenticacion.service'
+import { useState} from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './LoginPage.css'
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage(){
     const [email, setEmail] = useState('')
@@ -19,6 +18,7 @@ function LoginPage(){
     }
 
     const onSubmit = (event) => {
+        const navigate = useNavigate()
         event.preventDefault() 
         fetch('http://localhost:2023/api/session', {
             method: 'POST',
@@ -37,6 +37,8 @@ function LoginPage(){
             setError('')
             localStorage.setItem('token', data.token)
             console.log( 'sesión iniciada:', data.account, data.token)
+            navigate('/desafio', {replace: true})
+
         })
         .catch(err => {
             setError(err.error.message)
