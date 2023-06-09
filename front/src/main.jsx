@@ -17,12 +17,13 @@ const router = createBrowserRouter([
     element: <RoutePrivate><App /></RoutePrivate>,
     errorElement: <Error404 />,
     children: [
-      { path: "", element: <HomePages /> },
+      { path: "/desafio", element: <Desafio /> },
       { path: "recompensa", element: <Recompensa /> },
     ],
   },
   { path: "/login", element: <LoginPage /> },
-  { path: "/desafio", element: <Desafio /> },
+  { path: "/", element: <HomePages /> },
+  
 
 ]);
 
