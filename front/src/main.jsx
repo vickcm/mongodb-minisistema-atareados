@@ -10,6 +10,7 @@ import HomePages from "./Home/HomePage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/mainCss.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import FormDesafio from "./Desafio/FormDesafio";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
     errorElement: <Error404 />,
     
     children: [
-      { path: "desafio", element: <Desafio /> },
+      { path: "desafio", element: <FormDesafio /> },
       { path: "recompensa", element: <Recompensa /> },
       { path: "/", element: <HomePages /> },
     ],

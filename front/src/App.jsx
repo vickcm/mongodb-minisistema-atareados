@@ -42,6 +42,11 @@ function App() {
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
+            <Nav.Link className="linknav" as={Link} to="/desafio">
+              Desafío
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
             <Nav.Link className="linknav" onClick={onLogOut}>
               Salir
             </Nav.Link>
