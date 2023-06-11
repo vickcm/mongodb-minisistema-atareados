@@ -4,8 +4,10 @@ import App from "./App";
 import Error404 from "./Pages/Error404";
 import LoginPage from "./Pages/LoginPage";
 import RoutePrivate from "./Components/RoutePrivate";
-import DesafioPage from "./Pages/DesafioPages";
+import DesafioPage from "./Pages/CrearDesafioPages";
 import HomePages from "./Pages/HomePage";
+import Tareas from "./Pages/CrearTareaPages"
+import Panel from "./Pages/DesafioPanelPages"
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/mainCss.css";
@@ -20,6 +22,9 @@ const router = createBrowserRouter([
     
     children: [
       { path: "desafio", element: <DesafioPage /> },
+      { path: "tareas", element: <Tareas /> },
+      { path: "panel", element: <Panel /> },
+
       { path: "/", element: <HomePages /> },
     ],
   },

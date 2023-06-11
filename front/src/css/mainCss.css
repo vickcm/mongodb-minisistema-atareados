@@ -1,5 +1,5 @@
 body{
-    background-color: #fdfbfb;
+    background-color: #FFFDF6;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -10,15 +10,57 @@ body{
 
 }
 
+.header{
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    background-color: #4F70B6 !important;
+    color: white !important;
+    padding-left: 20px;
+}
+
+.navBar{
+    color: white !important;
+    background-color: #4F70B6 !important;
+}
+
+.Titulo-Nav{
+    color:white !important;
+}
 
 .nav{
-    color: black !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    
 }
 
-.linknav{
-    color: black !important;
-    font-size: 14px;
+.navbar-toggler{
+    color: white !important;
+    padding: 5px !important;
+    margin-left: auto !important;
+margin-right: auto !important;
+ justify-content: right !important;
+    align-items: right !important;
 }
+
+.navbar-toggler-icon{
+    color: white !important;
+    width: 1em !important;
+    height: 1em !important;
+   
+}
+
+.nav-item{
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin: 5px !important;
+    padding: 5px !important;
+    border-radius: 5px !important;
+}
+
+
 
 .titulo-home{
     padding: 20px;

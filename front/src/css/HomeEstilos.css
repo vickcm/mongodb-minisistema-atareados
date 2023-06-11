@@ -1,0 +1,48 @@
+
+.img-home{
+    margin-left: auto ;
+    margin-right: auto;
+    align-items: center;
+    width: 50%;
+}
+
+.image{
+  width: 100%;
+}
+
+.btn-home{
+    margin-left: auto ;
+    margin-right: auto;
+    text-align: center;
+    background-color: #02F9C1 ;
+    border: none;
+    border-radius: 5px;
+    width: 250px ;
+    height: 40px;
+    color: #333333;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif ;
+}
+
+.aling-button{
+    
+    margin-left: auto ;
+    margin-right: auto;
+    text-align: center;
+    margin-top: 30px !important;
+}
+
+.aling-a{
+    margin-left: auto ;
+    margin-right: auto;
+    text-align: center;
+    margin-top: 20px !important;
+
+}
+.link-crear{
+    text-decoration: none;
+    color: #333333;
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif ;
+    padding-bottom: 50px;
+}

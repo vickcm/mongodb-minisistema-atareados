@@ -1,13 +1,60 @@
-.titulo{
-    margin-top: 20px;
+.titulo h1{
+    font-family: 'Montserrat', sans-serif ;
+    font-size: 30px;
+    font-weight: 100;
+    color: #333333;
+    margin-bottom: 20px;
+    text-align: center;
+    margin-top:30px;
+    
 }
-.form_tareas_list{
-    margin-top: 10px !important;
-}
-.form{
-    margin-top: 20px;
+.titulo p{
+    font-family: 'Montserrat', sans-serif ;
+    font-size: 16px;
+    font-weight: 100;
+    color: #333333;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-.button{
-    margin-top: 20px;
+
+.aling-button-desafio{
+    margin-left: auto ;
+    margin-right: auto;
+    text-align: center;
+    background-color: #02F9C1 ;
+    border: none;
+    border-radius: 5px;
+    width: 350px;
+    height: 40px;
+    color: #333333;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif ;
+    margin-bottom:30px;
+}
+
+.container-desafio{
+    text-align: center;
+    margin-left: auto ;
+    margin-right: auto;
+    border: none;
+    border-radius: 5px;
+    width: 250px;
+    height: 40px;
+    color: #333333;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif ;
+
+}
+
+.rowDesafio{
+    padding: 10px;
+}
+
+.form-select{
+    margin-top: 15px !important;
+    width: 97% !important;
+    align-items: center;
+    margin-left: auto ;
+    margin-right: auto;
 }
