@@ -2,7 +2,11 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import Image from "react-bootstrap/Image";
 import authService from "./service/autentication.service";
+import Logo from "./imagenes/ATAREADOS_2.png"
+import Logo1 from "./imagenes/ATAREADOS_1.png"
+
 import "./css/mainCss.css";
 import { useNavigate, Link, Outlet } from "react-router-dom";
 
@@ -26,7 +30,9 @@ function App() {
     <header className="header">
       <Navbar collapseOnSelect expand="lg" className="navBar">
       <Container>
-        <Navbar.Brand className="Titulo-Nav">Atareados</Navbar.Brand>
+        <Navbar.Brand className="Titulo-Nav"> 
+        <Image src={Logo} className="Logo-Nav" />
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" className="light"/>
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav>
