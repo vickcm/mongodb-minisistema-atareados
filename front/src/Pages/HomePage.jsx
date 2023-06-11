@@ -4,10 +4,6 @@ import '../css/mainCss.css'
 function Homepages() {
   return (
     <>
-    <div>
-      <h1 className='titulo-home'>ACA PONEMOS LOS DESAFIOS CREADOS POR EL USUARIO</h1>
-    </div>
-
   
         <Card style={{ width: '18rem' }} className='card-home'>
           <Card.Body>

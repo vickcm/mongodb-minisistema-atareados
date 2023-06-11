@@ -1,7 +1,7 @@
 import React from "react";
-import Home from "./Home/HomePage";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
+import NavBarComponente from "./Components/NavBarComponente";
+// import Nav from "react-bootstrap/Nav";
+// import Navbar from "react-bootstrap/Navbar";
 import authService from "./service/autentication.service";
 import "./css/mainCss.css";
 import { useNavigate, Link, Outlet } from "react-router-dom";
@@ -21,7 +21,7 @@ function App() {
   return (
     <>
       <div>
-        <Nav variant="tabs" defaultActiveKey="/">
+        {/* <Nav variant="tabs" defaultActiveKey="/">
           <div className="logo">
             <Navbar.Brand href="#home">Atareados</Navbar.Brand>
           </div>
@@ -51,8 +51,8 @@ function App() {
               Salir
             </Nav.Link>
           </Nav.Item>
-        </Nav>
-
+        </Nav> */}
+        <NavBarComponente />
         <Outlet />
       </div>
 

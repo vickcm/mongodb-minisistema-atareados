@@ -1,7 +1,7 @@
 import { useState} from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import './LoginPage.css'
+import '../css/LoginPage.css'
 import { useNavigate } from 'react-router-dom';
 
 function LoginPage(){

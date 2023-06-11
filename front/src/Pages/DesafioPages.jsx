@@ -4,7 +4,7 @@ import { Container } from 'bootstrap-4-react/lib/components/layout';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import './FormDesafioStyle.css'
+import '../css/FormDesafioStyle.css'
 
 function FormDesafio() {
   return (

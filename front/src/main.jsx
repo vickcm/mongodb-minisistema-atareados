@@ -1,16 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import Desafio from "./Desafio/FormDesafio";
-import Recompensa from "./Recompensas/RecompensasUsuarios";
 import Error404 from "./Pages/Error404";
 import LoginPage from "./Pages/LoginPage";
-import RoutePrivate from "./components/RoutePrivate";
-import HomePages from "./Home/HomePage";
+import RoutePrivate from "./Components/RoutePrivate";
+import DesafioPage from "./Pages/DesafioPages";
+import HomePages from "./Pages/HomePage";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/mainCss.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import FormDesafio from "./Desafio/FormDesafio";
+
 
 const router = createBrowserRouter([
   {
@@ -19,8 +19,7 @@ const router = createBrowserRouter([
     errorElement: <Error404 />,
     
     children: [
-      { path: "desafio", element: <FormDesafio /> },
-      { path: "recompensa", element: <Recompensa /> },
+      { path: "desafio", element: <DesafioPage /> },
       { path: "/", element: <HomePages /> },
     ],
   },
