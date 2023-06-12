@@ -8,6 +8,7 @@ import DesafioPage from "./Pages/CrearDesafioPages";
 import HomePages from "./Pages/HomePage";
 import Tareas from "./Pages/CrearTareaPages"
 import Panel from "./Pages/DesafioPanelPages"
+import PerfilPage from "./Pages/PerfilPage";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/mainCss.css";
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
       { path: "desafio", element: <DesafioPage /> },
       { path: "tareas", element: <Tareas /> },
       { path: "panel", element: <Panel /> },
+      { path: "perfil", element: <PerfilPage /> },
 
       { path: "/", element: <HomePages /> },
     ],

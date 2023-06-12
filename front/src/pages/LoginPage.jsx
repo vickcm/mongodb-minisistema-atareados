@@ -52,7 +52,7 @@ function LoginPage(){
     return(
         <div className="page">
             <div className="container">
-                <Form onSubmit={onSubmit}> 
+                <Form onSubmit={onSubmit} className='form-login'> 
                     <h1 className="text-center">Iniciar Sesión</h1>
                     <Form.Group className="col-mb-6">
                         <Form.Label>Email:</Form.Label>

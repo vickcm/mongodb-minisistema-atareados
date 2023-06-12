@@ -73,7 +73,7 @@ function App() {
             </Nav.Item>
 
             <Nav.Item>
-              <Nav.Link className="linknav" as={Link} to="/Perfil">
+              <Nav.Link className="linknav" as={Link} to="/perfil">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
