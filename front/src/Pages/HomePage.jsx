@@ -9,24 +9,22 @@ import '../css/HomeEstilos.css'
 function Homepages() {
   return (
     <>
-  
     <Container>
       <Row>
         <Col>
-        <div className="img-home">
-          <Image src={ImageHome} className='image'/>
+          <div className="img-home">
+            <Image src={ImageHome} className='image'/>
           </div>
         </Col>
         <div className="aling-button">
           <button className="btn-home">Ir a Panel</button>
-          </div>
-          <div className="aling-a">
+        </div>
+        <div className="aling-a">
           <a className="link-crear">¿Quieres crear un desafio?</a>
-          </div>
+        </div>
       </Row>
     </Container>
-  
-        </>
+    </>
   );
 }
 
