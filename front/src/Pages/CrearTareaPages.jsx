@@ -10,7 +10,7 @@ function TareasForm() {
   return (
     <>
    <Container className="container-desafio">
-    <Form>
+    <Form className="form-desafio">
     <div className='titulo'>
       <h1>El titulo del desafio</h1>
       <p>Carga las tareas que consideres necesarias</p>

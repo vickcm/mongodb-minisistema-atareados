@@ -10,7 +10,7 @@ function FormDesafio() {
   return (
     <>
    <Container className="container-desafio">
-    <Form>
+    <Form className="form-desafio">
     <div className='titulo'>
       <h1>Crea tu desafio</h1>
       <p>Carga los datos para crear el desafio</p>

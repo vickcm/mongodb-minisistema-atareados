@@ -5,9 +5,8 @@ import Navbar from "react-bootstrap/Navbar";
 import Image from "react-bootstrap/Image";
 import authService from "./service/autentication.service";
 import Logo from "./imagenes/ATAREADOS_2.png"
-import Logo1 from "./imagenes/ATAREADOS_1.png"
 
-import "./css/mainCss.css";
+import "./css/AppEstilos.css";
 import { useNavigate, Link, Outlet } from "react-router-dom";
 
 
@@ -26,16 +25,12 @@ function App() {
 
   return (
     <>
-      <div>
-    <header className="header">
-      <Navbar collapseOnSelect expand="lg" className="navBar">
+      <Navbar className="navBar">
       <Container>
-        <Navbar.Brand className="Titulo-Nav"> 
-        <Image src={Logo} className="Logo-Nav" />
+          <Navbar.Brand className="Titulo-Nav"> 
+        <Image src={Logo} className="logo-nav"/>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" className="light"/>
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav>
+        <Nav className="me-auto">
 
             <Nav.Item>
               <Nav.Link className="linknav" as={Link} to="/">
@@ -113,15 +108,9 @@ function App() {
               </Nav.Link>
             </Nav.Item>
           </Nav>
-        </Navbar.Collapse>
       </Container>
     </Navbar>
-    </header>
-
-
-
         <Outlet />
-      </div>
 
       {/* // tiene que ser outlet  */}
 
