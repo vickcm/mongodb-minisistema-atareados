@@ -1,15 +1,9 @@
-import yup from 'yup';
+import * as yup from 'yup';
 
-// Schema para validar datos del perfil 
-// necesitamos agregar el user_id validado, para poder obtener el perfil del usuario que ingresó. 
+const profileSchema = yup.object().shape({
+  username: yup.string().required('El nombre de usuario es obligatorio'),
+  edad: yup.number().required('La edad es obligatoria').positive('La edad debe ser un número positivo'),
+});
 
-const profileSchema = yup.object({
-    name: yup.string().required(),
-    age: yup.number().integer().min(6).required(),
-    location: yup.string().required()
-})
-
-
-
-export { profileSchema };
+export default profileSchema;
 
