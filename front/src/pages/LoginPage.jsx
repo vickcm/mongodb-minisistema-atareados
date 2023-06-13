@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import '../css/LoginPage.css'
 import { useNavigate } from 'react-router-dom';
+import authService from '../service/autentication.service.js';
 
 function LoginPage(){
     const navigate = useNavigate()
@@ -21,32 +22,24 @@ function LoginPage(){
 
     const onSubmit = (event) => {
         event.preventDefault() 
+        console.log('submit', email, password)
+        authService.login({email, password})
 
-        // refactorizar a servicio 
-        
-        fetch('http://localhost:2023/api/session', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({email,password})
-        })
-        .then(async response =>  {
-            if(!response.ok){
-                throw await response.json()
-            }
-            return  response.json()
-        }) 
-        .then(({data}) => {
+        .then((data) => {
+            console.log("data", data.responseAccount.token)
+            
             setError('')
-            localStorage.setItem('token', data.token)
-            console.log( 'sesión iniciada:', data.account, data.token)
-            navigate('/desafio', {replace: true})
 
+            localStorage.setItem('token', data.responseAccount.token)
+
+            navigate('/desafio', {replace: true})
+           
         })
         .catch(err => {
             setError(err.error.message)
         })
+
+      
     } 
 
     return(

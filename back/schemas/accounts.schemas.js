@@ -17,6 +17,11 @@ const accountSchema = yup.object({
 
 })
 
-export { accountSchema };
+const loginAccountSchema = yup.object({
+  email: yup.string().email().required(),
+  password: yup.string().required()
+});
+
+export { accountSchema, loginAccountSchema };
 
     

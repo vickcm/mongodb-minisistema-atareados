@@ -28,7 +28,8 @@ async function loginAccount(req, res) {
     };
     console.log("Login Account Response:", responseAccount);
 
-    res.status(200).send({ message: "Login realizado con éxito", data: responseAccount });
+    res.status(200).send({ message: "Login realizado con éxito", responseAccount });
+
   } catch (error) {
     console.log("Login Account Error:", error);
     res.status(400).json({ error: { message: error.message } })

@@ -1,0 +1,25 @@
+  // refactorizar a servicio 
+        
+       /*  fetch('http://localhost:2023/api/session', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({email,password})
+        })
+        .then(async response =>  {
+            if(!response.ok){
+                throw await response.json()
+            }
+            return  response.json()
+        }) 
+        .then(({data}) => {
+            setError('')
+            localStorage.setItem('token', data.token)
+            console.log( 'sesión iniciada:', data.account, data.token)
+            navigate('/desafio', {replace: true})
+
+        })
+        .catch(err => {
+            setError(err.error.message)
+        }) */

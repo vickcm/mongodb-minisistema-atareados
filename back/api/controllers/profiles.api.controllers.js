@@ -1,18 +1,18 @@
-import * as services from "../../services/profiles.services.js";
+import * as profileService from '../../services/profiles.services.js'
 
 async function createProfile(req, res) {
-  try {
-
-    const userId = req.userId; // Obtén el userId del usuario autenticado desde el middleware de validación del token
-    console.log(userId) // Obtén el userId del usuario autenticado desde el payload del token
-
-    await services.createProfile(req.body, userId);
-
-    res.status(200).send({ message: "Perfil creado con éxito" });
-  } catch (error) {
-    console.log("Create Profile Error:", error);
-    res.status(500).json({ error: { message: "Error en el servidor" } });
+  console.log('Create Profile Request:', req.body); // Agrega este console.log
+  console.log('Create Profile Account:', req.account); // Agrega este console.log
+  return profileService.createProfile(req.body, req.account)
+  .then (() => {
+    res.status(201).json({ message: "Perfil creado exitosamente." })
+  })
+  .catch(err => {
+    res.status(400).json({ error: { message: err.message } });
   }
+  );
+
+
 }
 
 
