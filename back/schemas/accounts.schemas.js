@@ -12,7 +12,7 @@ const accountSchema = yup.object({
     .required()
     .matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]+$/,
-        'La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un número'
+        'La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un número - 6 caractres'
       ),
 
 })

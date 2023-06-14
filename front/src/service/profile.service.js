@@ -1,13 +1,12 @@
-// import API from './api.service'
+import API from './api.service'
 
-// async function getCurrent() {
-//     return API.call({ uri: 'profiles' })
-// }
 
-// export {
-//     getCurrent
-// }
+async function createProfile(profile) {
+    return API.call({ uri: 'profiles', method: 'POST', body: profile })
+}
 
-// export default {
-//     getCurrent
-// }
+export default {
+    createProfile
+}
+
+

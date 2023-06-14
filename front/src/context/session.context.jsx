@@ -1,56 +1,56 @@
-// import { createContext, useContext, useEffect, useState } from "react";
-// import { useNavigate } from 'react-router-dom'
-// import profileService from './service/profile.service'
+import { createContext, useContext, useState, useEffect, useCallback, useMemo } from "react"
+import {useNavigate} from 'react-router-dom'
+
+// import profileService from '../services/profile.service'
+import authService from '../service/autentication.service.js'
+
+const SessionContext = createContext()
+
+function useSession(){
+    return useContext(SessionContext)
+}
+
+/* function useProfile(){
+    const {profile} = useSession()
+    return profile
+} */
+
+function SessionProvider({children}){
+    // const [profile, setProfile] = useState({})
+    const navigate = useNavigate()
+
+    const onLogout = useCallback(() => {
+        authService.logout()
+        localStorage.removeItem('token')
+        navigate('/login', {replace: true})
+    }, [navigate])
 
 
-// const SessionContext = createContext()
+   /*  useEffect(() => {
+        profileService.getCurrent()
+        .then((profile) => {
+            setProfile(profile)
+        })
+    }, []) */
 
-// function SessionProvider({children}){
-//     const navigate = useNavigate()
-//     const [profile, userId] = useState({})
+    const value = useMemo(()=>{
+        return {
+           
+            onLogout
+        }
+    }, [ onLogout])
+    
 
-//     const onLogout = () =>{
-//         localStorage.removeItem('token')
-//         navigate('/login', {replace: true})
-//     }
+    
+    return (
+        <SessionContext.Provider value={value}>
+            {children}
+        </SessionContext.Provider>
+            )
+}
 
-//     useEffect(()=>{
-//         profileService.getCurrent()
-//         .then(data =>{
-//             userId(data)
-//         })
-//     }, [])
 
-//     return (<SessionContext.Provider value={{profile, onLogout}}>
-//         {children}
-//     </SessionContext.Provider>)
-// }
-
-// function useProfile(){
-//     const {profile} = useContext(SessionContext)
-//     return profile
-// }
-
-// function useLogout(){
-//     const {onLogout} = useContext(SessionContext)
-//     return onLogout
-// }
-
-// function useSession(){
-//     const {profile, onLogout} = useContext(SessionContext)
-//     return {profile, onLogout}
-// }
-
-// export {
-//     SessionProvider,
-//     useProfile,
-//     useLogout,
-//     useSession
-// }
-
-// export default {
-//     SessionProvider,
-//     useProfile,
-//     useLogout,
-//     useSession
-// }
+export {
+    useSession,
+    SessionProvider
+}

@@ -1,33 +1,32 @@
 import React from "react";
-import authService from "./service/autentication.service";
-import Header from "./Components/HeaderNav";
 import "./css/AppEstilos.css";
-import { useNavigate,Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import MainNav from "./Components/MainNav";
+import { SessionProvider } from './context/session.context'
+
 
 
 
 function App() {
-  const navigate = useNavigate();
 
-  const onLogOut = () => {
+/*   const onLogout = () => {
     authService.logout();
     console.log("sesión cerrada", localStorage.getItem("token"));
 
     localStorage.removeItem("token");
 
     navigate("/login", { replace: true });
-  };
+  }; */
 
   return (
     <>
+      <SessionProvider>
       <MainNav/>
 
         <Outlet />
+      </SessionProvider>
 
-      {/* // tiene que ser outlet  */}
-
-      {/* Aquí coloca el contenido de la página */}
+      
     </>
   );
 }

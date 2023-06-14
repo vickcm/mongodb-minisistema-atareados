@@ -7,6 +7,11 @@ export async function logout() {
     return API.call({ uri: 'session', method: 'DELETE' })
 }
 
+export  async function createAccount(account) {
+    return API.call({ uri: 'accounts', method: 'POST', body: account })
+}
+
+
 
 
 export default {
