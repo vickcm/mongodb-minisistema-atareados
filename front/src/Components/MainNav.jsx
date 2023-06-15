@@ -12,7 +12,10 @@ return(
 <Navbar className="navBar">
       <Container>
           <Navbar.Brand className="Titulo-Nav"> 
+          <Nav.Link className="linknav" as={Link} to="/">
         <Image src={Logo} className="logo-nav"/>
+        </Nav.Link>
+
         </Navbar.Brand>
         <Nav className="me-auto">
             <Nav.Item>
