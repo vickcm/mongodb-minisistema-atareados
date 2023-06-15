@@ -14,7 +14,7 @@ function FormDesafio() {
   const navigate = useNavigate()
 
   const [title, setTitle] = useState('')
-  const [members, setMembers] = useState('')
+  const [members, setMembers] = useState([])
   const [deadline, setDeadline] = useState('')
   const [error, setError] = useState('')
 
@@ -22,9 +22,10 @@ function FormDesafio() {
     setTitle(event.target.value)
   }
 
-  const onChangeMembers = (event) =>{
-    setMembers(event.target.value)
-  }
+  const onChangeMembers = (event) => {
+    const membersArray = event.target.value.split(',');
+    setMembers(membersArray);
+  };
 
   const onChangeDate = (event) =>{
     setDeadline(event.target.value)
@@ -38,6 +39,7 @@ function FormDesafio() {
           members,
           deadline
       }
+
       desafioService.createChallenge(challenge)
   
       .then(({challenge}) => {
@@ -66,7 +68,7 @@ function FormDesafio() {
         </div>
         <Row className="mb-3 rowDesafio">
           <Form.Group as={Col} md="4"  controlId="titulo">
-            <Form.Label>Titulo del Desafio</Form.Label>
+            <Form.Label>Título del Desafio</Form.Label>
             <Form.Control type="titulo"   value={title} onChange={onChangeTitle}/>
           </Form.Group>
           <Form.Group as={Col} md="4"  controlId="equipo">
@@ -79,7 +81,7 @@ function FormDesafio() {
           </Form.Group>
         </Row>
         <div className="aling-button-desafio">
-          <Button  className="btn-desfio">Crear las tareas</Button>
+          <Button  className="btn-desfio">Crear Desafío</Button>
         </div>
       </Form>
     </Container>
