@@ -1,3 +1,4 @@
+
 import API from './api.service'
 
 export async function login({email, password}) {
@@ -11,10 +12,8 @@ export  async function createAccount(account) {
     return API.call({ uri: 'accounts', method: 'POST', body: account })
 }
 
-
-
-
 export default {
     logout,
-    login
+    login,
+    createAccount
 }

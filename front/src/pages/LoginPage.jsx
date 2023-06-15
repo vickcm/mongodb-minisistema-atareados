@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import '../css/LoginPage.css'
 import { useNavigate } from 'react-router-dom';
 import authService from '../service/autentication.service.js';
+import { Link } from 'react-router-dom';
 
 function LoginPage(){
     const navigate = useNavigate()
@@ -32,14 +33,11 @@ function LoginPage(){
 
             localStorage.setItem('token', data.responseAccount.token)
 
-            navigate('/desafio', {replace: true})
-           
+            navigate('/crearperfil', {replace: true})
         })
         .catch(err => {
             setError(err.error.message)
         })
-
-      
     } 
 
     return(
@@ -59,6 +57,9 @@ function LoginPage(){
                     <Button type="submit" className='button'>
                         Ingresar
                     </Button>
+                    <Link to="/register" className="btn">
+                        ¿Aún no tienes cuenta? ¡Regístrate!
+                    </Link>
                 </Form> 
             </div>
         </div>

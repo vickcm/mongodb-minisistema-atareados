@@ -15,7 +15,6 @@ return(
         <Image src={Logo} className="logo-nav"/>
         </Navbar.Brand>
         <Nav className="me-auto">
-
             <Nav.Item>
               <Nav.Link className="linknav" as={Link} to="/">
                 <svg
@@ -23,7 +22,7 @@ return(
                   width="20"
                   height="20"
                   fill="white"
-                  classname="bi bi-house"
+                  className="bi bi-house"
                   viewBox="0 0 16 16"
                 >
                   <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z" />
@@ -38,7 +37,7 @@ return(
                   width="20"
                   height="20"
                   fill="white"
-                  classname="bi bi-journal-plus"
+                  className="bi bi-journal-plus"
                   viewBox="0 0 16 16"
                 >
                   <path
@@ -58,7 +57,7 @@ return(
                   width="20"
                   height="20"
                   fill="white"
-                  classname="bi bi-person-circle"
+                  className="bi bi-person-circle"
                   viewBox="0 0 16 16"
                 >
                   <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
@@ -77,7 +76,7 @@ return(
                   width="20"
                   height="20"
                   fill="white"
-                  classname="bi bi-box-arrow-in-right"
+                  className="bi bi-box-arrow-in-right"
                   viewBox="0 0 16 16"
                 >
                   <path
