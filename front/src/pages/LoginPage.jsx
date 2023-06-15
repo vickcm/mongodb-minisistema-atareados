@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import authService from '../service/autentication.service.js';
 import { Link } from 'react-router-dom';
 
+// para hacer ** cuando el usuario ya tiene perfil creado, llevarlo a la pagina de desafios, si no lo tiene llevarlo a crear perfil
+
 function LoginPage(){
     const navigate = useNavigate()
 
@@ -32,6 +34,7 @@ function LoginPage(){
             setError('')
 
             localStorage.setItem('token', data.responseAccount.token)
+
 
             navigate('/crearperfil', {replace: true})
         })
