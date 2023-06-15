@@ -56,7 +56,7 @@ function CreatePerfilPage() {
       <Container className="container-perfil">
         <Form className="form-perfil" onSubmit={onSubmit}>
           <div className="img-perfil">
-            <Image src={ImagePerfil} width="50%" rounded />
+            <Image src={ImagePerfil} width="30%" className='img-perfil' />
           </div>
           <Row className="mb-3 rowDesafio">
             <Form.Group
@@ -75,9 +75,11 @@ function CreatePerfilPage() {
                 placeholder="juanjose2023"
               />
             </Form.Group>
-            <Form.Group className="label-perfil" controlId="age">
+            <Form.Group   as={Col}
+              md="6" className="label-perfil" controlId="age">
               <Form.Label className="nombre-perfil">Edad</Form.Label>
               <Form.Control
+              
                 className="place-perfil"
                 onChange={onChangeAge}
                 value={age}

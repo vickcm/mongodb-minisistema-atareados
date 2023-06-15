@@ -58,6 +58,19 @@ margin-bottom: 100px;
     font-family: 'Montserrat', sans-serif !important; ;
 }
 
+
+.title{
+    margin-top: 20px;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+.img-perfil{
+    border-radius: 50% !important;
+}
 @media ((max-width: 600px)) {
     .form-perfil{
         width: 90%;

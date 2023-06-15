@@ -20,11 +20,14 @@ function PerfilPage() {
     <>
       <Container className="container-perfil">
         <div className="img-perfil">
-          <Image src={ImagePerfil} width="50%" rounded />
+          <Image src={ImagePerfil} width="30%"  className='img-perfil'/>
         </div>
         <div className=""> 
-          <h2>
-            Tu perfil es: {profiles.username} y tu edad es: {profiles.age}
+          <h2 className='title'>
+            Tu perfil es:  {profiles.username} 
+          </h2>
+          <h2  className='title'>
+            Tu edad es:  {profiles.age}
           </h2>
         </div>
       </Container>

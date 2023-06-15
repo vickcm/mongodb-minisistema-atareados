@@ -11,6 +11,7 @@ import Panel from "./Pages/DesafioPanelPages"
 import CreatePerfilPage from "./Pages/CreatePerfilPage";
 import RegisterPage from "./Pages/RegisterPage";
 import PerfilPage from "./Pages/PerfilPage";
+import CrearTareasPages from "./Pages/CrearTareaPages"
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/mainCss.css";
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
       { path: "panel", element: <Panel /> },
       { path: "crearperfil", element: <CreatePerfilPage /> },
       { path: "perfil", element: <PerfilPage /> },
+      { path: "/creartareas", element: <CrearTareasPages /> },
 
       { path: "/", element: <HomePages /> },
     ],
