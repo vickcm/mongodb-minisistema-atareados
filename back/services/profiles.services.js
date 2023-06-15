@@ -7,11 +7,10 @@ const profilesCollection = db.collection("profiles");
 async function createProfile(profile, account) {
   console.log("Create Profile:", profile); // Agrega este console.log
 
-
   const profileWithUserId = {
     ...profile,
     email: account.email,
-    _id: new ObjectId(account._id)
+    _id: new ObjectId(account._id),
   };
   await client.connect();
 
@@ -22,21 +21,35 @@ async function createProfile(profile, account) {
   }
 
   await profilesCollection.insertOne(profileWithUserId);
-
-  
 }
 
 async function getProfiles(idProfile) {
-  await client.connect()
+  await client.connect();
 
-    const profile = await profilesCollection.findOne({ _id: new ObjectId(idProfile) })
+  const profile = await profilesCollection.findOne({
+    _id: new ObjectId(idProfile),
+  });
 
-    if (!profile) {
-        throw new Error("Esta cuenta no tiene un perfil asociado.")
-    }
+  if (!profile) {
+    throw new Error("Esta cuenta no tiene un perfil asociado.");
+  }
 
-    return profile
+  return profile;
 }
 
+async function getUserByEmail(email) {
+  
+  await client.connect();
 
-export { createProfile, getProfiles };
+  const user = await profilesCollection.findOne({ email });
+
+  if (user) {
+    console.log('User:', user); // Agrega este console.log    
+    return user;
+
+  }
+
+  return null;
+}
+
+export { createProfile, getProfiles, getUserByEmail };
