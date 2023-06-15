@@ -84,6 +84,7 @@ function FormDesafio() {
           <Button  className="btn-desfio">Crear Desafío</Button>
         </div>
       </Form>
+      <p>{error} </p>
     </Container>
     </>
   );
