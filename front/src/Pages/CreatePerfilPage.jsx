@@ -32,7 +32,7 @@ function CreatePerfilPage() {
     [setAge]
   );
 
-  const onSubmit = useCallback((event) => {
+const onSubmit = useCallback((event) => {
     event.preventDefault()
     console.log("submit", username, age)
     const profile = {

@@ -36,7 +36,7 @@ function LoginPage(){
             localStorage.setItem('token', data.responseAccount.token)
 
 
-            navigate('/crearperfil', {replace: true})
+            navigate('/desafio', {replace: true})
         })
         .catch(err => {
             setError(err.error.message)
