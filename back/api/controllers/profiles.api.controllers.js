@@ -13,9 +13,9 @@ async function createProfile(req, res) {
     });
 }
 
-async function getProfiles(req, res) {
+async function getProfile(req, res) {
   return profileService
-    .getProfiles(req.account._id)
+    .getProfile(req.account._id)
 
     .then((profiles) => {
       res.status(200).json(profiles);
@@ -25,4 +25,4 @@ async function getProfiles(req, res) {
     });
 }
 
-export { createProfile, getProfiles };
+export { createProfile, getProfile };

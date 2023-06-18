@@ -1,7 +1,6 @@
 import { createContext, useContext, useState, useEffect, useCallback, useMemo } from "react"
 import {useNavigate} from 'react-router-dom'
-
-// import profileService from '../services/profile.service'
+import profileService from '../service/profile.service'
 import authService from '../service/autentication.service.js'
 
 const SessionContext = createContext()
@@ -10,13 +9,14 @@ function useSession(){
     return useContext(SessionContext)
 }
 
-/* function useProfile(){
+ function useProfile(){
     const {profile} = useSession()
     return profile
-} */
+}
 
 function SessionProvider({children}){
-    // const [profile, setProfile] = useState({})
+
+    const [profile, setProfile] = useState({})
     const navigate = useNavigate()
 
     const onLogout = useCallback(() => {
@@ -26,19 +26,19 @@ function SessionProvider({children}){
     }, [navigate])
 
 
-   /*  useEffect(() => {
+    useEffect(() => {
         profileService.getCurrent()
         .then((profile) => {
             setProfile(profile)
         })
-    }, []) */
+    }, []) 
 
     const value = useMemo(()=>{
         return {
-           
+           profile,
             onLogout
         }
-    }, [ onLogout])
+    }, [ profile, onLogout])
     
 
     
@@ -52,5 +52,6 @@ function SessionProvider({children}){
 
 export {
     useSession,
-    SessionProvider
+    SessionProvider,
+    useProfile
 }

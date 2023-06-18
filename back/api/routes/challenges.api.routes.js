@@ -5,7 +5,10 @@ import {validateChallenge} from '../../middlewares/challenges.validate.middlewar
 
 
 const router = Router();
+// creo un nuevo desafío
+router.post('/desafios', [validateToken, validateChallenge], controllers.createChallenge);
 
-router.post('/desafio', [validateToken], controllers.createChallenge);
+// obtengo los desafíos de un usuario. No necesito parámetro porque el usuario está en el token
+router.get('/desafios', [validateToken], controllers.getChallengesByUserId);
 
 export default router;

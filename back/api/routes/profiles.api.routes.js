@@ -7,7 +7,9 @@ const router = Router();
 router.post('/profiles', validateToken, controllers.createProfile);
 
 // para hacer: validar profile con schema 
-router.get('/profiles', validateToken, controllers.getProfiles);
+router.get('/profiles', validateToken, controllers.getProfile);
+
+
 
 /* router.get('/profiles/:id',controllers.getProfile);
 router.put('/profiles/:id', controllers.updateProfile);

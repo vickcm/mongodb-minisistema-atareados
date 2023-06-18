@@ -23,7 +23,7 @@ async function createProfile(profile, account) {
   await profilesCollection.insertOne(profileWithUserId);
 }
 
-async function getProfiles(idProfile) {
+async function getProfile(idProfile) {
   await client.connect();
 
   const profile = await profilesCollection.findOne({
@@ -52,4 +52,19 @@ async function getUserByEmail(email) {
   return null;
 }
 
-export { createProfile, getProfiles, getUserByEmail };
+async function getProfileByUserId(userId) {
+  await client.connect();
+
+  const profile = await profilesCollection.findOne({
+    _id: new ObjectId(userId),
+  });
+
+  if (!profile) {
+    throw new Error("Esta cuenta no tiene un perfil asociado.");
+  }
+
+  return profile;
+}
+
+
+export { createProfile, getProfile, getUserByEmail, getProfileByUserId };

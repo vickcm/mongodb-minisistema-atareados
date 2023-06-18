@@ -1,16 +1,18 @@
-import * as challengesSchema from '../schemas/challenges.schemas.js';
+import { challengeSchema } from '../schemas/challenges.schemas.js';
 
+async function validateChallenge(req, res, next) {
+  console.log('Validate Challenge Request:', req.body);
 
-function validateChallenge(req, res, next) {
-    const { body } = req;
-  
-    challengesSchema.validate(body)
-      .then(() => {
-        next();
-      })
-      .catch((error) => {
-        res.status(400).json({ error: { message: error.message } });
-      });
+  try {
+    const validatedChallenge = await challengeSchema.validate(req.body, {
+      abortEarly: false,
+      stripUnknown: true
+    });
+    req.body = validatedChallenge;
+    next();
+  } catch (error) {
+    res.status(400).json({ error });
   }
-  
-  export { validateChallenge };
+}
+
+export { validateChallenge };

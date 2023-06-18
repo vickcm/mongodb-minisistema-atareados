@@ -1,14 +1,23 @@
 import { MongoClient, ObjectId } from "mongodb";
-import { getUserByEmail } from "./profiles.services.js";
+import { getUserByEmail, getProfileByUserId } from "./profiles.services.js";
 const client = new MongoClient("mongodb://127.0.0.1:27017");
 const db = client.db("DB_ATAREADOS");
 const challengesCollection = db.collection("challenges");
 
-async function createChallenge(challenge) {
+async function createChallenge(challenge, account) {
   const { title, deadline, members } = challenge;
+
+  const authenticatedUser = account; // Reemplaza req.account por el objeto que contiene los datos del usuario registrado
+
+  const profileAuthenticatedUser = await getProfileByUserId(
+    authenticatedUser._id
+  );
 
   // Verificar que los usuarios correspondan a usuarios registrados
   const { validMembers, invalidMembers } = await validateMembers(members);
+
+   // Agregar el perfil del usuario autenticado al array validMembers
+   validMembers.unshift(profileAuthenticatedUser);
 
   if (invalidMembers.length > 0) {
     console.log('Invalid Members:', invalidMembers);
@@ -16,7 +25,6 @@ async function createChallenge(challenge) {
       `Los siguientes usuarios no están registrados: ${invalidMembers.join(", ")}`
     );
   }
-
   const createdAt = Date.now();
   // Guardar el desafío en la colección de desafíos
   const challengeData = {
@@ -61,4 +69,16 @@ async function validateMembers(members) {
   return { validMembers, invalidMembers };
 }
 
-export { createChallenge };
+async function getChallengesByUserId(userId) {
+  await client.connect();
+
+  const challenges = await challengesCollection
+    .find({ "members._id": new ObjectId(userId) })
+    .toArray();
+
+  return challenges;
+}
+
+
+
+export { createChallenge, getChallengesByUserId };
