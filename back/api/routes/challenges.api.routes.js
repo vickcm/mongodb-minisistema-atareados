@@ -6,6 +6,6 @@ import {validateChallenge} from '../../middlewares/challenges.validate.middlewar
 
 const router = Router();
 
-router.post('/desafio', [validateToken, validateChallenge], controllers.createChallenge);
+router.post('/desafio', [validateToken], controllers.createChallenge);
 
 export default router;

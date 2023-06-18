@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import { Button } from 'bootstrap-4-react/lib/components';
 import { Container } from 'bootstrap-4-react/lib/components/layout';
 import { useCallback, useState } from "react";
@@ -25,11 +24,14 @@ function FormDesafio() {
   const onChangeMembers = (event) => {
     const membersArray = event.target.value.split(',');
     setMembers(membersArray);
-  };
+    };
+
 
   const onChangeDate = (event) =>{
     setDeadline(event.target.value)
   }
+
+
 
   const onSubmit = useCallback((event) => {
       event.preventDefault()
@@ -75,6 +77,7 @@ function FormDesafio() {
             <Form.Label>Equipo</Form.Label>
             <Form.Control type="equipo"  value={members} onChange={onChangeMembers} />
           </Form.Group>
+       
           <Form.Group as={Col} md="4"  controlId="date">
             <Form.Label>Fecha de vencimiento</Form.Label>
             <Form.Control type="date" value={deadline} onChange={onChangeDate} />
