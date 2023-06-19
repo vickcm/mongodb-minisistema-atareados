@@ -12,6 +12,16 @@ const challengeSchema = yup.object().shape({
       .required('Debe ingresar al menos un miembro')
   });
 
-export {challengeSchema};
 
+
+
+
+const challengeSchemaUpdate = yup.object().shape({
+  title: yup.string(),
+  deadline: yup
+    .date()
+    .min(new Date(), 'La fecha de vencimiento debe ser posterior a la fecha actual'),
+  });
+
+export {challengeSchema, challengeSchemaUpdate};
 

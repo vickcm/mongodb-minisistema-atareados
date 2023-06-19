@@ -1,0 +1,23 @@
+LISTO SIN IMPLEMENTAR EN EL FRONT 
+
+UPDATES / EDIT PARA DESAFIO.. SOLO SE PUEDE EDITAR EL NOMBRE Y LA FECHA. 
+ENDPOINT: 
+api/desafios/:id 
+METODO:
+patch 
+
+PARAMS 
+id: id del desafio a editar
+
+BODY:
+{
+    "title": "nombre del desafio",
+    "deadline": "fecha del desafio"
+}
+
+RESPUESTA:
+
+{
+    "message": "Desafio actualizado con exito"
+}
+

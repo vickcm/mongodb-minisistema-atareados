@@ -79,6 +79,25 @@ async function getChallengesByUserId(userId) {
   return challenges;
 }
 
+async function updateChallenge(challenge, id) {
+  const { title, deadline } = challenge;
+  const challengeId = new ObjectId(id);
+  const challengeData = {
+    title,
+    deadline,
+  };
+
+  await client.connect();
+
+  const updatedChallenge = await challengesCollection.updateOne(
+    { _id: challengeId },
+    { $set: challengeData }
+  );
+  return updatedChallenge;
+}
 
 
-export { createChallenge, getChallengesByUserId };
+
+
+
+export { createChallenge, getChallengesByUserId, updateChallenge };
