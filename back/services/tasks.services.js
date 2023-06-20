@@ -44,6 +44,16 @@ async function getTasks(challengeId) {
     return tasks;
 }
 
+async function updateTask(task) {
+  await client.connect();
+  const taskId = task._id;
+  delete task._id;
+  await tasksCollection.updateOne({ _id: new ObjectId(taskId) }, { $set: task });
+  return task;
+}
 
 
-export { createTask, getTasks };
+
+
+
+export { createTask, getTasks, updateTask };

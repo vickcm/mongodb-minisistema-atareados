@@ -12,11 +12,33 @@ async function getChallenges() {
     return API.call({ uri: 'desafios', method: 'GET' })
 }
 
+async function getChallengeById(desafioId) {
+
+    return API.call({ uri: `desafios/${desafioId}` , method: 'GET' })
+
+}
+
+async function getTasks(id) {
+
+    return API.call({ uri: `desafios/${id}/tareas` , method: 'GET' })
+
+}
+
+async function createTask(id,task) {
+    return API.call({ uri: `desafios/${id}/tareas`, method: 'POST', body: task })
+}
+
+
+
+
 
 
 
 export default {
     createChallenge,
     getChallengesByUserId,
-    getChallenges
+    getChallenges, 
+    getTasks, 
+    getChallengeById,
+    createTask
 }

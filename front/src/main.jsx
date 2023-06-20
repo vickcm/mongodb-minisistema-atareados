@@ -6,7 +6,7 @@ import LoginPage from "./Pages/LoginPage";
 import RoutePrivate from "./Components/RoutePrivate";
 import DesafioPage from "./Pages/CrearDesafioPages";
 import HomePages from "./Pages/HomePage";
-import Tareas from "./Pages/CrearTareaPages"
+import TareasPanelPages from "./Pages/TareasPanelPages"
 import Panel from "./Pages/DesafioPanelPages"
 import CreatePerfilPage from "./Pages/CreatePerfilPage";
 import RegisterPage from "./Pages/RegisterPage";
@@ -24,11 +24,12 @@ const router = createBrowserRouter([
     errorElement: <Error404 />,
     children: [
       { path: "desafio", element: <DesafioPage /> },
-      { path: "tareas", element: <Tareas /> },
+      { path: "desafio/:idDesafio/creartareas", element: <CrearTareasPages /> },
+      { path: "desafio/:idDesafio", element: <TareasPanelPages /> },
       { path: "panel", element: <Panel /> },
       { path: "crearperfil", element: <CreatePerfilPage /> },
       { path: "perfil", element: <PerfilPage /> },
-      { path: "/creartareas", element: <CrearTareasPages /> },
+      // { path: "/creartareas", element: <CrearTareasPages /> },
 
       { path: "/", element: <HomePages /> },
     ],

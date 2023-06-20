@@ -68,5 +68,32 @@ async function getTasks(req, res) {
         });
 }
 
+async function getChallengeById(req, res) {
+    const challengeId = req.params.id;
+    return challengeService.getChallengeById(challengeId)
+        .then((challenge) => {
+            res.status(200).json(challenge);
+        })
+        .catch((err) => {
+            res.status(400).json({ error: { message: err.message } });
+        });
+}
 
-export { createChallenge, getChallengesByUserId, updateChallenge, createTask, getTasks };
+async function updateTask(req, res) {
+    const task = req.body;
+    return taskService
+        .updateTask(task)
+        .then(() => {
+            res.status(201).json({ message: "Tarea actualizada exitosamente." });
+        })
+        .catch((err) => {
+            res.status(400).json({ error: { message: err.message } });
+        });
+}
+
+
+
+
+  
+  
+  export { createChallenge, getChallengesByUserId, updateChallenge, createTask, getTasks, getChallengeById, updateTask };

@@ -96,8 +96,25 @@ async function updateChallenge(challenge, id) {
   return updatedChallenge;
 }
 
+async function getChallengeById(id) {
+  const challengeId = new ObjectId(id);
+  
+  await client.connect();
+
+  const challenge = await challengesCollection.findOne({ _id: challengeId });
+
+  // chequear si existe el challenge sino devolver null o un error
+
+  if(!challenge) {
+    return null;
+  } 
+
+  return challenge;
+}
 
 
 
 
-export { createChallenge, getChallengesByUserId, updateChallenge };
+
+
+export { createChallenge, getChallengesByUserId, updateChallenge, getChallengeById };

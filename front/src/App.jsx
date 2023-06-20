@@ -3,6 +3,8 @@ import "./css/AppEstilos.css";
 import { Outlet } from "react-router-dom";
 import MainNav from "./Components/MainNav";
 import { SessionProvider } from './context/session.context'
+import { DesafioProvider } from './context/desafioContext'
+
 
 
 
@@ -22,8 +24,10 @@ function App() {
     <>
       <SessionProvider>
       <MainNav/>
-
+      <DesafioProvider>
         <Outlet />
+        </DesafioProvider>
+
       </SessionProvider>
 
       

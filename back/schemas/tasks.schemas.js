@@ -12,5 +12,21 @@ const taskSchema = yup.object().shape({
       .required('El puntaje es requerido'),
   });
 
+
+const updateTaskSchema = yup.object().shape({
+  _id: yup.string().required(),
+  title: yup.string(),
+  description: yup.string(),
+  responsible: yup.string(),
+  points: yup
+    .number()
+    .integer('Points must be an integer')
+    .min(1, 'Points must be greater than 0')
+    .max(100, 'Points must not exceed 100'),
+});
+
+
+
+
   
-  export { taskSchema};
+export { taskSchema, updateTaskSchema };
