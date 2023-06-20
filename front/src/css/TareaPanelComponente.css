@@ -1,0 +1,14 @@
+.completed {
+    background-color: lightgreen;
+    text-decoration: line-through;
+    color: #555;
+    font-style: italic;
+    
+    /* Otros estilos para tareas completadas */
+};
+  
+a {
+    cursor: pointer;
+    color: #000;
+    text-decoration: none;
+};

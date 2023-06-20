@@ -1,7 +1,12 @@
 import React from 'react';
 import { Accordion, Button } from 'react-bootstrap';
+import { useState } from 'react';
+import '../css/TareaPanelComponente.css';
 
 function TareaPanelComponente({ tarea }) {
+
+  const [isCompleted, setIsCompleted] = useState(false);
+
   const { _id, title, description, responsible, points } = tarea;
 
   const handleEdit = () => {
@@ -9,13 +14,14 @@ function TareaPanelComponente({ tarea }) {
   };
 
   const handleComplete = () => {
-    // Lógica para marcar la tarea como completada
+    console.log('Tarea completada:', _id);
+    setIsCompleted(true);
   };
 
   return (
     <Accordion defaultActiveKey="0" className="acordion">
       <Accordion.Item eventKey="0">
-        <Accordion.Header className="header-acordeon">
+        <Accordion.Header >
           {title}  
           <div className="iconos">
            
@@ -25,7 +31,7 @@ function TareaPanelComponente({ tarea }) {
         <Accordion.Body>
           <div className="body-acordeon">
             <div className="body-acordeon-izq">
-              <p>Titulo {tarea.title}</p>
+              <p className={`header-acordeon ${isCompleted ? 'completed' : ''}`}>Titulo {tarea.title}</p>
               <p>Descripción {tarea.description}</p>
               <p>Responsable {tarea.responsible}</p>
               <p>Puntos {tarea.points}</p>
@@ -34,7 +40,7 @@ function TareaPanelComponente({ tarea }) {
               <a variant="primary" onClick={handleEdit}>Editar</a>
             </div>
             <div>
-              <a variant="success" onClick={handleComplete}>Completada</a>
+              <a onClick={handleComplete}>Completada</a>
             </div>
           </div>
         </Accordion.Body>
