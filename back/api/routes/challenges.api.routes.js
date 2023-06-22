@@ -19,6 +19,9 @@ router.post('/desafios/:id/tareas', [validateToken, validateTask] , controllers.
 router.get('/desafios/:id/tareas', [validateToken] , controllers.getTasks);
 router.patch('/desafios/:id/tareas', [validateToken, updateValidateTask] , controllers.updateTask);
 
+// TAREAS SUGERIDAS
+router.get('/sugerenciatareas', [validateToken] , controllers.getSuggestedTasks);  // obtengo las tareas sugeridas para un usuario servicio ext ')
+
 
 
 

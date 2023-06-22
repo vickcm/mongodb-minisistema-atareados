@@ -1,5 +1,7 @@
 import * as challengeService from "../../services/challenges.services.js";
 import * as taskService from "../../services/tasks.services.js";
+import * as openAiService from "../../services/out/openai.services.js";
+
 
 async function createChallenge(req, res) {
   console.log("Create Challenge Request:", req.body); // Agrega este console.log
@@ -92,8 +94,20 @@ async function updateTask(req, res) {
 }
 
 
+async function getSuggestedTasks(req, res) {
+    const account = req.account;
+    return openAiService.getSuggestedTasks(account._id)
+        .then((tasks) => {
+            res.status(200).json(tasks);
+        })
+        .catch((err) => {
+            res.status(400).json({ error: { message: err.message } });
+        });
+}
+
+
 
 
   
   
-  export { createChallenge, getChallengesByUserId, updateChallenge, createTask, getTasks, getChallengeById, updateTask };
+  export { createChallenge, getChallengesByUserId, updateChallenge, createTask, getTasks, getChallengeById, updateTask, getSuggestedTasks};
