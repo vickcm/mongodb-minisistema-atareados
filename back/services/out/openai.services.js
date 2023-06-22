@@ -5,7 +5,13 @@ const prompt = [
   "Escriba una tarea del hogar que tenga que ver con la limpieza",
   "Escriba una tarea del hogar que tenga que ver con el orden",
   "Escriba una tarea del hogar que tenga que ver con cocinar",
-  "Escriba una tarea del hogar que tenga que ver con la ropa"
+  "Escriba una tarea del hogar que tenga que ver con la ropa",
+  "Escriba una tarea del hogar que tenga que ver con la comida",
+  "escriba una tarea del hogar que tenga que ver con la hacer las compras",
+  "escriba una tarea del hogar que tenga que ver con la habitación",
+  "escriba una tarea del hogar que tenga que ver con la cocina",
+
+
 ];
 
 async function getSuggestedTasks() {
