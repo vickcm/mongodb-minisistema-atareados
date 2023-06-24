@@ -29,8 +29,7 @@ function TareaListItem({ tarea }) {
                 </Card.Text>
                 <p>Responsable: {tarea.responsible}</p>
                 <p>Puntos: {tarea.points}</p>
-                <Card.Link href="#" >Editar</Card.Link> 
-                <Link to={`/desafio/${desafio._id}/tareas/${tarea._id}/editar`} className="btn-tareas">Editar Tareas</Link> 
+                <Link to={`/desafio/${desafio._id}/tareas/${tarea._id}/editar`} className="btn-tareas-editar">Editar</Link> 
                 <Card.Link href="#" onClick={handleComplete}>Completada</Card.Link>
             </Card.Body>
         </Card>

@@ -4,3 +4,7 @@ html{
 div#root{
     background-color: #fcfbf8;
 }
+
+a, a:hover{
+    text-decoration: none;
+}
