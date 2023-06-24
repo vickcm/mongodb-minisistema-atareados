@@ -31,3 +31,7 @@ h2{
     justify-content: space-evenly;
     margin-top: 24px;
 }
+
+.tareas-list-cards .card{
+    margin-bottom: 24px;
+}

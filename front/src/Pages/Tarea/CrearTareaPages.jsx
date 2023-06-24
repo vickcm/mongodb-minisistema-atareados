@@ -9,10 +9,12 @@ import { useDesafio } from "../../context/desafioContext";
 import TareaListItem from '../../components/TareaItemListComponente';
 import desafioService from "../../service/desafio.service.js";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function TareasForm() {
   const params = useParams();
   const desafio = useDesafio(); // Obtén el desafío del contexto
+  const navigate = useNavigate();
   const [tareas, setTareas] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -63,6 +65,11 @@ function TareasForm() {
       .then((tareas) => {
         // Actualizar el estado de las tareas con las tareas obtenidas
         setTareas(tareas);
+        setTitle("");
+        setDescription("");
+        setPoints(0);
+        setSelectedMember(null);
+        navigate(`desafio/${id}`, { replace: true });
       })
       .catch((error) => {
         // Error al crear la tarea
@@ -136,6 +143,7 @@ function TareasForm() {
             </Button>
           </div>
         </Form>
+        <h3>Tareas Agregadas:</h3>
         <div className='tareas-list-cards'>
           {tareas.map((tarea) => (
             <TareaListItem key={tarea._id} tarea={tarea}/>
