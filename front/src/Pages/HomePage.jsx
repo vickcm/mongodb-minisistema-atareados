@@ -20,7 +20,7 @@ function Homepages() {
           <div className="aling-button">
             <button className="btn-home">
               {" "}
-              <Link to="/panel" className="btn">
+              <Link to="/paneldesafio" className="btn">
                 Ver Panel
               </Link>
             </button>

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Spinner } from 'react-bootstrap';
-import { useDesafio } from '../context/desafioContext';
-import TareaPanelComponente from '../components/TareaPanelComponente';
-import desafioService from '../service/desafio.service';
-import { formatDeadline } from '../utils/utils';
+import { Link } from 'react-router-dom';
+import { useDesafio } from '../../context/desafioContext';
+import TareaListItem from '../../components/TareaItemListComponente';
+import desafioService from '../../service/desafio.service';
+import { formatDeadline } from '../../utils/utils';
+import "../../css/Tarea.css";
 
 function TareasPanel() {
   const [tareas, setTareas] = useState([]);
@@ -29,9 +31,10 @@ function TareasPanel() {
     <>
       <Container>
         <div className="titulo">
-          <h2>Esto es el título del desafío: {desafio.title}</h2>
-          <h2>Esto es la fecha del vencimiento: {formatDeadline(desafio.deadline)}</h2>
+          <h1>Desafío: {desafio.title}</h1>
+          <p>Fecha del vencimiento: {formatDeadline(desafio.deadline)}</p>
           <h2>Lista de Tareas</h2>
+          <Link to={`/desafio/${desafio._id}/creartareas`} className="btn-tareas">Crear Tareas</Link>
         </div>
         {isLoading ? (
           <Spinner animation="border" role="status">
@@ -40,12 +43,13 @@ function TareasPanel() {
         ) : (
           <>
             {tareas.length === 0 ? (
-              <><p>No hay tareas disponibles.</p><button>Agregar boton Crear Tareas </button></>
-
+              <><p className='p-none-tarea'>No hay tareas disponibles.</p></>
             ) : (
-              tareas.map((tarea) => (
-                <TareaPanelComponente key={tarea._id} tarea={tarea} />
-              ))
+              <div className='tareas-list-cards'>
+                {tareas.map((tarea) => (
+                  <TareaListItem key={tarea._id} tarea={tarea}/>
+                ))}
+              </div>
             )}
           </>
         )}

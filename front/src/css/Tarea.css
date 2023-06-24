@@ -1,0 +1,33 @@
+.btn-tareas{
+    background-color: #32F4C5;
+    border: none;
+    border-radius: 5px;
+    padding: 13px 15px;
+    color:black;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+}
+
+.btn-tareas:hover{
+    background-color: #2BC6B5;
+    text-decoration: none;
+}
+
+h2{
+    font-size: 25px!important;
+}
+
+.p-none-tarea{
+    text-align: center;
+    margin-top: 24px;
+    font-size: 16px;
+}
+
+.tareas-list-cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 24px;
+}

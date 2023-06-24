@@ -3,10 +3,9 @@
     text-decoration: line-through;
     color: #555;
     font-style: italic;
-    
     /* Otros estilos para tareas completadas */
 };
-  
+
 a {
     cursor: pointer;
     color: #000;

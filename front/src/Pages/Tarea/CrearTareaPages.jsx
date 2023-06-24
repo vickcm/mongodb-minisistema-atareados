@@ -4,15 +4,16 @@ import { Container } from "bootstrap-4-react/lib/components/layout";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import "../css/FormDesafioStyle.css";
-import { useDesafio } from "../context/desafioContext";
-import desafioService from "../service/desafio.service";
+import "../../css/FormDesafioStyle.css";
+import { useDesafio } from "../../context/desafioContext";
+import TareaListItem from '../../components/TareaItemListComponente';
+import desafioService from "../../service/desafio.service.js";
 import { useParams } from "react-router-dom";
 
 function TareasForm() {
   const params = useParams();
   const desafio = useDesafio(); // Obtén el desafío del contexto
-
+  const [tareas, setTareas] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [points, setPoints] = useState(0);
@@ -116,9 +117,12 @@ function TareasForm() {
               Añadir tarea
             </Button>
           </div>
-
-         
         </Form>
+        <div className='tareas-list-cards'>
+          {tareas.map((tarea) => (
+            <TareaListItem key={tarea._id} tarea={tarea}/>
+          ))}
+        </div>
       </Container>
     </>
   );
