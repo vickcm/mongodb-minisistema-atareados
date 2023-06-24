@@ -142,15 +142,15 @@ function TareasFormActions({ tarea }) {
             <p>Carga las tareas que consideres necesarias</p>
           </div>
           <Row className="mb-3 rowDesafio">
-            <Form.Group as={Col} md="4" controlId="titulo">
+            <Form.Group as={Col} sm="12" controlId="titulo">
               <Form.Label>Título de la tarea</Form.Label>
               <Form.Control type="titulo" value={title} onChange={onChangeTitle} />
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="descripcion">
+            <Form.Group as={Col} sm="12" controlId="descripcion">
               <Form.Label>Describe la tarea</Form.Label>
               <Form.Control type="descripcion" value={description} onChange={onChangeDescription} />
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="puntos">
+            <Form.Group as={Col} sm="12" controlId="puntos">
               <Form.Label>Asigna los puntos</Form.Label>
               <Form.Control type="puntos" value={points} onChange={onChangePoints} />
             </Form.Group>
