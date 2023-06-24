@@ -57,6 +57,12 @@ function TareasForm() {
       .then((response) => {
         // La tarea se ha creado exitosamente
         console.log("Tarea creada:", response);
+        // Obtener las tareas actualizadas después de crear la nueva tarea
+        return desafioService.getTasks(id);
+      })
+      .then((tareas) => {
+        // Actualizar el estado de las tareas con las tareas obtenidas
+        setTareas(tareas);
       })
       .catch((error) => {
         // Error al crear la tarea
@@ -70,6 +76,18 @@ function TareasForm() {
       setIsLoading(false); // El desafío ha sido cargado, establecer isLoading a false
     }
   }, [desafio]);
+
+  useEffect(() => {
+    // Obtener las tareas cuando el componente se monte
+    const id = params.idDesafio;
+    desafioService.getTasks(id)
+      .then((tareas) => {
+        setTareas(tareas);
+      })
+      .catch((error) => {
+        console.error('Error al cargar las tareas:', error);
+      });
+  }, [params.idDesafio]);
 
   if (isLoading) {
     return <div>Cargando desafío...</div>; // Muestra un mensaje de carga mientras se carga el desafío
