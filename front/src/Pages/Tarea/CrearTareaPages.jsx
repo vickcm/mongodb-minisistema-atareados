@@ -69,7 +69,7 @@ function TareasForm() {
         setDescription("");
         setPoints(0);
         setSelectedMember(null);
-        navigate(`desafio/${id}`, { replace: true });
+        navigate(`/desafio/${id}`, { replace: true });
       })
       .catch((error) => {
         // Error al crear la tarea
