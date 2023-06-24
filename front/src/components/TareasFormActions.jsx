@@ -4,21 +4,25 @@ import { Container } from "bootstrap-4-react/lib/components/layout";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import "../../css/FormDesafioStyle.css";
-import { useDesafio } from "../../context/desafioContext";
-import desafioService from "../../service/desafio.service.js";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import "../css/FormDesafioStyle.css";
+import { useDesafio } from "../context/desafioContext";
+import desafioService from "../service/desafio.service.js";
+import { useParams, useNavigate } from "react-router-dom";
 
-function TareasForm() {
+function TareasFormActions({ tarea }) {
+  console.log("Tarea: LINEA43 TAREASFORMACTION", tarea);
+
   const params = useParams();
   const desafio = useDesafio(); // Obtén el desafío del contexto
   const navigate = useNavigate();
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [points, setPoints] = useState(0);
-  const [selectedMember, setSelectedMember] = useState(null); // Estado para almacenar el miembro seleccionado
+  const [title, setTitle] = useState(tarea ? tarea.title : "");
+  const [description, setDescription] = useState(tarea ? tarea.description : "");
+  const [points, setPoints] = useState(tarea ? tarea.points : 0);
+  const [selectedMember, setSelectedMember] = useState(tarea ? tarea.responsible : null);
+
+  // Estado para almacenar el miembro seleccionado
   const [isLoading, setIsLoading] = useState(true); // Estado para indicar si se está cargando el desafío
+  const [submitButtonLabel, setSubmitButtonLabel] = useState(tarea ? "editar tarea" : "añadir tarea");
 
   const onChangeTitle = (event) => {
     setTitle(event.target.value);
@@ -41,37 +45,68 @@ function TareasForm() {
   const onSubmit = (event) => {
     event.preventDefault();
 
-    // Crear la tarea utilizando el servicio desafioService.createTask()
-    const nuevaTarea = {
-      title: title,
-      description: description,
-      points: points,
-      responsible: selectedMember,
-      // Asegúrate de agregar cualquier otro dato necesario para la creación de la tarea
-    };
+    if (tarea) {
+      // Actualizar la tarea existente
+      const tareaActualizada = {
+        _id: tarea._id,
+        title: title,
+        description: description,
+        points: points,
+        responsible: selectedMember,
+        // Agrega cualquier otro dato necesario para la actualización de la tarea
+      };
 
-    const id = params.idDesafio;
+      desafioService
+        .updateTask(tarea._id, tareaActualizada)
+        .then((response) => {
+          // La tarea se ha actualizado exitosamente
+          console.log("Tarea actualizada:", response);
+          // Obtener las tareas actualizadas después de actualizar la tarea
+          return desafioService.getTasks(params.idDesafio);
+        })
+        .then((tareas) => {
+          // Actualizar el estado de las tareas con las tareas obtenidas
+          setTitle("");
+          setDescription("");
+          setPoints(0);
+          setSelectedMember(null);
+          navigate(`/desafio/${params.idDesafio}`, { replace: true });
+        })
+        .catch((error) => {
+          // Error al actualizar la tarea
+          console.error("Error al actualizar la tarea:", error);
+        });
+    } else {
+      // Crear una nueva tarea
+      const nuevaTarea = {
+        title: title,
+        description: description,
+        points: points,
+        responsible: selectedMember,
+        // Agrega cualquier otro dato necesario para la creación de la tarea
+      };
 
-    desafioService
-      .createTask(id, nuevaTarea)
-      .then((response) => {
-        // La tarea se ha creado exitosamente
-        console.log("Tarea creada:", response);
-        // Obtener las tareas actualizadas después de crear la nueva tarea
-        return desafioService.getTasks(id);
-      })
-      .then((tareas) => {
-        // Actualizar el estado de las tareas con las tareas obtenidas
-        setTitle("");
-        setDescription("");
-        setPoints(0);
-        setSelectedMember(null);
-        navigate(`/desafio/${id}`, { replace: true });
-      })
-      .catch((error) => {
-        // Error al crear la tarea
-        console.error("Error al crear la tarea:", error);
-      });
+      desafioService
+        .createTask(params.idDesafio, nuevaTarea)
+        .then((response) => {
+          // La tarea se ha creado exitosamente
+          console.log("Tarea creada:", response);
+          // Obtener las tareas actualizadas después de crear la nueva tarea
+          return desafioService.getTasks(params.idDesafio);
+        })
+        .then((tareas) => {
+          // Actualizar el estado de las tareas con las tareas obtenidas
+          setTitle("");
+          setDescription("");
+          setPoints(0);
+          setSelectedMember(null);
+          navigate(`/desafio/${params.idDesafio}`, { replace: true });
+        })
+        .catch((error) => {
+          // Error al crear la tarea
+          console.error("Error al crear la tarea:", error);
+        });
+    }
   };
 
   useEffect(() => {
@@ -84,12 +119,13 @@ function TareasForm() {
   useEffect(() => {
     // Obtener las tareas cuando el componente se monte
     const id = params.idDesafio;
-    desafioService.getTasks(id)
+    desafioService
+      .getTasks(id)
       .then((response) => {
         console.log("Tarea creada:", response);
       })
       .catch((error) => {
-        console.error('Error al cargar las tareas:', error);
+        console.error("Error al cargar las tareas:", error);
       });
   }, [params.idDesafio]);
 
@@ -102,7 +138,7 @@ function TareasForm() {
       <Container className="container-desafio">
         <Form className="form-desafio" onSubmit={onSubmit}>
           <div className="titulo">
-            <h1>{desafio?.title}</h1>
+          <h1>{tarea ? tarea.title : "Añadir Tarea"}</h1>
             <p>Carga las tareas que consideres necesarias</p>
           </div>
           <Row className="mb-3 rowDesafio">
@@ -122,7 +158,7 @@ function TareasForm() {
               <Form.Select
                 aria-label="Default select example"
                 className="form-select"
-                value={selectedMember ? selectedMember._id : ""}
+                value={selectedMember ? selectedMember.username : ""}
                 onChange={onSelectMember}
               >
                 <option>Selecciona el usuario</option>
@@ -136,7 +172,7 @@ function TareasForm() {
           </Row>
           <div className="aling-button-desafio">
             <Button className="btn-desfio" type="submit">
-              Añadir tarea
+              {submitButtonLabel}
             </Button>
           </div>
         </Form>
@@ -145,4 +181,4 @@ function TareasForm() {
   );
 }
 
-export default TareasForm;
+export default TareasFormActions;

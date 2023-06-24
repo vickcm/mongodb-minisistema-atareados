@@ -2,16 +2,18 @@ import React from 'react';
 import { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import '../css/TareaPanelComponente.css';
+import { Link } from 'react-router-dom';
+import { useDesafio } from '../context/desafioContext';
+
 
 function TareaListItem({ tarea }) {
+    const desafio = useDesafio();
+
 
     const [isCompleted, setIsCompleted] = useState(false);
 
     const { _id, title, description, responsible, points } = tarea;
 
-    const handleEdit = () => {
-    // Lógica para editar la tarea
-    };
 
     const handleComplete = () => {
         console.log('Tarea completada:', _id);
@@ -27,7 +29,8 @@ function TareaListItem({ tarea }) {
                 </Card.Text>
                 <p>Responsable: {tarea.responsible}</p>
                 <p>Puntos: {tarea.points}</p>
-                <Card.Link href="#" onClick={handleEdit}>Editar</Card.Link>
+                <Card.Link href="#" >Editar</Card.Link> 
+                <Link to={`/desafio/${desafio._id}/tareas/${tarea._id}/editar`} className="btn-tareas">Editar Tareas</Link> 
                 <Card.Link href="#" onClick={handleComplete}>Completada</Card.Link>
             </Card.Body>
         </Card>
