@@ -1,7 +1,8 @@
-import Accordion from "react-bootstrap/Accordion";
-import "../css/PanelDesafioEstilos.css";
 import { useState } from "react";
 import { Link } from 'react-router-dom';
+import Accordion from "react-bootstrap/Accordion";
+import "../css/PanelDesafioEstilos.css";
+
 import { formatDeadline, getDaysRemaining, getMessage } from "../utils/utils";
 
 function DesafioPanelComponente({ desafio }) {
@@ -28,16 +29,17 @@ function DesafioPanelComponente({ desafio }) {
               <p>Fecha de vencimiento: {formattedDeadline}</p>
               <p>{message}</p>
               <p>Equipo:</p>
-              <ul>
+              <ul className="list-unstyled">
                 {members.map((member) => (
                   <li key={member._id}>
                     {member.username} ({member.age} años) - {member.email}
                   </li>
                 ))}
               </ul>
-
-              <button>Editar</button>
-              <Link to={`/desafio/${desafio._id}`}>Ver tareas</Link>
+              <div className=" d-flex">
+                <button className="btn-editar-desafio">Editar</button>
+                <Link to={`/desafio/${desafio._id}`} className="btn-ver-tareas">Ver tareas</Link>
+              </div>
             </div>
           </div>
         </Accordion.Body>

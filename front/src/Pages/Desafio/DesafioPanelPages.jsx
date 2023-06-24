@@ -1,14 +1,16 @@
 import { Container, Button } from "bootstrap-4-react";
-import DesafioPanelComponente from "../Components/DesafioPanelComponente";
-import "../css/PanelDesafioEstilos.css";
-import { useProfile } from "../context/session.context";
+import DesafioPanelComponente from "../../components/DesafioPanelComponente";
+import "../../css/PanelDesafioEstilos.css";
+import { useProfile } from "../../context/session.context";
 import { useEffect, useState } from "react";
-import desafioService from "../service/desafio.service.js";
+import desafioService from "../../service/desafio.service.js";
+import Image from "react-bootstrap/Image";
+import ImageArrowLeft from "../../imagenes/flecha-izquierda.png";	
+import ImageArrowRight from "../../imagenes/flecha-derecha.png";	
 
 function DesafioPanel() {
   const profile = useProfile();
   const [desafios, setDesafios] = useState([]);
-
 
   useEffect(() => {
     desafioService.getChallenges().then((desafios) => {
@@ -41,19 +43,22 @@ function DesafioPanel() {
   };
 
   return (
+    <>
+    <h1 className="titulo">Panel de Desafíos</h1>
     <Container>
       {currentDesafios.map((desafio) => (
         <DesafioPanelComponente key={desafio._id} desafio={desafio}  />
       ))}
       <div className="pagination">
         <Button disabled={currentPage === 1} onClick={prevPage}>
-          Anterior
+          <Image src={ImageArrowLeft}/>
         </Button>
         <Button disabled={currentDesafios.length < desafiosPerPage} onClick={nextPage}>
-          Siguiente
+          <Image src={ImageArrowRight}/>
         </Button>
       </div>
     </Container>
+    </>
   );
 }
 

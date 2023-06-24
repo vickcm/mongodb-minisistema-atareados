@@ -2,41 +2,55 @@ import { Button } from "bootstrap-4-react/lib/components";
 import { Container } from "bootstrap-4-react/lib/components/layout";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Image from "react-bootstrap/Image";
+import ImagePlusMember from "../../imagenes/plus.png";	
+import ImageDeleteMember from "../../imagenes/trash.png";	
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import "../css/FormDesafioStyle.css";
-import desafioService from "../service/desafio.service.js";
+import "../../css/FormDesafioStyle.css";
+import desafioService from "../../service/desafio.service.js";
 
-function TeamMembers({ members, memberInput, onChangeMemberInput, addMember, deleteMember, error }) {
+function TeamMembersInput({ memberInput, onChangeMemberInput, addMember, error }) {
   return (
-    <Form.Group as={Col} md="4" controlId="equipo">
+    <Form.Group as={Col} sm="12" controlId="equipo">
       <Form.Label>Equipo</Form.Label>
-      <div>
-        {members.map((member, index) => (
-          <div key={index} className="member-item">
-            <p>{member}</p>
-            <div>
-              <a onClick={() => deleteMember(index)}>Eliminar</a>
-            </div>
-          </div>
-        ))}
-      </div>
-      <Row>
-        <Col>
+      <p className="p-team-form">¡Recuerda agregar los mails de los integrantes!</p>
+      <Row className="align-items-center">
+        <Col xs={11}>
           <Form.Control
             type="equipo"
             value={memberInput}
             onChange={onChangeMemberInput}
           />
         </Col>
-        <Col>
-          <a onClick={addMember}>Agregar miembro</a>
+        <Col xs={1}>
+          <a onClick={addMember} className="btn-plus-member" title="Agregar">
+            <Image src={ImagePlusMember} />
+          </a>
         </Col>
       </Row>
       {error && <p className="error-message">{error}</p>}
     </Form.Group>
   );
+}
+
+function TeamMembers({ members, deleteMember }) {
+  return (
+    <div className="member-list">
+      <h2>Integrantes:</h2>
+      {members.length === 0 ? (
+        <p>Todavía no hay integrantes en tu equipo</p>
+      ) : (
+        members.map((member, index) => (
+          <div key={index} className="member-item">
+            <p>{member}</p>
+            <a title="Eliminar" onClick={() => deleteMember(index)}><Image src={ImageDeleteMember} /></a>
+          </div>
+        ))
+      )}
+    </div>
+  )  
 }
 
 function FormDesafio() {
@@ -92,7 +106,7 @@ function FormDesafio() {
         .then(({ challenge }) => {
           console.log("Equipo creado", challenge);
           setError("");
-          navigate("/creartareas", { replace: true });
+          navigate("/paneldesafio", { replace: true });
         })
         .catch((err) => {
           setError(err.error.message);
@@ -110,7 +124,7 @@ function FormDesafio() {
             <p>Carga los datos para crear el desafio</p>
           </div>
           <Row className="mb-3 rowDesafio">
-            <Form.Group as={Col} md="4" controlId="titulo">
+            <Form.Group as={Col} sm="12" controlId="titulo">
               <Form.Label>Título del Desafio</Form.Label>
               <Form.Control
                 type="titulo"
@@ -118,15 +132,7 @@ function FormDesafio() {
                 onChange={onChangeTitle}
               />
             </Form.Group>
-            <TeamMembers
-              members={members}
-              memberInput={memberInput}
-              onChangeMemberInput={onChangeMemberInput}
-              addMember={addMember}
-              deleteMember={deleteMember}
-              error={error}
-            />
-            <Form.Group as={Col} md="4" controlId="date">
+            <Form.Group as={Col} sm="12" controlId="date">
               <Form.Label>Fecha de vencimiento</Form.Label>
               <Form.Control
                 type="date"
@@ -134,16 +140,22 @@ function FormDesafio() {
                 onChange={onChangeDate}
               />
             </Form.Group>
+            <TeamMembersInput
+              onChangeMemberInput={onChangeMemberInput}
+              memberInput={memberInput}
+              addMember={addMember}
+              error={error}
+            />
           </Row>
           <div className="aling-button-desafio">
             <Button className="btn-desfio">Crear Desafío</Button>
           </div>
         </Form>
         <p>{error}</p>
+        <TeamMembers members={members} deleteMember={deleteMember}/>
       </Container>
     </>
   );
 }
 
 export default FormDesafio;
-

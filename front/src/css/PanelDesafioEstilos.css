@@ -1,18 +1,59 @@
 .acordion{
     margin-top: 30px;
-    margin-top: 150px;
     box-shadow: 0px 0px 10px 0px #def2ed;
 }
 
+.titulo {
+    font-family: 'Montserrat', sans-serif ;
+    font-size: 30px;
+    font-weight: 500;
+    color: #333333;
+    text-align: center;
+    margin-top:30px;
+} 
 
 .header-acordeon{
     display: flex;
-    }
+}
 
 .iconos{
-        margin-left: 75%;
-    }
+    margin-left: 75%;
+}
 
- .iconos svg{
-        margin-left: 10px;
-    }
+.iconos svg{
+    margin-left: 10px;
+}
+
+.btn-editar-desafio{
+    background-color: #def2ed;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.btn-ver-tareas{
+    background-color: #32F4C5;
+    border: none;
+    border-radius: 5px;
+    padding: 13px 15px;
+    color:black;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.btn-ver-tareas:hover{
+    text-decoration: none;    
+}
+
+.pagination{
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.pagination button{
+    padding: 0px !important;
+    border: none;
+}

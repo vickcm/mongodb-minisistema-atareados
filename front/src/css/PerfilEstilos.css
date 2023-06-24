@@ -19,8 +19,6 @@
     font-family: 'Montserrat', sans-serif ;
 }
 
-
-
 .rowDesafio{
     padding: 10px;
 }
@@ -34,30 +32,26 @@
 }
 
 .form-perfil{
-width:40%;
-margin-left: auto;
-margin-right: auto;
-align-items: center;
-padding: 40px;
-border-radius: 15px;
-box-shadow: 0px 0px 10px 0px #def2ed;
-background-color: white;
-margin-bottom: 100px;
+    width:40%;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px 0px #def2ed;
+    background-color: white;
+    margin-bottom: 100px;
 }
 
 .label-perfil{
     margin-top: 20px !important;
     text-align: left;
-
-   
-   
 }
 
 .place-perfil{
     font-size: 14px !important;
     font-family: 'Montserrat', sans-serif !important; ;
 }
-
 
 .title{
     margin-top: 20px;

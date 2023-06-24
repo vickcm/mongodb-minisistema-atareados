@@ -5,21 +5,19 @@ import { Navbar, Nav, Container, Image } from "react-bootstrap";
 import { useSession } from "../context/session.context";
 
 function MainNav(){
-  const {onLogout} = useSession()
+  const {profile, onLogout} = useSession()
 
 return(
-
-<Navbar className="navBar">
+    <Navbar className="navBar">
       <Container>
           <Navbar.Brand className="Titulo-Nav"> 
-          <Nav.Link className="linknav" as={Link} to="/">
-        <Image src={Logo} className="logo-nav"/>
-        </Nav.Link>
-
-        </Navbar.Brand>
-        <Nav className="me-auto">
+            <Nav.Link className="linknav" as={Link} to="/">
+              <Image src={Logo} className="logo-nav"/>
+            </Nav.Link>
+          </Navbar.Brand>
+          <Nav className="me-auto">
             <Nav.Item>
-              <Nav.Link className="linknav" as={Link} to="/">
+              <Nav.Link className="linknav" as={Link} to="/" title="Home">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -32,9 +30,8 @@ return(
                 </svg>
               </Nav.Link>
             </Nav.Item>
-
             <Nav.Item>
-              <Nav.Link className="linknav" as={Link} to="/desafio">
+              <Nav.Link className="linknav" as={Link} to="/desafio" title="Crear Desafio">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -54,7 +51,7 @@ return(
             </Nav.Item>
 
             <Nav.Item>
-              <Nav.Link className="linknav" as={Link} to="/perfil">
+              <Nav.Link className="linknav" as={Link} to="/perfil" title="Perfil">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -71,9 +68,8 @@ return(
                 </svg>
               </Nav.Link>
             </Nav.Item>
-
             <Nav.Item>
-              <Nav.Link className="linknav" onClick={onLogout}>
+              <Nav.Link className="linknav user-link" onClick={onLogout} title="Salir"> {profile.username}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -96,7 +92,7 @@ return(
           </Nav>
       </Container>
     </Navbar>
-)
+  )
 }
 
 export default MainNav;

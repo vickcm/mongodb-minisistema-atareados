@@ -5,11 +5,11 @@ import Image from "react-bootstrap/Image";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import ImagePerfil from "../imagenes/perfil.jpg";
-import "../css/PerfilEstilos.css";
+import ImagePerfil from "../../imagenes/perfil.jpg";
+import "../../css/PerfilEstilos.css";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import profileService from "../service/profile.service";
+import profileService from "../../service/profile.service";
 
 function CreatePerfilPage() {
 
@@ -79,7 +79,6 @@ const onSubmit = useCallback((event) => {
               md="6" className="label-perfil" controlId="age">
               <Form.Label className="nombre-perfil">Edad</Form.Label>
               <Form.Control
-              
                 className="place-perfil"
                 onChange={onChangeAge}
                 value={age}

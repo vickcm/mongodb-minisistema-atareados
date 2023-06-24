@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { Container } from "bootstrap-4-react/lib/components/layout";
 import Image from "react-bootstrap/Image";
-import ImagePerfil from "../imagenes/perfil.jpg";
-import "../css/PerfilEstilos.css";
-import profileService from "../service/profile.service";
+import ImagePerfil from "../../imagenes/perfil.jpg";
+import "../../css/PerfilEstilos.css";
+import profileService from "../../service/profile.service";
 import { useNavigate } from 'react-router-dom';
 
 
@@ -22,8 +22,6 @@ function PerfilPage() {
         .catch(err => {
           console.log(err)
           navigate('/crearperfil', {replace: true})
-
-
         })
   },[])
 
