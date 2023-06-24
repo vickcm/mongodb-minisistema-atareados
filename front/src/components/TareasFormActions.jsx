@@ -18,7 +18,7 @@ function TareasFormActions({ tarea }) {
   const [title, setTitle] = useState(tarea ? tarea.title : "");
   const [description, setDescription] = useState(tarea ? tarea.description : "");
   const [points, setPoints] = useState(tarea ? tarea.points : 0);
-  const [selectedMember, setSelectedMember] = useState(tarea ? tarea.responsible : null);
+  const [selectedMember, setSelectedMember] = useState(tarea && tarea.responsible ? tarea.responsible : null);
 
   // Estado para almacenar el miembro seleccionado
   const [isLoading, setIsLoading] = useState(true); // Estado para indicar si se está cargando el desafío
@@ -38,8 +38,8 @@ function TareasFormActions({ tarea }) {
 
   const onSelectMember = (event) => {
     const memberId = event.target.value;
-    const selectedMember = desafio.members.find((member) => member._id === memberId);
-    setSelectedMember(selectedMember.username);
+    const selectedMember = desafio.members.find((member) => member.username === memberId);
+    setSelectedMember(selectedMember ? selectedMember.username : null);
   };
 
   const onSubmit = (event) => {
@@ -138,7 +138,7 @@ function TareasFormActions({ tarea }) {
       <Container className="container-desafio">
         <Form className="form-desafio" onSubmit={onSubmit}>
           <div className="titulo">
-          <h1>{tarea ? tarea.title : "Añadir Tarea"}</h1>
+            <h1>{tarea ? tarea.title : "Añadir Tarea"}</h1>
             <p>Carga las tareas que consideres necesarias</p>
           </div>
           <Row className="mb-3 rowDesafio">
@@ -158,12 +158,12 @@ function TareasFormActions({ tarea }) {
               <Form.Select
                 aria-label="Default select example"
                 className="form-select"
-                value={selectedMember ? selectedMember.username : ""}
+                value={selectedMember ? selectedMember : ""}
                 onChange={onSelectMember}
               >
                 <option>Selecciona el usuario</option>
                 {desafio.members.map((member) => (
-                  <option key={member._id} value={member._id}>
+                  <option key={member._id} value={member.username}>
                     {member.username}
                   </option>
                 ))}
