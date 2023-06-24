@@ -11,7 +11,7 @@ import PanelDesafio from "./Pages/Desafio/DesafioPanelPages"
 import CreatePerfilPage from "./Pages/Perfil/CreatePerfilPage";
 import RegisterPage from "./Pages/Perfil/RegisterPage";
 import PerfilPage from "./Pages/Perfil/PerfilPage";
-import CrearTareasPages from "./Pages/Tarea/CrearTareaPages";
+import TareasActionsPage from "./Pages/Tarea/TareasActionsPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/mainCss.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -23,7 +23,9 @@ const router = createBrowserRouter([
     errorElement: <Error404 />,
     children: [
       { path: "desafio", element: <DesafioPage /> },
-      { path: "desafio/:idDesafio/creartareas", element: <CrearTareasPages /> },
+      { path: "desafio/:idDesafio/tareas/nueva", element: <TareasActionsPage /> },
+      { path: "desafio/:idDesafio/tareas/:idTarea/editar", element: <TareasActionsPage /> },
+
       { path: "desafio/:idDesafio", element: <TareasPanelPages /> },
       { path: "paneldesafio", element: <PanelDesafio /> },
       { path: "crearperfil", element: <CreatePerfilPage /> },

@@ -28,9 +28,9 @@ async function createTask(id,task) {
     return API.call({ uri: `desafios/${id}/tareas`, method: 'POST', body: task })
 }
 
-
-
-
+async function getTaskById(id,taskId) {
+    return API.call({ uri: `desafios/${id}/tareas/${taskId}`, method: 'GET' })
+}
 
 
 
@@ -40,5 +40,7 @@ export default {
     getChallenges, 
     getTasks, 
     getChallengeById,
-    createTask
+    createTask, 
+    getTaskById
+
 }

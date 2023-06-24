@@ -17,6 +17,8 @@ router.get('/desafios/:id', [validateToken], controllers.getChallengeById);
 
 router.post('/desafios/:id/tareas', [validateToken, validateTask] , controllers.createTask);
 router.get('/desafios/:id/tareas', [validateToken] , controllers.getTasks);
+router.get('/desafios/:id/tareas/:idtarea', [validateToken] , controllers.getTaskbyId);
+
 router.patch('/desafios/:id/tareas', [validateToken, updateValidateTask] , controllers.updateTask);
 
 // TAREAS SUGERIDAS

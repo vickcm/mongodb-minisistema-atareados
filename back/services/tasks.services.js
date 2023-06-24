@@ -52,8 +52,23 @@ async function updateTask(task) {
   return task;
 }
 
+async function getTaskById(taskId) {
+  await client.connect();
+  const task = await tasksCollection.findOne({ _id: new ObjectId(taskId) });
+  
+  if (!task) {
+    // Si no se encuentra ninguna tarea, puedes devolver un valor predeterminado o lanzar una excepción
+    // Aquí hay un ejemplo de devolución de un valor predeterminado (un objeto vacío)
+    return {};
+  }
+
+  return task;
+
+}
 
 
 
 
-export { createTask, getTasks, updateTask };
+
+
+export { createTask, getTasks, updateTask, getTaskById };

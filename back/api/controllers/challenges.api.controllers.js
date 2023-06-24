@@ -93,6 +93,18 @@ async function updateTask(req, res) {
         });
 }
 
+async  function getTaskbyId(req, res) {
+    const taskId = req.params.idtarea;
+    return taskService.getTaskById(taskId)
+        .then((task) => {
+            res.status(200).json(task);
+        })
+        .catch((err) => {
+            res.status(400).json({ error: { message: err.message } });
+        });
+}
+
+
 
 async function getSuggestedTasks(req, res) {
     const account = req.account;
@@ -110,4 +122,4 @@ async function getSuggestedTasks(req, res) {
 
   
   
-  export { createChallenge, getChallengesByUserId, updateChallenge, createTask, getTasks, getChallengeById, updateTask, getSuggestedTasks};
+  export { createChallenge, getChallengesByUserId, updateChallenge, createTask, getTasks, getChallengeById, updateTask, getTaskbyId, getSuggestedTasks};

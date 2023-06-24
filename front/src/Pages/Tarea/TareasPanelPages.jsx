@@ -34,7 +34,7 @@ function TareasPanel() {
           <h1>Desafío: {desafio.title}</h1>
           <p>Fecha del vencimiento: {formatDeadline(desafio.deadline)}</p>
           <h2>Lista de Tareas</h2>
-          <Link to={`/desafio/${desafio._id}/creartareas`} className="btn-tareas">Crear Tareas</Link>
+          <Link to={`/desafio/${desafio._id}/tareas/nueva`} className="btn-tareas">Crear Tareas</Link>
         </div>
         {isLoading ? (
           <Spinner animation="border" role="status">
