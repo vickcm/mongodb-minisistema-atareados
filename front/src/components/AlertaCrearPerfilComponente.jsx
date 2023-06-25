@@ -13,21 +13,21 @@ function AlertaCrearPerfilComponente() {
 
     return (
         <>
-        <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-                <Modal.Title>Crear Perfil</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                {!profile.username == "" ? (
-                    <button>{profile.username}</button>
-                ) : (
+        {!profile.username == "" ? (
+            <p className='visually-hidden'>ingresaste como {profile.username}</p>
+        ) : (
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Crear Perfil</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
                     <div className='div-crear-perfil'>
                         <p>Por favor crea tu perfil para poder seguir navegando en Atareados</p>
                         <Link to={`/crearperfil`}>Crear Perfil</Link>
                     </div>
-                )}
-            </Modal.Body>
-        </Modal>
+                </Modal.Body>
+            </Modal>
+        )}
         </>
     );
 }
