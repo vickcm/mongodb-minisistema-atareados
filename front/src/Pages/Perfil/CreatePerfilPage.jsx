@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 import profileService from "../../service/profile.service";
 
 function CreatePerfilPage() {
-
   const navigate = useNavigate()
   const [username, setUsername] = useState("");
   const [age, setAge] = useState("");

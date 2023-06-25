@@ -25,7 +25,6 @@ function SessionProvider({children}){
         navigate('/login', {replace: true})
     }, [navigate])
 
-
     useEffect(() => {
         profileService.getCurrent()
         .then((profile) => {
@@ -35,18 +34,16 @@ function SessionProvider({children}){
 
     const value = useMemo(()=>{
         return {
-           profile,
+            profile,
             onLogout
         }
     }, [ profile, onLogout])
-    
-
     
     return (
         <SessionContext.Provider value={value}>
             {children}
         </SessionContext.Provider>
-            )
+    )
 }
 
 

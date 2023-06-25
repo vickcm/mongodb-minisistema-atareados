@@ -1,2 +1,29 @@
 footer 
 navbar 
+****VER COMO QUEDA
+{!profile.username == "" ? (
+          <button>{profile.username}</button>
+) : (
+    <div>Por favor crea tu perfil
+        <Link to={`/crearperfil`} className="btn-tareas">Crear Perfil</Link>
+    </div>
+)}
+
+const onSubmit = useCallback((event) => {
+    event.preventDefault()
+    console.log("submit", username, age)
+    const profile = {
+        username,
+        age
+    }
+    profileService.createProfile(profile)
+    .then(() => {
+      console.log("perfil creado");
+      setError('');
+      navigate('/desafio', { replace: true });
+    })
+    .catch((error) => {
+      setError(error.message); // Opción 1: usa err.error.message si el error se envía como { error: { message: "..."} }
+      // setError(err.message); // Opción 2: usa err.message si el error se envía como { message: "..."}
+    });
+}, [username, age, navigate, setError])

@@ -9,6 +9,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import AlertaCrearPerfilComponente from "../../components/AlertaCrearPerfilComponente";
+import { useSession } from "../../context/session.context";
 
 import "../../css/FormDesafioStyle.css";
 
@@ -59,6 +60,7 @@ function TeamMembers({ members, deleteMember }) {
 function FormDesafio() {
   const navigate = useNavigate();
 
+  //const {profile} = useSession()
   const [title, setTitle] = useState("");
   const [members, setMembers] = useState([]);
   const [memberInput, setMemberInput] = useState("");
