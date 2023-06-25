@@ -6,7 +6,6 @@ import TareaListItem from "../../components/TareaItemListComponente";
 import desafioService from "../../service/desafio.service";
 import { formatDeadline } from "../../utils/utils";
 import "../../css/Tarea.css";
-import Button from "react-bootstrap/Button";
 import TablaPuntos from "../../components/TablaPuntosComponente";
 
 function TareasPanel() {
@@ -23,7 +22,6 @@ function TareasPanel() {
 
   useEffect(() => {
     setIsLoading(true);
-
     desafioService
       .getTasks(id)
       .then((tareas) => {
@@ -45,12 +43,7 @@ function TareasPanel() {
           <h1>Desafío: {desafio.title}</h1>
           <p>Fecha del vencimiento: {formattedDeadline}</p>
           <h2>Lista de Tareas</h2>
-          <Link
-            to={`/desafio/${desafio._id}/tareas/nueva`}
-            className="btn-tareas"
-          >
-            Crear Tareas
-          </Link>
+          <Link to={`/desafio/${desafio._id}/tareas/nueva`} className="btn-tareas">Crear Tareas</Link>
         </div>
         {isLoading ? (
           <Spinner animation="border" role="status">
@@ -64,20 +57,16 @@ function TareasPanel() {
               </>
             ) : (
               <div>
-                <Button
-                  variant="primary"
-                  onClick={handleTogglePoints}
-                  className="btn-tareas"
-                >
-                  {showPoints ? "Ocultar Puntos" : "Mostrar Puntos"}
-                </Button>
-
+                <div className="div-btn-pts">
+                  <Link variant="primary"onClick={handleTogglePoints}>
+                    {showPoints ? "Ocultar Puntos" : "Mostrar Puntos"}
+                  </Link>
+                </div>
                 <div className="tareas-list-cards">
                   {tareas.map((tarea) => (
                     <TareaListItem key={tarea._id} tarea={tarea} />
                   ))}
                 </div>
-
                 {showPoints && <TablaPuntos />}
               </div>
             )}

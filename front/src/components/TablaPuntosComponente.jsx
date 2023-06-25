@@ -42,10 +42,13 @@ function TablaPuntos() {
 
   const renderTable = useMemo(() => {
     return (
-      <Table striped bordered hover>
+      <>
+      <div style={{ borderTop: "1px dashed #4f70b675 ", marginLeft: 20, marginRight: 20, marginTop: 20 }}></div>
+      <h1 className="titulo text-center mt-5">Tabla de Puntos</h1>
+      <Table striped bordered>
         <thead>
           <tr>
-            <th>#</th>
+            <th>Pocisión</th>
             <th>Responsable</th>
             <th>Puntos</th>
           </tr>
@@ -66,6 +69,7 @@ function TablaPuntos() {
           ))}
         </tbody>
       </Table>
+      </>
     );
   }, [members]);
 

@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useCallback } from "react";
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
+import Image from "react-bootstrap/Image";
+import ImageCheck from "../imagenes/check.png";
 import "../css/TareaPanelComponente.css";
 import { Link } from "react-router-dom";
 import { useDesafio, useSetDesafio } from "../context/desafioContext";
@@ -68,24 +69,13 @@ function TareaListItem({ tarea }) {
         <p>Responsable: {tarea.responsible}</p>
         <p>Puntos: {tarea.points}</p>
         {isComplete ? (
-          <Button variant={completeButtonVariant} disabled>
-            Completada
-          </Button>
+          <Link variant={completeButtonVariant} disabled className="tarea-completada">
+            Tarea Completada <Image src={ImageCheck} />
+          </Link>
         ) : (
           <div>
-            <Link
-              to={`/desafio/${desafio._id}/tareas/${tarea._id}/editar`}
-              className="btn-tareas-editar"
-            >
-              Editar
-            </Link>
-            <Button
-              variant={completeButtonVariant}
-              disabled={isButtonDisabled}
-              onClick={handleComplete}
-            >
-              Completar
-            </Button>
+            <Link to={`/desafio/${desafio._id}/tareas/${tarea._id}/editar`} className="btn-tareas-editar"> Editar </Link>
+            <Link variant={completeButtonVariant} disabled={isButtonDisabled} onClick={handleComplete} className="btn-tareas-completar"> Completar </Link>
           </div>
         )}
       </Card.Body>

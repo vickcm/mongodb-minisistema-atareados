@@ -16,6 +16,25 @@
 
 }
 
+.btn-tareas-completar{
+    background-color: #009688;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 15px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    margin-right:5px;
+    text-decoration: none;
+}
+
+.btn-tareas-completar:hover{
+    background-color: #00897b;
+    color: #fff;
+    text-decoration: none;
+}
+
 .btn-tareas-editar{
     background-color: #F5F3ED;
     border: none;
@@ -31,6 +50,37 @@
 
 .btn-tareas-editar:hover{
     background-color: #e3e3e3;
+    text-decoration: none;
+}
+
+.tarea-completada{
+    text-decoration: none;
+    color: #009688;
+    cursor: default;
+}
+.tarea-completada:hover{
+    text-decoration: none;
+    color: #009688;
+    cursor: default;
+}
+
+.div-btn-pts{
+    display: flex;
+    justify-content: center;
+    margin-top: 22px;
+}
+
+.div-btn-pts a {
+    background-color: #4F70B6;
+    color: #fff;
+    border-radius: 5px;
+    padding: 6px 15px;
+    text-decoration: none;
+}
+
+.div-btn-pts a:hover{
+    background-color: #3e5a9a;
+    color: #fff;
     text-decoration: none;
 }
 
