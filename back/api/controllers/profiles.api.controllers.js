@@ -9,6 +9,8 @@ async function createProfile(req, res) {
       res.status(201).json({ message: "Perfil creado exitosamente." });
     })
     .catch((err) => {
+      console.error("Error al crear el perfil:", err); // Agrega este console.error para registrar el error
+
       res.status(400).json({ error: { message: err.message } });
     });
 }

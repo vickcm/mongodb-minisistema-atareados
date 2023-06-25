@@ -5,19 +5,25 @@ const db = client.db("DB_ATAREADOS");
 const profilesCollection = db.collection("profiles");
 
 async function createProfile(profile, account) {
-  console.log("Create Profile:", profile); // Agrega este console.log
 
   const profileWithUserId = {
     ...profile,
+    points: 0,
     email: account.email,
     _id: new ObjectId(account._id),
   };
   await client.connect();
 
+
   const checkProfile = await profilesCollection.findOne(profileWithUserId);
+  const checkProfileByUsername = await profilesCollection.findOne({ username: profileWithUserId.username });
+
 
   if (checkProfile) {
     throw new Error("Ya tiene un perfil creado");
+  }
+  if (checkProfileByUsername) {
+    throw new Error("El nombre de usuario no está disponible");
   }
 
   await profilesCollection.insertOne(profileWithUserId);
@@ -44,7 +50,6 @@ async function getUserByEmail(email) {
   const user = await profilesCollection.findOne({ email });
 
   if (user) {
-    console.log('User:', user); // Agrega este console.log    
     return user;
 
   }

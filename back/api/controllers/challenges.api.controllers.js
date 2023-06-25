@@ -4,8 +4,7 @@ import * as openAiService from "../../services/out/openai.services.js";
 
 
 async function createChallenge(req, res) {
-  console.log("Create Challenge Request:", req.body); // Agrega este console.log
-  console.log("Create Challenge Account linea 6 controller:", req.account); // Agrega este console.log
+
   const challenge = req.body;
   const account = req.account;
 
@@ -82,9 +81,11 @@ async function getChallengeById(req, res) {
 }
 
 async function updateTask(req, res) {
-    const task = req.body;
+  const taskId = req.params.idtarea;
+  const task = req.body;
+  const challengeId = req.params.id;
     return taskService
-        .updateTask(task)
+        .updateTask(challengeId, taskId, task)
         .then(() => {
             res.status(201).json({ message: "Tarea actualizada exitosamente." });
         })
@@ -106,6 +107,8 @@ async  function getTaskbyId(req, res) {
 
 
 
+
+
 async function getSuggestedTasks(req, res) {
     const account = req.account;
     return openAiService.getSuggestedTasks(account._id)
@@ -118,8 +121,18 @@ async function getSuggestedTasks(req, res) {
 }
 
 
+async function getPoints(req, res) {
+  const challengeId = req.params.id;
+  return challengeService.getPoints(challengeId)
+      .then((points) => {
+          res.status(200).json(points);
+      })
+      .catch((err) => {
+          res.status(400).json({ error: { message: err.message } });
+      });
+}
 
 
   
   
-  export { createChallenge, getChallengesByUserId, updateChallenge, createTask, getTasks, getChallengeById, updateTask, getTaskbyId, getSuggestedTasks};
+  export { createChallenge, getChallengesByUserId, updateChallenge, createTask, getTasks, getChallengeById, updateTask, getTaskbyId, getSuggestedTasks, getPoints};

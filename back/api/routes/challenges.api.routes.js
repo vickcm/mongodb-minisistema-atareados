@@ -17,14 +17,17 @@ router.get('/desafios/:id', [validateToken], controllers.getChallengeById);
 
 router.post('/desafios/:id/tareas', [validateToken, validateTask] , controllers.createTask);
 router.get('/desafios/:id/tareas', [validateToken] , controllers.getTasks);
-router.get('/desafios/:id/tareas/:idtarea', [validateToken] , controllers.getTaskbyId);
 
-router.patch('/desafios/:id/tareas', [validateToken, updateValidateTask] , controllers.updateTask);
+// OBTENER Y ACTUALIZAR UNA TAREA
+router.get('/desafios/:id/tareas/:idtarea', [validateToken] , controllers.getTaskbyId);
+router.patch('/desafios/:id/tareas/:idtarea', [validateToken, updateValidateTask] , controllers.updateTask);
 
 // TAREAS SUGERIDAS
 router.get('/sugerenciatareas', [validateToken] , controllers.getSuggestedTasks);  // obtengo las tareas sugeridas para un usuario servicio ext ')
 
+// TABLA DE PUNTOS 
 
+router.get('/desafios/:id/puntos', [validateToken] , controllers.getPoints);  
 
 
 export default router;

@@ -20,7 +20,6 @@ async function createChallenge(challenge, account) {
    validMembers.unshift(profileAuthenticatedUser);
 
   if (invalidMembers.length > 0) {
-    console.log('Invalid Members:', invalidMembers);
     throw new Error(
       `Los siguientes usuarios no están registrados: ${invalidMembers.join(", ")}`
     );
@@ -47,18 +46,13 @@ async function validateMembers(members) {
   await client.connect();
 
   const validateMember = async (email) => {
-    console.log('Member:', email);
 
     const user = await getUserByEmail(email);
-    console.log('User:', user);
     if (user) {
-      console.log('Valid Member:', user.email);
-      console.log('UserName: ', user.username);
-      
+
       return user;
     } else {
       invalidMembers.push(email);
-      console.log('Invalid Member:', email);
     }
   };
 
@@ -112,9 +106,33 @@ async function getChallengeById(id) {
   return challenge;
 }
 
+async function getPoints(challengeId) {
+
+  
+  await client.connect();
+
+  const challenge = await challengesCollection.findOne({ _id: challengeId });
+
+  // Chequear si existe el challenge, sino devolver null o un error
+  if (!challenge) {
+    return null;
+  }
+
+  // Recorrer el array de members y devolver un array de objetos con el nombre y los puntos de cada uno
+  const pointsArray = challenge.members.map((member) => {
+    return {
+      username: member.username,
+      points: member.points,
+    };
+  });
+
+  console.log(pointsArray);
+
+  return pointsArray;
+}
 
 
 
 
 
-export { createChallenge, getChallengesByUserId, updateChallenge, getChallengeById };
+export { createChallenge, getChallengesByUserId, updateChallenge, getChallengeById, getPoints };

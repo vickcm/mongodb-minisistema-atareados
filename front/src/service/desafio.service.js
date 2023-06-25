@@ -32,6 +32,16 @@ async function getTaskById(id,taskId) {
     return API.call({ uri: `desafios/${id}/tareas/${taskId}`, method: 'GET' })
 }
 
+async function updateTask(id,taskId,task) {
+    return API.call({ uri: `desafios/${id}/tareas/${taskId}`, method: 'PATCH', body: task })
+}
+
+async function getPoints(id) {
+    return API.call({ uri: `desafios/${id}/puntos`, method: 'GET' })
+}
+
+
+
 
 
 export default {
@@ -41,6 +51,8 @@ export default {
     getTasks, 
     getChallengeById,
     createTask, 
-    getTaskById
+    getTaskById, 
+    updateTask, 
+    getPoints
 
 }

@@ -40,15 +40,15 @@ const onSubmit = useCallback((event) => {
         age
     }
     profileService.createProfile(profile)
-
-    .then(({profile}) => {
-        console.log("perfil creado", profile)
-        setError('')
-        navigate('/desafio', {replace: true})
+    .then(() => {
+      console.log("perfil creado");
+      setError('');
+      navigate('/desafio', { replace: true });
     })
-    .catch(err => {
-        setError(err.error.message)
-    })
+    .catch((error) => {
+      setError(error.message); // Opción 1: usa err.error.message si el error se envía como { error: { message: "..."} }
+      // setError(err.message); // Opción 2: usa err.message si el error se envía como { message: "..."}
+    });
 }, [username, age, navigate, setError])
 
   return (
@@ -94,7 +94,7 @@ const onSubmit = useCallback((event) => {
             </Button>
           </div>
         </Form>
-        <p>{error} </p>
+        {error && <p>{error}</p>}
       </Container>
     </>
   );

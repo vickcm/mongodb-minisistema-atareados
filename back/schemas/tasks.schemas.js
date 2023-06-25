@@ -14,7 +14,6 @@ const taskSchema = yup.object().shape({
 
 
 const updateTaskSchema = yup.object().shape({
-  _id: yup.string().required(),
   title: yup.string(),
   description: yup.string(),
   responsible: yup.string(),

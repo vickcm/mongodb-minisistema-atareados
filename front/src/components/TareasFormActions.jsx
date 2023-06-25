@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "../css/FormDesafioStyle.css";
-import { useDesafio } from "../context/desafioContext";
+import { useDesafio, useSetDesafio } from "../context/desafioContext";
 import desafioService from "../service/desafio.service.js";
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -14,6 +14,8 @@ function TareasFormActions({ tarea }) {
 
   const params = useParams();
   const desafio = useDesafio(); // Obtén el desafío del contexto
+  const setDesafio = useSetDesafio();
+
   const navigate = useNavigate();
   const [title, setTitle] = useState(tarea ? tarea.title : "");
   const [description, setDescription] = useState(tarea ? tarea.description : "");
@@ -42,13 +44,15 @@ function TareasFormActions({ tarea }) {
     setSelectedMember(selectedMember ? selectedMember.username : null);
   };
 
+  const idTarea = params.idTarea;
+  const idDesafio = params.idDesafio;
+
   const onSubmit = (event) => {
     event.preventDefault();
 
     if (tarea) {
       // Actualizar la tarea existente
       const tareaActualizada = {
-        _id: tarea._id,
         title: title,
         description: description,
         points: points,
@@ -57,7 +61,7 @@ function TareasFormActions({ tarea }) {
       };
 
       desafioService
-        .updateTask(tarea._id, tareaActualizada)
+        .updateTask(idDesafio, idTarea, tareaActualizada)
         .then((response) => {
           // La tarea se ha actualizado exitosamente
           console.log("Tarea actualizada:", response);
@@ -70,6 +74,8 @@ function TareasFormActions({ tarea }) {
           setDescription("");
           setPoints(0);
           setSelectedMember(null);
+          setDesafio({ ...desafio, tasks: tareas });
+
           navigate(`/desafio/${params.idDesafio}`, { replace: true });
         })
         .catch((error) => {
@@ -100,6 +106,8 @@ function TareasFormActions({ tarea }) {
           setDescription("");
           setPoints(0);
           setSelectedMember(null);
+          setDesafio({ ...desafio, tasks: tareas });
+
           navigate(`/desafio/${params.idDesafio}`, { replace: true });
         })
         .catch((error) => {

@@ -6,7 +6,6 @@ const db = client.db("DB_ATAREADOS");
 const accountsCollection = db.collection("accounts");
 
 async function createAccount(account) {
-  console.log('Create Account:', account); // Agrega este console.log
 
   await client.connect();
   const checkAccountExist = await accountsCollection.findOne({ email: account.email });
@@ -28,7 +27,6 @@ async function createAccount(account) {
 }
 
 async function loginAccount(account) {
-    console.log('Login Account:', account); // Agrega este console.log
     await client.connect();
 
     const checkAccountExist = await accountsCollection.findOne({ email: account.email });

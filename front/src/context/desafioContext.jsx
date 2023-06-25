@@ -3,24 +3,26 @@ import { useParams } from "react-router-dom";
 import desafioService from "../service/desafio.service.js";
 
 const DesafioContext = createContext();
+const SetDesafioContext = createContext();
 
 function useDesafio() {
   return useContext(DesafioContext);
 }
 
+function useSetDesafio() {
+  return useContext(SetDesafioContext);
+}
+
 export function DesafioProvider({ children }) {
   const [desafio, setDesafio] = useState({});
   const params = useParams();
-  console.log("params", params);
 
   const fetchDesafio = useCallback(async () => {
     const idDesafio = params.idDesafio;
-    console.log("idDesafio", idDesafio);
     if (idDesafio) {
       console.log("Ejecutando getChallengeById en el DesafioProvider");
       const fetchedDesafio = await desafioService.getChallengeById(idDesafio);
       setDesafio(fetchedDesafio);
-      console.log("fetchedDesafio", fetchedDesafio);
     }
   }, [params.idDesafio]);
 
@@ -32,9 +34,11 @@ export function DesafioProvider({ children }) {
 
   return (
     <DesafioContext.Provider value={desafioValue}>
-      {children}
+      <SetDesafioContext.Provider value={setDesafio}>
+        {children}
+      </SetDesafioContext.Provider>
     </DesafioContext.Provider>
   );
 }
 
-export { DesafioContext, useDesafio };
+export { DesafioContext, SetDesafioContext, useDesafio, useSetDesafio };

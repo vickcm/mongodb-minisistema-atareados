@@ -1,7 +1,6 @@
 import * as accountSchemas from '../schemas/accounts.schemas.js';
 
 async function validateAccount(req, res, next) {
-  console.log('Validate Account Request:', req.body); // Agrega este console.log
 
   try {
     const validatedAccount = await accountSchemas.accountSchema.validate(req.body, {
@@ -17,7 +16,6 @@ async function validateAccount(req, res, next) {
 }
 
 async function validateLogin(req, res, next) {
-  console.log('Validate Account Request:', req.body); // Agrega este console.log
 
   try {
     const validatedAccount = await accountSchemas.loginAccountSchema.validate(req.body, {

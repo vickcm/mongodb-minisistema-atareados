@@ -1,7 +1,6 @@
 import { taskSchema, updateTaskSchema } from '../schemas/tasks.schemas.js';
 
 async function validateTask(req, res, next) {
-  console.log('Validate Challenge Request:', req.body);
 
   try {
     const validatedTask = await taskSchema.validate(req.body, {
@@ -16,7 +15,6 @@ async function validateTask(req, res, next) {
 }
 
 async function updateValidateTask(req, res, next) {
-  console.log('Validate Challenge Request:', req.body);
 
   try {
     const validatedTask = await updateTaskSchema.validate(req.body, {

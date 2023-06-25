@@ -1,14 +1,17 @@
 import { Button } from "bootstrap-4-react/lib/components";
 import { Container } from "bootstrap-4-react/lib/components/layout";
 import { useCallback, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Image from "react-bootstrap/Image";
 import ImagePlusMember from "../../imagenes/plus.png";	
 import ImageDeleteMember from "../../imagenes/trash.png";	
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { useSession } from "../../context/session.context";
+
 import "../../css/FormDesafioStyle.css";
+
 import desafioService from "../../service/desafio.service.js";
 
 function TeamMembersInput({ memberInput, onChangeMemberInput, addMember, error }) {
@@ -54,6 +57,9 @@ function TeamMembers({ members, deleteMember }) {
 }
 
 function FormDesafio() {
+
+  const {profile} = useSession()
+
   const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
@@ -118,6 +124,17 @@ function FormDesafio() {
   return (
     <>
       <Container className="container-desafio">
+      {!profile.username == "" ? (
+          <button>{profile.username}</button>
+        ) : (
+          
+          <div>Por favor crea tu perfil
+          
+          <Link to={`/crearperfil`} className="btn-tareas">Crear Perfil</Link>
+          </div>
+
+
+        )}
         <Form className="form-desafio" onSubmit={onSubmit}>
           <div className="titulo">
             <h1>Crea tu desafio</h1>

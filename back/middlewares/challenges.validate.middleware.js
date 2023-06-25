@@ -1,7 +1,6 @@
 import { challengeSchema, challengeSchemaUpdate } from '../schemas/challenges.schemas.js';
 
 async function validateChallenge(req, res, next) {
-  console.log('Validate Challenge Request:', req.body);
 
   try {
     const validatedChallenge = await challengeSchema.validate(req.body, {
@@ -16,7 +15,6 @@ async function validateChallenge(req, res, next) {
 }
 
 async function validateChallengeUpdate(req, res, next) {
-  console.log('Validate Challenge Update Request:', req.body);
 
   try {
     const validatedChallenge = await challengeSchemaUpdate.validate(req.body, {

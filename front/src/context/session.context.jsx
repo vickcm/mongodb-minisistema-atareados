@@ -9,7 +9,7 @@ function useSession(){
     return useContext(SessionContext)
 }
 
- function useProfile(){
+function useProfile(){
     const {profile} = useSession()
     return profile
 }
