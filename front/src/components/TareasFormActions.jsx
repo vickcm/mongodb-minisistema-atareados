@@ -24,7 +24,7 @@ function TareasFormActions({ tarea }) {
 
   // Estado para almacenar el miembro seleccionado
   const [isLoading, setIsLoading] = useState(true); // Estado para indicar si se está cargando el desafío
-  const [submitButtonLabel, setSubmitButtonLabel] = useState(tarea ? "editar tarea" : "añadir tarea");
+  const [submitButtonLabel, setSubmitButtonLabel] = useState(tarea ? "Editar tarea" : "Agregar tarea");
 
   const onChangeTitle = (event) => {
     setTitle(event.target.value);
