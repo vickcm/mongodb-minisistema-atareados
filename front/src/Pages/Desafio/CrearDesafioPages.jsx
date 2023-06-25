@@ -8,7 +8,7 @@ import ImageDeleteMember from "../../imagenes/trash.png";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { useSession } from "../../context/session.context";
+import AlertaCrearPerfilComponente from "../../components/AlertaCrearPerfilComponente";
 
 import "../../css/FormDesafioStyle.css";
 
@@ -57,9 +57,6 @@ function TeamMembers({ members, deleteMember }) {
 }
 
 function FormDesafio() {
-
-  const {profile} = useSession()
-
   const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
@@ -123,18 +120,8 @@ function FormDesafio() {
 
   return (
     <>
+      <AlertaCrearPerfilComponente />
       <Container className="container-desafio">
-      {!profile.username == "" ? (
-          <button>{profile.username}</button>
-        ) : (
-          
-          <div>Por favor crea tu perfil
-          
-          <Link to={`/crearperfil`} className="btn-tareas">Crear Perfil</Link>
-          </div>
-
-
-        )}
         <Form className="form-desafio" onSubmit={onSubmit}>
           <div className="titulo">
             <h1>Crea tu desafio</h1>

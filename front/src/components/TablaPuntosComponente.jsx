@@ -37,7 +37,6 @@ function TablaPuntos() {
         console.error("Error al obtener los puntos:", error);
       }
     };
-
     fetchPoints();
   }, [desafio.id]);
 

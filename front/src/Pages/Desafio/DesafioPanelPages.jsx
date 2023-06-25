@@ -7,6 +7,7 @@ import desafioService from "../../service/desafio.service.js";
 import Image from "react-bootstrap/Image";
 import ImageArrowLeft from "../../imagenes/flecha-izquierda.png";	
 import ImageArrowRight from "../../imagenes/flecha-derecha.png";	
+import AlertaCrearPerfilComponente from "../../components/AlertaCrearPerfilComponente";
 
 function DesafioPanel() {
   const profile = useProfile();
@@ -44,6 +45,7 @@ function DesafioPanel() {
 
   return (
     <>
+    <AlertaCrearPerfilComponente />
     <h1 className="titulo">Panel de Desafíos</h1>
     <Container>
       {currentDesafios.map((desafio) => (

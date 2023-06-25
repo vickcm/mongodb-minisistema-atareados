@@ -5,11 +5,13 @@ import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import ImageHome from "../imagenes/Home.png";
 import { Link } from "react-router-dom";
+import AlertaCrearPerfilComponente from "../components/AlertaCrearPerfilComponente";
 import "../css/HomeEstilos.css";
 
 function Homepages() {
   return (
     <>
+      <AlertaCrearPerfilComponente />
       <Container>
         <Row>
           <Col>
