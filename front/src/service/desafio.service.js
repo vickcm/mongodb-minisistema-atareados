@@ -40,6 +40,11 @@ async function getPoints(id) {
     return API.call({ uri: `desafios/${id}/puntos`, method: 'GET' })
 }
 
+async function getSuggestedTask() {
+    return API.call({ uri: `sugerenciatareas`, method: 'GET' })
+}
+
+
 
 
 
@@ -53,6 +58,7 @@ export default {
     createTask, 
     getTaskById, 
     updateTask, 
-    getPoints
+    getPoints,
+    getSuggestedTask
 
 }

@@ -20,6 +20,9 @@
     text-align: center;
     margin-top:30px;
 }
+.titulo .p-sugerencia {
+    color: #4F70B6
+ }
 
 .titulo p{
     font-family: 'Montserrat', sans-serif ;
@@ -86,3 +89,10 @@
 .p-team-form{
     font-size: 12px;
 }
+
+.btn-sugerencia {
+    box-shadow: 0px 0px 10px 0px #4F70B6;
+    margin: 10px;
+    border-radius: 10px;
+}
+

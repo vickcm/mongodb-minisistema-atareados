@@ -10,7 +10,6 @@ import desafioService from "../service/desafio.service.js";
 import { useParams, useNavigate } from "react-router-dom";
 
 function TareasFormActions({ tarea }) {
-  console.log("Tarea: LINEA43 TAREASFORMACTION", tarea);
 
   const params = useParams();
   const desafio = useDesafio(); // Obtén el desafío del contexto
@@ -18,13 +17,22 @@ function TareasFormActions({ tarea }) {
 
   const navigate = useNavigate();
   const [title, setTitle] = useState(tarea ? tarea.title : "");
-  const [description, setDescription] = useState(tarea ? tarea.description : "");
+  const [description, setDescription] = useState(
+    tarea ? tarea.description : ""
+  );
   const [points, setPoints] = useState(tarea ? tarea.points : 0);
-  const [selectedMember, setSelectedMember] = useState(tarea && tarea.responsible ? tarea.responsible : null);
+  const [selectedMember, setSelectedMember] = useState(
+    tarea && tarea.responsible ? tarea.responsible : null
+  );
+  const [sugerencia, SetSugerencia] = useState("");
+  const [sugerenciasCount, setSugerenciasCount] = useState(0);
+
 
   // Estado para almacenar el miembro seleccionado
   const [isLoading, setIsLoading] = useState(true); // Estado para indicar si se está cargando el desafío
-  const [submitButtonLabel, setSubmitButtonLabel] = useState(tarea ? "Editar tarea" : "Agregar tarea");
+  const [submitButtonLabel, setSubmitButtonLabel] = useState(
+    tarea ? "Editar tarea" : "Agregar tarea"
+  );
 
   const onChangeTitle = (event) => {
     setTitle(event.target.value);
@@ -40,12 +48,40 @@ function TareasFormActions({ tarea }) {
 
   const onSelectMember = (event) => {
     const memberId = event.target.value;
-    const selectedMember = desafio.members.find((member) => member.username === memberId);
+    const selectedMember = desafio.members.find(
+      (member) => member.username === memberId
+    );
     setSelectedMember(selectedMember ? selectedMember.username : null);
   };
 
   const idTarea = params.idTarea;
   const idDesafio = params.idDesafio;
+
+  const solicitarSugerencia = () => {
+    
+    if (sugerenciasCount < 5) {
+      desafioService
+      .getSuggestedTask()
+      .then((sugerencia) => {
+        // La sugerencia de tarea se ha obtenido exitosamente
+        console.log("Sugerencia de tarea:", sugerencia);
+  
+        // Actualiza los campos del formulario con la sugerencia obtenida
+        setTitle(sugerencia)
+        setSugerenciasCount(sugerenciasCount + 1);
+
+
+      })
+      .catch((error) => {
+        // Error al obtener la sugerencia de tarea
+        console.error("Error al obtener la sugerencia de tarea:", error);
+      });
+    }
+    // Lógica para solicitar la sugerencia de tarea
+
+
+    
+  };
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -148,19 +184,37 @@ function TareasFormActions({ tarea }) {
           <div className="titulo">
             <h1>{tarea ? tarea.title : "Añadir Tarea"}</h1>
             <p>Carga las tareas que consideres necesarias</p>
+            <p className="p-sugerencia">
+              ¿Necesitas una inspiración? !Pedile a Atareadito una tarea!
+            </p>
+            <Button onClick={solicitarSugerencia} disabled={sugerenciasCount >= 5} className="btn-sugerencia">
+              Solicitar sugerencia
+            </Button>
           </div>
           <Row className="mb-3 rowDesafio">
             <Form.Group as={Col} sm="12" controlId="titulo">
               <Form.Label>Título de la tarea</Form.Label>
-              <Form.Control type="titulo" value={title} onChange={onChangeTitle} />
+              <Form.Control
+                type="titulo"
+                value={title}
+                onChange={onChangeTitle}
+              />
             </Form.Group>
             <Form.Group as={Col} sm="12" controlId="descripcion">
               <Form.Label>Describe la tarea</Form.Label>
-              <Form.Control type="descripcion" value={description} onChange={onChangeDescription} />
+              <Form.Control
+                type="descripcion"
+                value={description}
+                onChange={onChangeDescription}
+              />
             </Form.Group>
             <Form.Group as={Col} sm="12" controlId="puntos">
               <Form.Label>Asigna los puntos</Form.Label>
-              <Form.Control type="puntos" value={points} onChange={onChangePoints} />
+              <Form.Control
+                type="puntos"
+                value={points}
+                onChange={onChangePoints}
+              />
             </Form.Group>
             {desafio && desafio.members && (
               <Form.Select
