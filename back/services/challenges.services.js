@@ -76,6 +76,9 @@ async function getChallengesByUserId(userId) {
 async function updateChallenge(challenge, id) {
   const { title, deadline } = challenge;
   const challengeId = new ObjectId(id);
+  
+  // falta validar que el usuario que quiere actualizar por cualquiera del equipo
+
   const challengeData = {
     title,
     deadline,
