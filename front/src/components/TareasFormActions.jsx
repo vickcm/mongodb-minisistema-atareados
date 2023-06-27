@@ -185,7 +185,7 @@ function TareasFormActions({ tarea }) {
             <h1>{tarea ? tarea.title : "Añadir Tarea"}</h1>
             <p>Carga las tareas que consideres necesarias</p>
             <p className="p-sugerencia">
-              ¿Necesitas una inspiración? !Pedile a Atareadito una tarea!
+              ¿Necesitas una inspiración? ¡Pedile a Atareadito una tarea!
             </p>
             <Button onClick={solicitarSugerencia} disabled={sugerenciasCount >= 5} className="btn-sugerencia">
               Solicitar sugerencia

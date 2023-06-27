@@ -1,2 +1,5 @@
 # mongodb-minisistema-atareados
-hola este es un cambio para ver si se v ene la rama 
+# Barco Cecilia
+# Castro Menna Victoria
+# Guggiari Micaela 
+23.1 | DWN4AV | Aplicaciones Híbridas

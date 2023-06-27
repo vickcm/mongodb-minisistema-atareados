@@ -69,7 +69,7 @@ function LoginPage() {
                 value={password}
                 onChange={onChangePassword}
               />
-              <button onClick={switchShown} className="eye-icon-button">
+              <button type="button" onClick={switchShown} className="eye-icon-button">
                 {shown ? <AiFillEyeInvisible /> : <AiFillEye />}
               </button>
             </div>
