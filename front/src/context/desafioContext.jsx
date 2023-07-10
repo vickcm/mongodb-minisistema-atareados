@@ -26,9 +26,10 @@ export function DesafioProvider({ children }) {
     }
   }, [params.idDesafio]);
 
-  useEffect(() => {
-    fetchDesafio();
-  }, [fetchDesafio]);
+useEffect(() => {
+  fetchDesafio();
+}, [desafio]); // Ejecutar el efecto cuando el desafío cambie
+
 
   const desafioValue = useMemo(() => desafio, [desafio]);
 
