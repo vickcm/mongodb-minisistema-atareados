@@ -8,13 +8,10 @@ async function getProfile() {
     return API.call({ uri: 'profiles',  })
 }
 
-export async function getCurrent() {
-    return API.call({ uri: 'profiles' })
-}
 
 
 export default {
     createProfile,
-    getProfile,
-    getCurrent
+    getProfile
+    
 }
