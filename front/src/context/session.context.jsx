@@ -3,6 +3,8 @@ import {useNavigate} from 'react-router-dom'
 import profileService from '../service/profile.service'
 import authService from '../service/autentication.service.js'
 
+
+// verificar tantos llamados a profile 
 const SessionContext = createContext()
 
 function useSession(){
