@@ -30,6 +30,8 @@ export function DesafioProvider({ children }) {
     fetchDesafio();
   }, [desafio]);
 
+  
+
   const desafioValue = useMemo(() => desafio, [desafio]);
 
   return (
