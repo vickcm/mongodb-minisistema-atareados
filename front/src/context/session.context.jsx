@@ -32,7 +32,7 @@ function SessionProvider({children}){
         .then((profile) => {
             setProfile(profile)
         })
-    }, [profile]) 
+    }, []) 
 
     const value = useMemo(()=>{
         return {
