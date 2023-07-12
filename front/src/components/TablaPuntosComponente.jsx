@@ -48,7 +48,7 @@ function TablaPuntos() {
       <Table striped bordered>
         <thead>
           <tr>
-            <th>Posición</th>
+            <th>Pocisión</th>
             <th>Responsable</th>
             <th>Puntos</th>
           </tr>

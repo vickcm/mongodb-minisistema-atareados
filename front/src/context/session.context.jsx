@@ -3,8 +3,6 @@ import {useNavigate} from 'react-router-dom'
 import profileService from '../service/profile.service'
 import authService from '../service/autentication.service.js'
 
-
-// verificar tantos llamados a profile 
 const SessionContext = createContext()
 
 function useSession(){
@@ -12,8 +10,8 @@ function useSession(){
 }
 
 function useProfile(){
-    const {profile, setProfile} = useSession()
-    return {profile, setProfile}
+    const {profile} = useSession()
+    return profile
 }
 
 function SessionProvider({children}){
@@ -28,7 +26,7 @@ function SessionProvider({children}){
     }, [navigate])
 
     useEffect(() => {
-        profileService.getProfile()
+        profileService.getCurrent()
         .then((profile) => {
             setProfile(profile)
         })
@@ -37,8 +35,7 @@ function SessionProvider({children}){
     const value = useMemo(()=>{
         return {
             profile,
-            onLogout, 
-            setProfile
+            onLogout
         }
     }, [ profile, onLogout])
     

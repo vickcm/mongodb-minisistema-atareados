@@ -2,14 +2,10 @@ import { Link } from "react-router-dom";
 import "../css/AppEstilos.css";
 import Logo from "../imagenes/ATAREADOS_2.png";
 import { Navbar, Nav, Container, Image } from "react-bootstrap";
-import { useSession, useProfile } from "../context/session.context";
+import { useSession } from "../context/session.context";
 
 function MainNav(){
-  const { onLogout} = useSession()
-  const {profile} = useProfile();
-  console.log(profile)
-
-
+  const {profile, onLogout} = useSession()
 
 return(
     <Navbar className="navBar">
