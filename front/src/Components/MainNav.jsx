@@ -6,7 +6,8 @@ import { useSession, useProfile } from "../context/session.context";
 
 function MainNav(){
   const { onLogout} = useSession()
-  const profile = useProfile();
+  const {profile} = useProfile();
+  console.log(profile)
 
 
 
