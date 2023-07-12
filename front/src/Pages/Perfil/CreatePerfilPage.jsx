@@ -9,13 +9,15 @@ import ImagePerfil from "../../imagenes/perfil.jpg";
 import "../../css/PerfilEstilos.css";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useProfile } from "../../context/session.context";
 import profileService from "../../service/profile.service";
 
 function CreatePerfilPage() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [age, setAge] = useState("");
   const [error, setError] = useState("");
+  const {profile, setProfile} = useProfile();
 
   const onChangeUsername = useCallback(
     (event) => {
@@ -31,24 +33,30 @@ function CreatePerfilPage() {
     [setAge]
   );
 
-const onSubmit = useCallback((event) => {
-    event.preventDefault()
-    console.log("submit", username, age)
-    const profile = {
+  const onSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+      console.log("submit", username, age);
+      const profileData = {
         username,
         age
-    }
-    profileService.createProfile(profile)
-    .then(() => {
-      console.log("perfil creado");
-      setError('');
-      navigate('/desafio', { replace: true });
-    })
-    .catch((error) => {
-      setError(error.message); // Opción 1: usa err.error.message si el error se envía como { error: { message: "..."} }
-      // setError(err.message); // Opción 2: usa err.message si el error se envía como { message: "..."}
-    });
-}, [username, age, navigate, setError])
+      };
+      profileService
+        .createProfile(profileData)
+        .then(() => {
+          console.log("perfil creado");
+          setError("");
+          // Actualizar el perfil en el contexto después de que se haya creado correctamente
+          setProfile(profileData); // Llama a la función setProfile del contexto con el perfil recién creado
+          navigate("/desafio", { replace: true });
+        })
+        .catch((error) => {
+          setError(error.message); // Opción 1: usa err.error.message si el error se envía como { error: { message: "..."} }
+          // setError(err.message); // Opción 2: usa err.message si el error se envía como { message: "..."}
+        });
+    },
+    [username, age, navigate, setError, setProfile]
+  );
 
   return (
     <>

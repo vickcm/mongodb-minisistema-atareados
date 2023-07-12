@@ -10,8 +10,8 @@ function useSession(){
 }
 
 function useProfile(){
-    const {profile} = useSession()
-    return profile
+    const {profile, setProfile} = useSession()
+    return {profile, setProfile}
 }
 
 function SessionProvider({children}){
@@ -26,7 +26,7 @@ function SessionProvider({children}){
     }, [navigate])
 
     useEffect(() => {
-        profileService.getCurrent()
+        profileService.getProfile()
         .then((profile) => {
             setProfile(profile)
         })
@@ -35,7 +35,8 @@ function SessionProvider({children}){
     const value = useMemo(()=>{
         return {
             profile,
-            onLogout
+            onLogout,
+            setProfile
         }
     }, [ profile, onLogout])
     
