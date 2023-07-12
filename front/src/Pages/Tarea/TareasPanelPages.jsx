@@ -15,6 +15,7 @@ function TareasPanel() {
 
   const desafio = useDesafio();
   const id = desafio._id;
+  console.log(desafio)
 
   const handleTogglePoints = useCallback(() => {
     setShowPoints((prevShowPoints) => !prevShowPoints);

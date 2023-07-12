@@ -13,6 +13,7 @@ function DesafioPanelComponente({ desafio }) {
   const formattedDeadline = formatDeadline(deadline);
   const daysRemaining = getDaysRemaining(deadline);
   const message = getMessage(daysRemaining);
+  console.log(desafio)
 
   return (
     <Accordion defaultActiveKey="0" className="acordion">

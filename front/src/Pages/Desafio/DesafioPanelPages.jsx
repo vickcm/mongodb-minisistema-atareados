@@ -12,6 +12,7 @@ import AlertaCrearPerfilComponente from "../../components/AlertaCrearPerfilCompo
 function DesafioPanel() {
   const profile = useProfile();
   const [desafios, setDesafios] = useState([]);
+  console.log(desafios)
 
   useEffect(() => {
     desafioService.getChallenges().then((desafios) => {
