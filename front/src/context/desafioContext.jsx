@@ -28,7 +28,7 @@ export function DesafioProvider({ children }) {
 
   useEffect(() => {
     fetchDesafio();
-  }, [fetchDesafio]);
+  }, [desafio]);
 
   const desafioValue = useMemo(() => desafio, [desafio]);
 
