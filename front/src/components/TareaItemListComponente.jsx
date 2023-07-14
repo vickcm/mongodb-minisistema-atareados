@@ -4,17 +4,21 @@ import Image from "react-bootstrap/Image";
 import ImageCheck from "../imagenes/check.png";
 import "../css/TareaPanelComponente.css";
 import { Link } from "react-router-dom";
-import { useDesafio, useSetDesafio } from "../context/desafioContext";
+import { useDesafio, useSetDesafio, useUpdateTareas } from "../context/desafioContext";
 import taskService from "../service/desafio.service";
 
 function TareaListItem({ tarea }) {
   const desafio = useDesafio();
   const setDesafio = useSetDesafio();
+  const setTareas = useUpdateTareas();
+
   const [isComplete, setIsComplete] = useState(tarea.isComplete);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const idTarea = tarea._id;
   const idDesafio = desafio._id;
+  console.log("idTarea:", idTarea);
+  console.log("idDesafio:", idDesafio);
 
   const handleComplete = useCallback(() => {
     if (!isComplete) {
@@ -42,9 +46,11 @@ function TareaListItem({ tarea }) {
             }
             return task;
           });
+         
           updatedDesafio.tasks = updatedTasks;
           setDesafio(updatedDesafio);
           console.log("Desafío actualizado:", updatedDesafio);
+          
           
         })
         .catch((error) => {

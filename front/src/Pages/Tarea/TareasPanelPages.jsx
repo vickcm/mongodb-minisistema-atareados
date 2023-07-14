@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { Container, Spinner } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { useDesafio } from "../../context/desafioContext";
+import { Link, useParams } from "react-router-dom";
+import { useDesafio, useTareas, useUpdateTareas } from "../../context/desafioContext";
 import TareaListItem from "../../components/TareaItemListComponente";
 import desafioService from "../../service/desafio.service";
 import { formatDeadline } from "../../utils/utils";
@@ -9,12 +9,14 @@ import "../../css/Tarea.css";
 import TablaPuntos from "../../components/TablaPuntosComponente";
 
 function TareasPanel() {
-  const [tareas, setTareas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showPoints, setShowPoints] = useState(false);
+  const tareas = useTareas();
+  const updateTareas = useUpdateTareas();
 
   const desafio = useDesafio();
-  const id = desafio._id;
+  const params = useParams();
+  const id = params.idDesafio;
   console.log(desafio)
 
   const handleTogglePoints = useCallback(() => {
@@ -26,14 +28,14 @@ function TareasPanel() {
     desafioService
       .getTasks(id)
       .then((tareas) => {
-        setTareas(tareas);
+        updateTareas(tareas);
         setIsLoading(false);
       })
       .catch((error) => {
         console.error("Error al cargar las tareas:", error);
         setIsLoading(false);
       });
-  }, [id]);
+  }, [id, updateTareas]);
 
   const formattedDeadline = useMemo(() => formatDeadline(desafio.deadline), [desafio.deadline]);
 

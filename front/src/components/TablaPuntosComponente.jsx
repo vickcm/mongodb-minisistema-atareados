@@ -2,15 +2,15 @@ import React, { useEffect, useState, useMemo, useCallback } from "react";
 import Table from "react-bootstrap/Table";
 import Image from "react-bootstrap/Image";
 import winner from "../imagenes/trofeo.png";
-import { useDesafio } from "../context/desafioContext";
+import { useDesafio, useTareas } from "../context/desafioContext";
 import desafioService from "../service/desafio.service.js";
 
 function TablaPuntos() {
   const desafio = useDesafio();
   const [members, setMembers] = useState([]);
+  
 
-  console.log("tabla de puntos:", desafio);
-
+  
   const sortMembers = useCallback(() => {
     if (desafio) {
       // Ordenar los miembros según los puntos (de mayor a menor)
@@ -21,7 +21,7 @@ function TablaPuntos() {
 
   useEffect(() => {
     sortMembers();
-  }, [desafio.members, sortMembers, desafio.tasks]);
+  }, [ sortMembers]);
 
   useEffect(() => {
     const fetchPoints = async () => {
@@ -38,7 +38,7 @@ function TablaPuntos() {
       }
     };
     fetchPoints();
-  }, [desafio.id]);
+  }, [desafio]);
 
   const renderTable = useMemo(() => {
     return (
