@@ -8,9 +8,6 @@ import desafioService from "../service/desafio.service.js";
 function TablaPuntos() {
   const desafio = useDesafio();
   const [members, setMembers] = useState([]);
-  
-
-  
   const sortMembers = useCallback(() => {
     if (desafio) {
       // Ordenar los miembros según los puntos (de mayor a menor)
