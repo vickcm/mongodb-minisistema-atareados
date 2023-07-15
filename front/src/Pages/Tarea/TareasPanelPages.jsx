@@ -28,6 +28,7 @@ function TareasPanel() {
     desafioService
       .getTasks(id)
       .then((tareas) => {
+        console.log(tareas)
         updateTareas(tareas);
         setIsLoading(false);
       })

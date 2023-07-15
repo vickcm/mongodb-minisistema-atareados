@@ -50,19 +50,53 @@ function TareaListItem({ tarea }) {
           updatedDesafio.tasks = updatedTasks;
           setDesafio(updatedDesafio);
           console.log("Desafío actualizado:", updatedDesafio);
-          
-          
         })
         .catch((error) => {
           console.log("Error al actualizar la tarea:", error);
           // Maneja el error de actualización de la tarea si es necesario
           setIsButtonDisabled(false); // Habilita el botón en caso de error
         });
+    } else {
+      // Si la tarea ya está completada, realizar la acción de descompletar aquí
+      setIsButtonDisabled(true);
+
+      const tareaActualizada = {
+        isComplete: false,
+        responsible: tarea.responsible,
+        points: tarea.points,
+        // Agrega cualquier otro dato necesario para la actualización de la tarea
+      };
+
+      taskService
+        .updateTask(idDesafio, idTarea, tareaActualizada)
+        .then(() => {
+          console.log("Tarea descompletada");
+          setIsComplete(false);
+          // Aquí puedes realizar acciones adicionales después de descompletar la tarea
+
+          // Actualizar el estado del contexto desafio
+          const updatedDesafio = { ...desafio };
+          const updatedTasks = updatedDesafio.tasks.map((task) => {
+            if (task._id === idTarea) {
+              return { ...task, isComplete: false };
+            }
+            return task;
+          });
+         
+          updatedDesafio.tasks = updatedTasks;
+          setDesafio(updatedDesafio);
+          console.log("Desafío actualizado:", updatedDesafio);
+        })
+        .catch((error) => {
+          console.log("Error al descompletar la tarea:", error);
+          // Maneja el error de descompletar la tarea si es necesario
+          setIsButtonDisabled(false); // Habilita el botón en caso de error
+        });
     }
   }, [isComplete, tarea, idDesafio, idTarea, desafio, setDesafio]);
 
   const completeButtonVariant = useMemo(() => {
-    return isComplete ? "primary" : "primary";
+    return isComplete ? "secondary" : "primary";
   }, [isComplete]);
 
   return (
@@ -75,14 +109,33 @@ function TareaListItem({ tarea }) {
         <p>Responsable: {tarea.responsible}</p>
         <p>Puntos: {tarea.points}</p>
         {isComplete ? (
-          <Link variant={completeButtonVariant} disabled className="tarea-completada">
-            Tarea Completada <Image src={ImageCheck} />
-          </Link>
+          <>
+            <Link
+              variant={completeButtonVariant}
+              disabled={isButtonDisabled}
+              onClick={handleComplete}
+              className="btn-tareas-completar"
+            >
+              Quitar Finalizado
+            </Link>
+            <span className="tarea-completada">
+              Tarea Completa <Image src={ImageCheck} />
+            </span>
+          </>
         ) : (
+
           <div>
-            <Link to={`/desafio/${desafio._id}/tareas/${tarea._id}/editar`} className="btn-tareas-editar"> Editar </Link>
-            <Link variant={completeButtonVariant} disabled={isButtonDisabled} onClick={handleComplete} className="btn-tareas-completar"> Completar </Link>
+             <Link to={`/desafio/${desafio._id}/tareas/${tarea._id}/editar`} className="btn-tareas-editar"> Editar </Link>
+             <Link
+            variant={completeButtonVariant}
+            disabled={isButtonDisabled}
+            onClick={handleComplete}
+            className="btn-tareas-completar"
+          >
+            Finalizar
+          </Link>
           </div>
+      
         )}
       </Card.Body>
     </Card>
