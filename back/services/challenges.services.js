@@ -108,10 +108,16 @@ async function getChallengeById(id) {
 
 async function getPoints(challengeId) {
 
+  console.log(challengeId);
+
   
   await client.connect();
+ // hacer un console.log de si estoy conectada 
+  console.log("Estoy conectada a la base de datos");
+  challengeId = new ObjectId(challengeId);
 
   const challenge = await challengesCollection.findOne({ _id: challengeId });
+  console.log(challenge);
 
   // Chequear si existe el challenge, sino devolver null o un error
   if (!challenge) {

@@ -123,6 +123,7 @@ async function getSuggestedTasks(req, res) {
 
 async function getPoints(req, res) {
   const challengeId = req.params.id;
+  console.log("challengeId", challengeId);
   return challengeService.getPoints(challengeId)
       .then((points) => {
           res.status(200).json(points);

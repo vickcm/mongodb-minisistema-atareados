@@ -28,7 +28,7 @@ router.get('/sugerenciatareas', [validateToken, checkTeamMembership] , controlle
 
 // TABLA DE PUNTOS 
 
-router.get('/desafios/:id/puntos', [validateToken] , controllers.getPoints);  
+router.get('/desafios/:id/puntos', [validateToken, checkTeamMembership] , controllers.getPoints);  
 
 
 export default router;

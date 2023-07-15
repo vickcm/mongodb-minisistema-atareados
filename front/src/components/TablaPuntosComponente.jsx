@@ -1,30 +1,41 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import Table from "react-bootstrap/Table";
 import Image from "react-bootstrap/Image";
 import winner from "../imagenes/trofeo.png";
-import { useDesafio } from "../context/desafioContext";
+import { useParams } from "react-router-dom";
+import desafioService from "../service/desafio.service.js";
 
 function TablaPuntos() {
-  const desafio = useDesafio();
-  console.log("desafio:", desafio);
+  const { idDesafio } = useParams();
+  const [members, setMembers] = useState([]);
 
+  useEffect(() => {
+    const fetchPoints = async () => {
+      console.log("Obteniendo puntos...");
+      console.log("idDesafio:", idDesafio);
+      try {
+        const response = await desafioService.getPoints(idDesafio);
+        console.log(response);
+        const updatedMembers = response.map((item, index) => ({
+          _id: index + 1,
+          username: item.username,
+          points: item.points
+        }));
+        setMembers(updatedMembers);
+      } catch (error) {
+        console.error("Error al obtener los puntos:", error);
+      }
+    };
 
+    fetchPoints();
+  }, [idDesafio]);
 
-  const members = useMemo(() => {
-    if (desafio && Array.isArray(desafio.desafio.members)) {
-      // Ordenar los miembros según los puntos (de mayor a menor)
-      return [...desafio.desafio.members].sort((a, b) => b.points - a.points);
-    }
-    return [];
-  }, [desafio]);
-  return (
-    <>
-      <div style={{ borderTop: "1px dashed #4f70b675 ", marginLeft: 20, marginRight: 20, marginTop: 20 }}></div>
-      <h1 className="titulo text-center mt-5">Tabla de Puntos</h1>
-      <Table striped bordered>
+  const renderTable = useMemo(() => {
+    return (
+      <Table striped bordered hover >
         <thead>
           <tr>
-            <th>Posición</th>
+            <th>#</th>
             <th>Responsable</th>
             <th>Puntos</th>
           </tr>
@@ -45,8 +56,10 @@ function TablaPuntos() {
           ))}
         </tbody>
       </Table>
-    </>
-  );
+    );
+  }, [members]);
+
+  return <div>{renderTable}</div>;
 }
 
 export default TablaPuntos;
