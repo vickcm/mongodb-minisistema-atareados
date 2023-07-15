@@ -8,8 +8,8 @@ import { useDesafio, useSetDesafio, useUpdateTareas } from "../context/desafioCo
 import taskService from "../service/desafio.service";
 
 function TareaListItem({ tarea }) {
-  const desafio = useDesafio();
-  const setDesafio = useSetDesafio();
+  const {desafio} = useDesafio();
+  const {setDesafio} = useSetDesafio();
   const setTareas = useUpdateTareas();
 
   const [isComplete, setIsComplete] = useState(tarea.isComplete);
@@ -123,19 +123,17 @@ function TareaListItem({ tarea }) {
             </span>
           </>
         ) : (
-
           <div>
-             <Link to={`/desafio/${desafio._id}/tareas/${tarea._id}/editar`} className="btn-tareas-editar"> Editar </Link>
+             <Link to={`/desafio/${idDesafio}/tareas/${idTarea}/editar`} className="btn-tareas-editar"> Editar </Link>
              <Link
-            variant={completeButtonVariant}
-            disabled={isButtonDisabled}
-            onClick={handleComplete}
-            className="btn-tareas-completar"
-          >
-            Finalizar
-          </Link>
+              variant={completeButtonVariant}
+              disabled={isButtonDisabled}
+              onClick={handleComplete}
+              className="btn-tareas-completar"
+            >
+              Finalizar
+            </Link>
           </div>
-      
         )}
       </Card.Body>
     </Card>

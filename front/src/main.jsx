@@ -15,6 +15,7 @@ import TareasActionsPage from "./Pages/Tarea/TareasActionsPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/mainCss.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import TablaPuntosPage from "./pages/Puntos/TablaPuntosPage";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,8 @@ const router = createBrowserRouter([
       { path: "desafio/:idDesafio/tareas/:idTarea/editar", element: <TareasActionsPage /> },
 
       { path: "desafio/:idDesafio", element: <TareasPanelPages /> },
+      { path: "desafio/:idDesafio/tablapuntos", element: <TablaPuntosPage /> },
+
       { path: "paneldesafio", element: <PanelDesafio /> },
       { path: "crearperfil", element: <CreatePerfilPage /> },
       { path: "perfil", element: <PerfilPage /> },
