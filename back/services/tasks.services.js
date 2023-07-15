@@ -44,16 +44,12 @@ async function getTasks(challengeId) {
 }
 
 async function updateTask(challengeId, taskId, task) {
-
-
   await client.connect();
   await tasksCollection.updateOne({ _id: new ObjectId(taskId) }, { $set: task });
 
+  const { isComplete, points, responsible } = task;
 
-  if (task.isComplete) {
-    const { points, responsible } = task;
-
-
+  if (isComplete) {
     // Buscar el desafío en la colección de desafíos
     const desafio = await challengesCollection.findOne({ _id: new ObjectId(challengeId) });
 
@@ -64,19 +60,40 @@ async function updateTask(challengeId, taskId, task) {
     // Buscar al responsable de la tarea en la lista de miembros del desafío
     const responsableDesafio = desafio.members.find((member) => member.username === responsible);
 
-
     if (!responsableDesafio) {
       throw new Error("Responsable de la tarea no encontrado en los miembros del desafío");
     }
 
     // Sumar los puntos de la tarea al total del responsable
     responsableDesafio.points = responsableDesafio.points + points;
-    console.log("points de la tarea:", points )
-    console.log("responsableDesafio:", responsableDesafio.points )
-    console.log ("Responsable encontrado:", responsableDesafio);
-
+    console.log("Puntos de la tarea:", points);
+    console.log("Total de puntos del responsable:", responsableDesafio.points);
+    console.log("Responsable encontrado:", responsableDesafio);
 
     // Actualizar el desafío con el nuevo total del responsable
+    await challengesCollection.updateOne(
+      { _id: new ObjectId(challengeId) },
+      { $set: { members: desafio.members } }
+    );
+  } else {
+    // Restar los puntos de la tarea al responsable si no está completa
+    const desafio = await challengesCollection.findOne({ _id: new ObjectId(challengeId) });
+
+    if (!desafio) {
+      throw new Error("Desafío no encontrado");
+    }
+
+    const responsableDesafio = desafio.members.find((member) => member.username === responsible);
+
+    if (!responsableDesafio) {
+      throw new Error("Responsable de la tarea no encontrado en los miembros del desafío");
+    }
+
+    responsableDesafio.points = responsableDesafio.points - points;
+    console.log("Puntos de la tarea:", points);
+    console.log("Total de puntos del responsable:", responsableDesafio.points);
+    console.log("Responsable encontrado:", responsableDesafio);
+
     await challengesCollection.updateOne(
       { _id: new ObjectId(challengeId) },
       { $set: { members: desafio.members } }
