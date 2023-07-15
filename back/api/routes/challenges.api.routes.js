@@ -11,7 +11,7 @@ router.post('/desafios', [validateToken, validateChallenge], controllers.createC
 
 // obtengo los desafíos de un usuario. No necesito parámetro porque el usuario está en el token
 router.get('/desafios', [validateToken], controllers.getChallengesByUserId);
-router.patch('/desafios/:id', [validateToken, validateChallengeUpdate, checkTeamMembership], controllers.updateChallenge);
+router.patch('/desafios/:id', [validateToken, checkTeamMembership, validateChallengeUpdate ], controllers.updateChallenge);
 router.get('/desafios/:id', [validateToken, checkTeamMembership], controllers.getChallengeById);
 
 // TAREAS DE UN DESAFÍO
@@ -24,7 +24,7 @@ router.get('/desafios/:id/tareas/:idtarea', [validateToken, checkTeamMembership]
 router.patch('/desafios/:id/tareas/:idtarea', [validateToken, checkTeamMembership, updateValidateTask] , controllers.updateTask);
 
 // TAREAS SUGERIDAS
-router.get('/sugerenciatareas', [validateToken] , controllers.getSuggestedTasks);  // obtengo las tareas sugeridas para un usuario servicio ext ')
+router.get('/sugerenciatareas', [validateToken, checkTeamMembership] , controllers.getSuggestedTasks);  // obtengo las tareas sugeridas para un usuario servicio ext ')
 
 // TABLA DE PUNTOS 
 
