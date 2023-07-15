@@ -131,8 +131,30 @@ async function getPoints(challengeId) {
   return pointsArray;
 }
 
+async function checkMembership(challengeId, user) {
+
+  challengeId = new ObjectId(challengeId);
+
+  const challenge = await getChallengeById(challengeId);
+
+  if (!challenge) {
+    return false;
+  }
+
+  const member = challenge.members.find((member) => {
+    return member._id.toString() === user._id.toString();
+  });
+
+  if (!member) {
+    return false;
+  }
+
+  return true;
+}
 
 
 
 
-export { createChallenge, getChallengesByUserId, updateChallenge, getChallengeById, getPoints };
+
+
+export { createChallenge, getChallengesByUserId, updateChallenge, getChallengeById, getPoints, checkMembership };
