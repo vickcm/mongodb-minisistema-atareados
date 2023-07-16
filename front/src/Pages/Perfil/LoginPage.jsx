@@ -58,7 +58,6 @@ function LoginPage() {
               value={email}
               onChange={onChangeEmail}
             />
-            
           </Form.Group>
           <Form.Group className="col-mb-6">
             <Form.Label>Contraseña</Form.Label>
@@ -73,6 +72,9 @@ function LoginPage() {
                 {shown ? <AiFillEyeInvisible /> : <AiFillEye />}
               </button>
             </div>
+            <Link to="" className="btn mt-2">
+              ¿Olvidaste tu contraseña? 
+            </Link>
           </Form.Group>
           <p> {error} </p>
           <div className="row justify-content-center my-4">
