@@ -46,4 +46,20 @@ async function logoutAccount(req, res) {
     });
 }
 
-export { createAccount, loginAccount, logoutAccount };
+
+async function sendResetPasswordEmail(req, res) {
+
+  const email = req.body.email;
+  return services
+    .sendResetPasswordEmail(email)
+    .then((response) => {
+      res.status(200).send({ message: "Email enviado con éxito", data: response });
+    })
+    .catch((error) => {
+      res.status(400).json({ error: { message: error.message } });
+    });
+}
+
+
+
+export { createAccount, loginAccount, logoutAccount, sendResetPasswordEmail };

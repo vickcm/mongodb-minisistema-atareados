@@ -4,6 +4,7 @@ import { MongoClient, ObjectId } from "mongodb";
 const client = new MongoClient("mongodb://127.0.0.1:27017");
 const db = client.db("DB_ATAREADOS");
 const tokensCollection = db.collection("tokens");
+const tokensResetCollection = db.collection("tokensReset");
 
 async function createToken(account) {
   const token = jwt.sign(account, "secret");
@@ -14,6 +15,29 @@ async function createToken(account) {
   });
   return token;
 }
+
+async function createTokenTime(userId) {
+  const payload = { userId: userId };
+  const secretKey = 'secret';
+  const expiresIn = '2h'; // Duración de 2 horas
+
+  const token = jwt.sign(payload, secretKey, { expiresIn });
+
+  const tokenObject = {
+    token: token,
+    account_id: new ObjectId(userId)
+  };
+
+  await client.connect();
+  await tokensResetCollection.createIndex({ createdAt: 1 }, { expireAfterSeconds: 7200 });
+
+  await tokensResetCollection.insertOne(
+    tokenObject
+  );
+ console.log(token);
+  return token;
+}
+
 
 
 async function verifiedToken(token) {
@@ -40,4 +64,4 @@ async function deleteToken(token) {
 
 
 
-export { createToken, verifiedToken, deleteToken };
+export { createToken, verifiedToken, deleteToken, createTokenTime };
