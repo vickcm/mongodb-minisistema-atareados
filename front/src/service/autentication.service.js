@@ -16,11 +16,17 @@ export async function resetPassword(email) {
     return API.call({ uri: 'password/reset', method: 'POST', body:  {email}  })
 }
 
+export async function changePassword({newPassword, confirmNewPassword}) {
+    return API.call({ uri: 'password/reset/:token', method: 'POST', body:  {newPassword, confirmNewPassword}  })
+}
+
+
 
 
 export default {
     logout,
     login,
     createAccount, 
-    resetPassword
+    resetPassword,
+    changePassword
 }

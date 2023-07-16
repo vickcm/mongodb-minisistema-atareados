@@ -18,27 +18,25 @@ async function createToken(account) {
 
 async function createTokenTime(userId) {
   const payload = { userId: userId };
-  const secretKey = 'secret';
-  const expiresIn = '2h'; // Duración de 2 horas
+  const secretKey = "secret";
+  const expiresIn = "2h"; // Duración de 2 horas
 
-  const token = jwt.sign(payload, secretKey, { expiresIn });
+  const token = jwt.sign(payload, secretKey, { expiresIn, subject: 'reset' });
 
   const tokenObject = {
     token: token,
-    account_id: new ObjectId(userId)
+    account_id: new ObjectId(userId),
   };
 
   await client.connect();
-  await tokensResetCollection.createIndex({ createdAt: 1 }, { expireAfterSeconds: 7200 });
-
-  await tokensResetCollection.insertOne(
-    tokenObject
+  await tokensResetCollection.createIndex(
+    { createdAt: 1 },
+    { expireAfterSeconds: 7200 }
   );
- console.log(token);
+
+  await tokensResetCollection.insertOne(tokenObject);
   return token;
 }
-
-
 
 async function verifiedToken(token) {
   try {
@@ -58,10 +56,8 @@ async function verifiedToken(token) {
 }
 
 async function deleteToken(token) {
-    await client.connect();
-    await tokensCollection.deleteOne({ token });
+  await client.connect();
+  await tokensCollection.deleteOne({ token });
 }
-
-
 
 export { createToken, verifiedToken, deleteToken, createTokenTime };

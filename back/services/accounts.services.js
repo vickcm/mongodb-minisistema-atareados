@@ -82,6 +82,8 @@ async function sendResetPasswordEmail(email) {
 
   const token = await createTokenTime(user._id);
 
+  
+  
   console.log("token:", token);
 
   // Crear el enlace de restablecimiento de contraseña con el token generado
