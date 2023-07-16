@@ -12,8 +12,15 @@ export  async function createAccount(account) {
     return API.call({ uri: 'accounts', method: 'POST', body: account })
 }
 
+export async function resetPassword(email) {
+    return API.call({ uri: 'password/reset', method: 'POST', body:  {email}  })
+}
+
+
+
 export default {
     logout,
     login,
-    createAccount
+    createAccount, 
+    resetPassword
 }

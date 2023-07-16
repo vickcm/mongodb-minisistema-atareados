@@ -16,6 +16,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/mainCss.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import TablaPuntosPage from "./pages/Puntos/TablaPuntosPage";
+import ResetPasswordPage from "./Pages/Perfil/ResetPasswordPage";
+import ResetPasswordTokenPage from "./Pages/Perfil/ResetPasswordTokenPage";
+
 
 const router = createBrowserRouter([
   {
@@ -38,6 +41,11 @@ const router = createBrowserRouter([
     ],
   },
   { path: "/login", element: <LoginPage /> },
+  { path: "/password/reset", element: <ResetPasswordPage /> },
+  { path: "/password/reset/:token", element: <ResetPasswordTokenPage /> },
+
+
+
   { path: "/register", element: <RegisterPage /> },
 ]);
 
