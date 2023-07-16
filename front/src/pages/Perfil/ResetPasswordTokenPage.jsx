@@ -44,32 +44,41 @@ function ResetPasswordToken() {
   };
 
   return (
-    <div>
-      <h2>Restablecer Contraseña</h2>
+    <div className="page">
       {errorMessage && <p className="error">{errorMessage}</p>}
       {successMessage && <p className="success">{successMessage}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="password">Contraseña:</label>
-          <input
+    <div className="container">
+      <Form onSubmit={handleSubmit} className="form-login">
+        <h1 className="text-center">Restablecer Contraseña</h1>
+        <Form.Group className="col-mb-6">
+          <Form.Label>Contraseña</Form.Label>
+          <Form.Control
             type="password"
             id="password"
             value={password}
             onChange={handlePasswordChange}
           />
+        </Form.Group>
+        <Form.Group className="col-mb-6">
+          <Form.Label>Confirmar Contraseña</Form.Label>
+          <div className="input-with-icon">
+            <Form.Control
+              type="password"
+              id="confirmPassword"
+              placeholder="Confirmar contraseña"
+              value={confirmPassword}
+              onChange={handleConfirmPasswordChange}
+            />
+          </div>
+        </Form.Group>
+        <div className="row justify-content-center my-4">
+          <Link to="/login" className="btn mt-2">
+            Restablecer Contraseña
+          </Link>
         </div>
-        <div>
-          <label htmlFor="confirmPassword">Confirmar Contraseña:</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            value={confirmPassword}
-            onChange={handleConfirmPasswordChange}
-          />
-        </div>
-        <button type="submit">Restablecer Contraseña</button>
-      </form>
+      </Form>
     </div>
+  </div>
   );
 }
 

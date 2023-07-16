@@ -22,8 +22,6 @@ function ResetPassword() {
     setEmail(event.target.value);
   };
 
-  
-
   const onSubmit = (event) => {
     event.preventDefault();
     console.log("submit", email);
@@ -54,8 +52,6 @@ function ResetPassword() {
               onChange={onChangeEmail}
             />
           </Form.Group>
-         
-          
           <div className="row justify-content-center my-4">
             <Button type="submit" className="button">
               Enviar
