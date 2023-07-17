@@ -16,8 +16,8 @@ export async function resetPassword(email) {
     return API.call({ uri: 'password/reset', method: 'POST', body:  {email}  })
 }
 
-export async function changePassword({newPassword, confirmNewPassword}) {
-    return API.call({ uri: 'password/reset/:token', method: 'POST', body:  {newPassword, confirmNewPassword}  })
+export async function changePassword({token, newPassword, confirmPassword}) {
+    return API.call({ uri: 'password/reset/token', method: 'POST', body:  {token, newPassword, confirmPassword}  })
 }
 
 

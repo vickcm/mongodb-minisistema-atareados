@@ -11,7 +11,7 @@ router.post('/accounts', [validateAccount] , controllers.createAccount);
 router.post('/session', [validateLogin], controllers.loginAccount);
 router.delete('/session', [validateToken], controllers.logoutAccount);
 router.post('/password/reset', controllers.sendResetPasswordEmail);
-router.post('/password/reset/:token', controllers.resetPassword);
+router.post('/password/reset/token', controllers.resetPassword);
 
 
 

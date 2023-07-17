@@ -63,12 +63,12 @@ async function sendResetPasswordEmail(req, res) {
 
 async function resetPassword (req, res) {
   // recibo por parámetro un token y llamo al servicio para generar un nueva contraseña
-  const token = req.params.token;
+  const token = req.body.token;
   const newPassword = req.body.newPassword;
-  const confirmPassword = req.body.confirmNewPassword; 
+  const confirmPassword = req.body.confirmPassword; 
   console.log("token:", token, newPassword, confirmPassword)
   return services
-    .resetPassword(token, newPassword, confirmPassword)
+    .resetPassword(token, newPassword, confirmPassword )
     .then((response) => {
       res.status(200).send({ message: "Contraseña actualizada con éxito", data: response });
     })

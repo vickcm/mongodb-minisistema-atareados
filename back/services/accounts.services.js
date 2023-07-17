@@ -88,7 +88,7 @@ async function sendResetPasswordEmail(email) {
 
   // Crear el enlace de restablecimiento de contraseña con el token generado
 
-  const resetPasswordLink = `http://localhost:5173/password/reset/${token}`;
+  const resetPasswordLink = `http://localhost:5173/password/reset?token=${token}`;
 
   const mailOptions = {
     from: "tu-email@gmail.com",

@@ -1,22 +1,32 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "../../css/LoginPage.css";
-import { useNavigate } from "react-router-dom";
 import authService from "../../service/autentication.service.js";
 import { Link } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
-// para hacer ** cuando el usuario ya tiene perfil creado, llevarlo a la pagina de desafios, si no lo tiene llevarlo a crear perfil
-
 function ResetPasswordToken() {
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
+  const location = useLocation();
+
+  useEffect(() => {
+    // Obtener el token de la consulta de la URL
+    const queryParams = new URLSearchParams(location.search);
+    const token = queryParams.get("token");
+    // Hacer algo con el token, si es necesario
+    console.log(token);
+  }, [location.search]);
+
   const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+    setNewPassword(e.target.value);
   };
 
   const handleConfirmPasswordChange = (e) => {
@@ -25,35 +35,39 @@ function ResetPasswordToken() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submit", password, confirmPassword);
+    console.log("submit", newPassword, confirmPassword);
     // Validar que las contraseñas coincidan
-    if (password !== confirmPassword) {
+    if (newPassword !== confirmPassword) {
       setErrorMessage("Las contraseñas no coinciden");
       console.log("Las contraseñas no coinciden");
       return;
     }
-
+  
+    // Obtener el token de la consulta de la URL
+    const queryParams = new URLSearchParams(location.search);
+    const token = queryParams.get("token");
+  
     // Realizar la lógica para restablecer la contraseña aquí
     // Esto podría incluir hacer una solicitud al servidor para actualizar la contraseña
-
+    console.log (token, newPassword, confirmPassword)
     authService
-      .changePassword({ password, confirmPassword })
+      .changePassword({ token, newPassword, confirmPassword }) // Agregar el token al objeto de solicitud
       .then((data) => {
         console.log("data", data);
         setErrorMessage("");
         setSuccessMessage("Contraseña restablecida correctamente");
+        navigate("/login", { replace: true });
+
       })
       .catch((err) => {
         setErrorMessage(err.error.message);
       });
-
+  
     // Reiniciar los campos y mostrar un mensaje de éxito
-    setPassword("");
+    setNewPassword("");
     setConfirmPassword("");
     setErrorMessage("");
-    setSuccessMessage("Contraseña restablecida correctamente");
   };
-
   return (
     <div className="page">
       {errorMessage && <p>{errorMessage}</p>}
@@ -65,8 +79,8 @@ function ResetPasswordToken() {
             <Form.Label>Contraseña</Form.Label>
             <Form.Control
               type="password"
-              id="password"
-              value={password}
+              id="newPassword"
+              value={newPassword}
               onChange={handlePasswordChange}
             />
           </Form.Group>

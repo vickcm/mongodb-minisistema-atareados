@@ -72,7 +72,7 @@ function LoginPage() {
                 {shown ? <AiFillEyeInvisible /> : <AiFillEye />}
               </button>
             </div>
-            <Link to="/password/reset" className="btn mt-2">
+            <Link to="/passwordreset" className="btn mt-2">
               ¿Olvidaste tu contraseña? 
             </Link>
           </Form.Group>
