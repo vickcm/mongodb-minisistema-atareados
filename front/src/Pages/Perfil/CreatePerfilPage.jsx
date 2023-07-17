@@ -15,7 +15,7 @@ import profileService from "../../service/profile.service";
 function CreatePerfilPage() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
-  const [age, setAge] = useState("");
+  const [nacimiento, setNacimiento] = useState("");
   const [error, setError] = useState("");
   const {profile, setProfile} = useProfile();
 
@@ -28,18 +28,18 @@ function CreatePerfilPage() {
 
   const onChangeAge = useCallback(
     (event) => {
-      setAge(event.target.value);
+      setNacimiento(event.target.value);
     },
-    [setAge]
+    [setNacimiento]
   );
 
   const onSubmit = useCallback(
     (event) => {
       event.preventDefault();
-      console.log("submit", username, age);
+      console.log("submit", username, nacimiento);
       const profileData = {
         username,
-        age
+        nacimiento
       };
       profileService
         .createProfile(profileData)
@@ -55,7 +55,7 @@ function CreatePerfilPage() {
           // setError(err.message); // Opción 2: usa err.message si el error se envía como { message: "..."}
         });
     },
-    [username, age, navigate, setError, setProfile]
+    [username, nacimiento, navigate, setError, setProfile]
   );
 
   return (
@@ -83,15 +83,14 @@ function CreatePerfilPage() {
               />
             </Form.Group>
             <Form.Group   as={Col}
-              md="6" className="label-perfil" controlId="age">
-              <Form.Label className="nombre-perfil">Edad</Form.Label>
+              md="6" className="label-perfil" controlId="nacimiento">
+              <Form.Label className="nombre-perfil">Fecha de Nacimiento</Form.Label>
               <Form.Control
                 className="place-perfil"
                 onChange={onChangeAge}
-                value={age}
+                value={nacimiento}
                 size="lg"
-                type="text"
-                placeholder="27 años"
+                type="date"
               />
             </Form.Group>
           </Row>

@@ -26,7 +26,24 @@ function getMessage(daysRemaining) {
   }
 }
 
+function getAge(fechaNacimiento) {
+
+  var fechaNacimiento = new Date(fechaNacimiento);
+  var fechaActual = new Date();
+
+  var edad = fechaActual.getFullYear() - fechaNacimiento.getFullYear();
+
+  // Verificar si ya se cumplió años en el año actual
+  if (fechaActual.getMonth() < fechaNacimiento.getMonth() ||
+    (fechaActual.getMonth() === fechaNacimiento.getMonth() && fechaActual.getDate() < fechaNacimiento.getDate())) {
+    edad--;
+  }
+
+  return edad;
+
+}
 
 
 
-export { formatDeadline, getDaysRemaining, getMessage };
+
+export { formatDeadline, getDaysRemaining, getMessage, getAge };

@@ -46,9 +46,11 @@ function TareasFormActions({ tarea }) {
     setPoints(event.target.value);
   };
 
+  console.log (desafio.desafio.members)
+
   const onSelectMember = (event) => {
     const memberId = event.target.value;
-    const selectedMember = desafio.members.find(
+    const selectedMember = desafio.desafio.members.find(
       (member) => member.username === memberId
     );
     setSelectedMember(selectedMember ? selectedMember.username : null);
@@ -216,7 +218,7 @@ function TareasFormActions({ tarea }) {
                 onChange={onChangePoints}
               />
             </Form.Group>
-            {desafio && desafio.members && (
+            {desafio && desafio.desafio.members && (
               <Form.Select
                 aria-label="Default select example"
                 className="form-select"
@@ -224,7 +226,7 @@ function TareasFormActions({ tarea }) {
                 onChange={onSelectMember}
               >
                 <option>Selecciona el usuario</option>
-                {desafio.members.map((member) => (
+                {desafio.desafio.members.map((member) => (
                   <option key={member._id} value={member.username}>
                     {member.username}
                   </option>

@@ -6,6 +6,8 @@ import ImagePerfil from "../../imagenes/perfil.jpg";
 import "../../css/PerfilEstilos.css";
 import profileService from "../../service/profile.service";
 import { useNavigate } from 'react-router-dom';
+import {getAge} from '../../utils/utils'
+
 
 
 function PerfilPage() {
@@ -33,10 +35,13 @@ function PerfilPage() {
         </div>
         <div className=""> 
           <h2 className='title'>
-            Tu perfil es:  {profiles.username} 
+           {profiles.username} 
           </h2>
           <h2  className='title'>
-            Tu edad es:  {profiles.age}
+            Tu Edad: {getAge(profiles.nacimiento)}
+          </h2>
+          <h2  className='title'>
+            {profiles.email}
           </h2>
         </div>
       </Container>
