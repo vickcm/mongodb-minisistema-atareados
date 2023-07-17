@@ -4,7 +4,22 @@ html{
 div#root{
     background-color: #fcfbf8;
 }
-
 a, a:hover{
     text-decoration: none;
+}
+.error-message{
+    background: #f3cccc;
+    color: #df0000;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.25rem;
+    width: 40%;
+    text-align: center;
+}
+.success-message{
+    background: #d4edda;
+    color: #155724;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.25rem;
+    width: 40%;
+    text-align: center;
 }
