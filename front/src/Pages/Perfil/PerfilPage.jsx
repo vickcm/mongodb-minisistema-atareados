@@ -43,6 +43,9 @@ function PerfilPage() {
           <h2  className='title'>
             {profiles.email}
           </h2>
+          <Button type="submit"  className="btn-desfio">
+            Editar Perfil
+          </Button>
         </div>
       </Container>
     </>
