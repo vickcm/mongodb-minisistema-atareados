@@ -70,8 +70,7 @@ function ResetPasswordToken() {
   };
   return (
     <div className="page">
-      {errorMessage && <p>{errorMessage}</p>}
-      {successMessage && <p className="success">{successMessage}</p>}
+      
       <div className="container">
         <Form onSubmit={handleSubmit} className="form-login">
           <h1 className="text-center">Restablecer Contraseña</h1>
@@ -96,6 +95,10 @@ function ResetPasswordToken() {
               />
             </div>
           </Form.Group>
+          <div>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+            {successMessage && <p className="success-message">{successMessage}</p>}
+          </div>
           <div className="row justify-content-center my-4">
             <Button type="submit" className="btn mt-2">
               Restablecer Contraseña

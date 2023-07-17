@@ -152,13 +152,13 @@ function FormDesafio() {
               addMember={addMember}
               error={error}
             />
+            <TeamMembers members={members} deleteMember={deleteMember}/>
           </Row>
           <div className="aling-button-desafio">
             <Button className="btn-desfio">Crear Desafío</Button>
           </div>
         </Form>
         <p>{error}</p>
-        <TeamMembers members={members} deleteMember={deleteMember}/>
       </Container>
     </>
   );
