@@ -61,29 +61,22 @@ function TareasFormActions({ tarea }) {
   const idDesafio = params.idDesafio;
 
   const solicitarSugerencia = () => {
-    
     if (sugerenciasCount < 5) {
       desafioService
-      .getSuggestedTask()
-      .then((sugerencia) => {
-        // La sugerencia de tarea se ha obtenido exitosamente
-        console.log("Sugerencia de tarea:", sugerencia);
+        .getSuggestedTask()
+        .then((sugerencia) => {
+          console.log("Sugerencia de tarea:", sugerencia);
+          
   
-        // Actualiza los campos del formulario con la sugerencia obtenida
-        setTitle(sugerencia)
-        setSugerenciasCount(sugerenciasCount + 1);
-
-
-      })
-      .catch((error) => {
-        // Error al obtener la sugerencia de tarea
-        console.error("Error al obtener la sugerencia de tarea:", error);
-      });
+          if (sugerencia) {
+            setTitle(sugerencia);
+            setSugerenciasCount(sugerenciasCount + 1);
+          }
+        })
+        .catch((error) => {
+          console.error("Error al obtener la sugerencia de tarea:", error);
+        });
     }
-    // Lógica para solicitar la sugerencia de tarea
-
-
-    
   };
 
   const onSubmit = (event) => {
@@ -190,8 +183,8 @@ function TareasFormActions({ tarea }) {
             <p className="p-sugerencia">
               ¿Necesitas una inspiración? ¡Pedile a Atareadito una tarea!
             </p>
-            <Button onClick={solicitarSugerencia} disabled={sugerenciasCount >= 5} className="btn-sugerencia">
-              Solicitar sugerencia
+            <Button onClick={solicitarSugerencia} disabled={tarea || sugerenciasCount >= 5} className="btn-sugerencia">
+            {tarea ? "Disponible solo en creación" : "Solicitar Sugerencia"}
             </Button>
           </div>
           <Row className="mb-3 rowDesafio">

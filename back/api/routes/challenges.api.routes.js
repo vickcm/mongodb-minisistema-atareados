@@ -24,7 +24,7 @@ router.get('/desafios/:id/tareas/:idtarea', [validateToken, checkTeamMembership]
 router.patch('/desafios/:id/tareas/:idtarea', [validateToken, checkTeamMembership, updateValidateTask] , controllers.updateTask);
 
 // TAREAS SUGERIDAS
-router.get('/sugerenciatareas', [validateToken, checkTeamMembership] , controllers.getSuggestedTasks);  // obtengo las tareas sugeridas para un usuario servicio ext ')
+router.get('/sugerenciatareas', [validateToken] , controllers.getSuggestedTasks);  // obtengo las tareas sugeridas para un usuario servicio ext ')
 
 // TABLA DE PUNTOS 
 

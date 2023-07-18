@@ -111,6 +111,7 @@ async  function getTaskbyId(req, res) {
 
 async function getSuggestedTasks(req, res) {
     const account = req.account;
+    console.log("account", account);
     return openAiService.getSuggestedTasks(account._id)
         .then((tasks) => {
             res.status(200).json(tasks);
