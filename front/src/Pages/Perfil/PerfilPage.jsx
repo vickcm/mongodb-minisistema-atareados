@@ -5,7 +5,7 @@ import Image from "react-bootstrap/Image";
 import ImagePerfil from "../../imagenes/perfil.jpg";
 import "../../css/PerfilEstilos.css";
 import profileService from "../../service/profile.service";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import {getAge} from '../../utils/utils'
 
 
@@ -43,9 +43,9 @@ function PerfilPage() {
           <h2  className='title'>
             {profiles.email}
           </h2>
-          <Button type="submit"  className="btn-desfio">
+          <Link to="/perfil/editar"  className="btn-desfio">
             Editar Perfil
-          </Button>
+          </Link>
         </div>
       </Container>
     </>

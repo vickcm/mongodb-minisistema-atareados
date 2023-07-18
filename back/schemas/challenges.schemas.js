@@ -21,7 +21,7 @@ const challengeSchemaUpdate = yup.object().shape({
   deadline: yup
     .date()
     .min(new Date(), 'La fecha de vencimiento debe ser posterior a la fecha actual'),
-  });
+});
 
 export {challengeSchema, challengeSchemaUpdate};
 

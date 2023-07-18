@@ -18,6 +18,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import TablaPuntosPage from "./pages/Puntos/TablaPuntosPage";
 import ResetPasswordPage from "./Pages/Perfil/ResetPasswordPage";
 import ResetPasswordTokenPage from "./Pages/Perfil/ResetPasswordTokenPage";
+import PerfilPageEdit from "./pages/Perfil/PerfilPageEdit";
+import DesafioPanelPagesEdit from "./pages/Desafio/DesafioPanelPagesEdit";
 
 
 const router = createBrowserRouter([
@@ -27,15 +29,21 @@ const router = createBrowserRouter([
     errorElement: <Error404 />,
     children: [
       { path: "desafio", element: <DesafioPage /> },
+      { path: "desafio/:idDesafio", element: <TareasPanelPages /> },
+      { path: "desafio/:idDesafio/editar", element: <DesafioPanelPagesEdit /> },
+
       { path: "desafio/:idDesafio/tareas/nueva", element: <TareasActionsPage /> },
       { path: "desafio/:idDesafio/tareas/:idTarea/editar", element: <TareasActionsPage /> },
 
-      { path: "desafio/:idDesafio", element: <TareasPanelPages /> },
+
+
       { path: "desafio/:idDesafio/tablapuntos", element: <TablaPuntosPage /> },
 
       { path: "paneldesafio", element: <PanelDesafio /> },
       { path: "crearperfil", element: <CreatePerfilPage /> },
       { path: "perfil", element: <PerfilPage /> },
+      { path: "perfil/editar", element: <PerfilPageEdit /> },
+
 
       { path: "/", element: <HomePages /> },
     ],

@@ -71,5 +71,41 @@ async function getProfileByUserId(userId) {
   return profile;
 }
 
+async function updateProfile(profileData, userId) {
+  try {
+    // Conectarse a la base de datos
+    await client.connect();
 
-export { createProfile, getProfile, getUserByEmail, getProfileByUserId };
+    // Buscar el perfil por userId
+    const profile = await profilesCollection.findOne({
+      _id: new ObjectId(userId),
+    });
+
+    if (!profile) {
+      throw new Error("Perfil no encontrado");
+    }
+
+    // Actualizar solo los campos necesarios
+    const updatedFields = {};
+    if (profileData.nacimiento) {
+      updatedFields.nacimiento = profileData.nacimiento;
+    }
+    if (profileData.username) {
+      updatedFields.username = profileData.username;
+    }
+
+    // Actualizar el perfil en la colección
+    await profilesCollection.updateOne(
+      { _id: new ObjectId(userId) },
+      { $set: updatedFields }
+    );
+
+ 
+
+    console.log("Perfil actualizado exitosamente");
+  } catch (error) {
+    console.error("Error al actualizar el perfil:", error);
+  }
+}
+
+export { createProfile, getProfile, getUserByEmail, getProfileByUserId, updateProfile };

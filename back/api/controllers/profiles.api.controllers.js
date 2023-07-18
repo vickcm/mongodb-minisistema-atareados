@@ -27,4 +27,17 @@ async function getProfile(req, res) {
     });
 }
 
-export { createProfile, getProfile };
+async function updateProfile(req, res) {
+  return profileService
+    .updateProfile(req.body, req.account._id)
+    .then(() => {
+      res.status(200).json({ message: "Perfil actualizado exitosamente." });
+    })
+    .catch((err) => {
+      res.status(400).json({ error: { message: err.message } });
+    });
+}
+
+
+
+export { createProfile, getProfile, updateProfile };

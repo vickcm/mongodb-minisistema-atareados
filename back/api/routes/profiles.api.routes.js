@@ -9,6 +9,9 @@ router.post('/profiles', validateToken, controllers.createProfile);
 // para hacer: validar profile con schema 
 router.get('/profiles', validateToken, controllers.getProfile);
 
+// para cambiar username o fecha de nacimiento
+
+router.patch('/profiles', validateToken, controllers.updateProfile);
 
 
 /* router.get('/profiles/:id',controllers.getProfile);

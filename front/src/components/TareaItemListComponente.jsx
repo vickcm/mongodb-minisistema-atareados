@@ -49,6 +49,7 @@ function TareaListItem({ tarea }) {
          
           updatedDesafio.tasks = updatedTasks;
           setDesafio(updatedDesafio);
+          
           console.log("Desafío actualizado:", updatedDesafio);
         })
         .catch((error) => {

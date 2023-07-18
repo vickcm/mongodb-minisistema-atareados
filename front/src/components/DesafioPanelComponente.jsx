@@ -1,10 +1,15 @@
-import { useState } from "react";
-import Card from 'react-bootstrap/Card';
-import { Link } from 'react-router-dom';
-import ListGroup from 'react-bootstrap/ListGroup';
+import React, { useState } from "react";
+import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
+import ListGroup from "react-bootstrap/ListGroup";
 import "../css/PanelDesafioEstilos.css";
 
-import { formatDeadline, getDaysRemaining, getMessage } from "../utils/utils";
+import {
+  formatDeadline,
+  getDaysRemaining,
+  getMessage,
+} from "../utils/utils";
+
 
 function DesafioPanelComponente({ desafio }) {
   const { _id, title, deadline, members } = desafio;
@@ -37,7 +42,7 @@ function DesafioPanelComponente({ desafio }) {
         <ListGroup.Item>{message}</ListGroup.Item>
       </ListGroup>
       <Card.Body>
-        <Card.Link className="btn-editar-desafio" href="#">Editar</Card.Link>
+        <Link to={`/desafio/${desafio._id}/editar`}   className="btn-editar-desafio" >Editar</Link>
         <Link to={`/desafio/${desafio._id}`} className="btn-ver-tareas">Ver tareas</Link>
       </Card.Body>
     </Card>
