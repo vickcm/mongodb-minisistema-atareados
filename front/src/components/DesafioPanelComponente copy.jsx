@@ -5,6 +5,7 @@ import "../css/PanelDesafioEstilos.css";
 
 import { formatDeadline, getDaysRemaining, getMessage } from "../utils/utils";
 
+// desafio panel puro sin editar 
 function DesafioPanelComponente({ desafio }) {
   const { _id, title, deadline, members } = desafio;
   const [editTitle, setEditTitle] = useState(desafio.title);
