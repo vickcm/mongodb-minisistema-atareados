@@ -27,6 +27,7 @@
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
     margin-right:5px;
+    margin-bottom: 10px;
     text-decoration: none;
 }
 
@@ -58,11 +59,17 @@
     text-decoration: none;
     color: #009688;
     cursor: default;
+    margin-bottom: 15px;
 }
 .tarea-completada:hover{
     text-decoration: none;
     color: #009688;
     cursor: default;
+}
+
+.btn-tareas-descompletar{
+    font-size: 14px;
+    color: #bd1b1b;
 }
 
 .div-btn-pts{

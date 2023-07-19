@@ -56,8 +56,9 @@ function ResetPassword() {
             <Button type="submit" className="button">
               Enviar
             </Button>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+            {successMessage && <p className="success-message">{successMessage}</p>}
             <p> {error} </p>
-            
           </div>
         </Form>
       </div>

@@ -46,7 +46,6 @@ function TareaListItem({ tarea }) {
             }
             return task;
           });
-         
           updatedDesafio.tasks = updatedTasks;
           setDesafio(updatedDesafio);
           
@@ -83,7 +82,6 @@ function TareaListItem({ tarea }) {
             }
             return task;
           });
-         
           updatedDesafio.tasks = updatedTasks;
           setDesafio(updatedDesafio);
           console.log("Desafío actualizado:", updatedDesafio);
@@ -110,30 +108,30 @@ function TareaListItem({ tarea }) {
         <p>Responsable: {tarea.responsible}</p>
         <p>Puntos: {tarea.points}</p>
         {isComplete ? (
-          <>
+          <div className="d-flex flex-column align-items-start">
+            <span className="tarea-completada">
+              Tarea Completa <Image src={ImageCheck} />
+            </span>
+            <Link
+              variant={completeButtonVariant}
+              disabled={isButtonDisabled}
+              onClick={handleComplete}
+              className="btn-tareas-descompletar"
+            >
+              Quitar Completado
+            </Link>
+          </div>
+        ) : (
+          <div className="d-flex flex-column align-items-start">
             <Link
               variant={completeButtonVariant}
               disabled={isButtonDisabled}
               onClick={handleComplete}
               className="btn-tareas-completar"
             >
-              Quitar Finalizado
+              Tarea Completada
             </Link>
-            <span className="tarea-completada">
-              Tarea Completa <Image src={ImageCheck} />
-            </span>
-          </>
-        ) : (
-          <div>
-             <Link to={`/desafio/${idDesafio}/tareas/${idTarea}/editar`} className="btn-tareas-editar"> Editar </Link>
-             <Link
-              variant={completeButtonVariant}
-              disabled={isButtonDisabled}
-              onClick={handleComplete}
-              className="btn-tareas-completar"
-            >
-              Finalizar
-            </Link>
+            <Link to={`/desafio/${idDesafio}/tareas/${idTarea}/editar`} className="btn-tareas-editar"> Editar </Link>
           </div>
         )}
       </Card.Body>

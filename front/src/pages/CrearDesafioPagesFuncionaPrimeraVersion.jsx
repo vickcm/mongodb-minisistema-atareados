@@ -45,7 +45,6 @@ function FormDesafio() {
         members,
         deadline,
       };
-
       desafioService
         .createChallenge(challenge)
         .then(({ challenge }) => {
@@ -110,7 +109,8 @@ function FormDesafio() {
         <Col>
           <a onClick={addMember}>Agregar miembro</a>
         </Col>
-        <p>{error}</p>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+        {successMessage && <p className="success-message">{successMessage}</p>}
       </Container>
     </>
   );

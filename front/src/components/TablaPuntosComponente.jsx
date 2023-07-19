@@ -32,7 +32,7 @@ function TablaPuntos() {
 
   const renderTable = useMemo(() => {
     return (
-      <Table striped bordered hover >
+      <Table striped bordered hover>
         <thead>
           <tr>
             <th>#</th>

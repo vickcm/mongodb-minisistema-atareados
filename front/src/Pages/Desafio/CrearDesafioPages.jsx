@@ -42,13 +42,13 @@ function TeamMembersInput({ memberInput, onChangeMemberInput, addMember, error }
 function TeamMembers({ members, deleteMember }) {
   return (
     <div className="member-list">
-      <h2>Integrantes:</h2>
+      <p>Integrantes:</p>
       {members.length === 0 ? (
-        <p>Todavía no hay integrantes en tu equipo</p>
+        <p class="p-team-form">Todavía no hay integrantes en tu equipo</p>
       ) : (
         members.map((member, index) => (
           <div key={index} className="member-item">
-            <p>{member}</p>
+            <p class="p-team-form">{member}</p>
             <a title="Eliminar" onClick={() => deleteMember(index)}><Image src={ImageDeleteMember} /></a>
           </div>
         ))

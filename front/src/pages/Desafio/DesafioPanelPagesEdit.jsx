@@ -40,13 +40,12 @@ function TeamMembersInput({ memberInput, onChangeMemberInput, addMember, error }
 }
 
 function TeamMembers({ members, deleteMember }) {
-
   if (!members || members.length === 0) {
     return <p>Todavía no hay integrantes en tu equipo</p>;
   }
   return (
-    <div className="member-list">
-      <h2>Integrantes:</h2>
+    <div>
+      <p>Integrantes:</p>
       {members.length === 0 ? (
         <p>Todavía no hay integrantes en tu equipo</p>
       ) : (
@@ -67,7 +66,6 @@ function DesafioPanelPagesEdit() {
   console.log(desafio);
   console.log(desafio.desafio.title);
   // Obtiene los datos actuales del desafío o inicializa con valores vacíos si es un nuevo desafío
-
 
   const [title, setTitle] = useState(desafio.desafio.title);
   const [members, setMembers] = useState(desafio.desafio.members);

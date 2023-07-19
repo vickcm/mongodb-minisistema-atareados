@@ -57,7 +57,6 @@ function ResetPasswordToken() {
         setErrorMessage("");
         setSuccessMessage("Contraseña restablecida correctamente");
         navigate("/login", { replace: true });
-
       })
       .catch((err) => {
         setErrorMessage(err.error.message);
@@ -70,7 +69,6 @@ function ResetPasswordToken() {
   };
   return (
     <div className="page">
-      
       <div className="container">
         <Form onSubmit={handleSubmit} className="form-login">
           <h1 className="text-center">Restablecer Contraseña</h1>

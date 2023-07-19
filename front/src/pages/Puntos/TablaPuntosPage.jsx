@@ -34,7 +34,7 @@ function TablaPuntosPage() {
 
   return (
     <Container>
-      <div className="titulo">
+      <div className="titulo mb-4">
         <h1>Desafío: {desafio?.title}</h1>
         <p>Fecha del vencimiento: {formattedDeadline}</p>
         <h2>Tabla de Puntos</h2>
