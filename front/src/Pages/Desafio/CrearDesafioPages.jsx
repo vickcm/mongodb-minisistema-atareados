@@ -14,6 +14,7 @@ import { useSession } from "../../context/session.context";
 import "../../css/FormDesafioStyle.css";
 
 import desafioService from "../../service/desafio.service.js";
+import { toast } from "react-toastify";
 
 function TeamMembersInput({ memberInput, onChangeMemberInput, addMember, error }) {
   return (
@@ -58,6 +59,9 @@ function TeamMembers({ members, deleteMember }) {
 }
 
 function FormDesafio() {
+  toast.success("Lorem ipsum dolor", {
+    theme: "colored"
+  })
   const navigate = useNavigate();
 
   //const {profile} = useSession()
@@ -110,6 +114,7 @@ function FormDesafio() {
         .createChallenge(challenge)
         .then(({ challenge }) => {
           console.log("Equipo creado", challenge);
+          toast.success("Desafío creado correctamente");
           setError("");
           navigate("/paneldesafio", { replace: true });
         })

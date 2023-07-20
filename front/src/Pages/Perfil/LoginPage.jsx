@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import authService from "../../service/autentication.service.js";
 import { Link } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import {toast} from 'react-toastify';
 
 
 // para hacer ** cuando el usuario ya tiene perfil creado, llevarlo a la pagina de desafios, si no lo tiene llevarlo a crear perfil
@@ -38,6 +39,7 @@ function LoginPage() {
         console.log("data", data.responseAccount.token);
         setError("");
         localStorage.setItem("token", data.responseAccount.token);
+        toast.success("Bienvenido");
         navigate("/desafio", { replace: true });
       })
       .catch((err) => {

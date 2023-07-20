@@ -17,6 +17,7 @@ function DesafioPanel() {
   useEffect(() => {
     desafioService.getChallenges().then((desafios) => {
       setDesafios(desafios);
+
     });
   }, []);
 

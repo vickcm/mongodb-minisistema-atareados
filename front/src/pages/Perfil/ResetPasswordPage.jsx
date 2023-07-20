@@ -16,6 +16,8 @@ function ResetPassword() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [shown, setShown] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   
   const onChangeEmail = (event) => {

@@ -2,9 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Container, Form, Button } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
 import profileService from "../../service/profile.service";
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+
 
 
 function PerfilPageEdit() {
+
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
@@ -33,9 +37,11 @@ function PerfilPageEdit() {
 
     profileService.updateProfile(updatedProfile)
       .then(() => {
+        toast.success("Perfil editado correctamente");
         navigate('/perfil', { replace: true });
       })
       .catch(err => {
+        toast.error("Error al editar el perfil");
         console.log(err);
         // Manejar el error en caso de que ocurra
       });
@@ -66,6 +72,7 @@ function PerfilPageEdit() {
           Guardar cambios
         </Button>
       </Form>
+
     </Container>
   );
 }

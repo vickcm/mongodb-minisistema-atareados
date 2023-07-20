@@ -6,8 +6,13 @@ import "../css/TareaPanelComponente.css";
 import { Link } from "react-router-dom";
 import { useDesafio, useSetDesafio, useUpdateTareas } from "../context/desafioContext";
 import taskService from "../service/desafio.service";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 function TareaListItem({ tarea }) {
+  const notify = () => toast.success("Felicitaciones, tarea Completa, sumaste !" + tarea.points + " puntos)");
   const {desafio} = useDesafio();
   const {setDesafio} = useSetDesafio();
   const setTareas = useUpdateTareas();
@@ -37,7 +42,7 @@ function TareaListItem({ tarea }) {
           console.log("Tarea actualizada");
           setIsComplete(true);
           // Aquí puedes realizar acciones adicionales después de completar la tarea
-
+          notify();
           // Actualizar el estado del contexto desafio
           const updatedDesafio = { ...desafio };
           const updatedTasks = updatedDesafio.tasks.map((task) => {
@@ -134,7 +139,13 @@ function TareaListItem({ tarea }) {
             <Link to={`/desafio/${idDesafio}/tareas/${idTarea}/editar`} className="btn-tareas-editar"> Editar </Link>
           </div>
         )}
+        
       </Card.Body>
+      <div>
+      
+        <ToastContainer />
+    
+      </div>
     </Card>
   );
 }
