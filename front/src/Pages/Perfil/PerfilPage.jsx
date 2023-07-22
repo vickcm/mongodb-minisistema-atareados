@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import React, { useState, useEffect } from 'react';
 import { Container } from "bootstrap-4-react/lib/components/layout";
 import Image from "react-bootstrap/Image";
@@ -6,13 +5,10 @@ import ImagePerfil from "../../imagenes/perfil.jpg";
 import "../../css/PerfilEstilos.css";
 import profileService from "../../service/profile.service";
 import { useNavigate, Link } from 'react-router-dom';
-import {getAge} from '../../utils/utils'
-
-
+import { getAge } from '../../utils/utils'
 
 function PerfilPage() {
   const navigate = useNavigate()
-
   const [profiles, setProfiles] = useState([])
 
   useEffect(()=>{
@@ -35,15 +31,12 @@ function PerfilPage() {
         </div>
         <div className=""> 
           <h2 className='title'>
-           {profiles.username} 
+            {profiles.username}, {getAge(profiles.nacimiento)} años. 
           </h2>
-          <h2  className='title'>
-            Tu Edad: {getAge(profiles.nacimiento)}
-          </h2>
-          <h2  className='title'>
+          <p  className='title'>
             {profiles.email}
-          </h2>
-          <Link to="/perfil/editar"  className="btn-desfio">
+          </p>
+          <Link to="/perfil/editar"  className="btn-perfil-editar">
             Editar Perfil
           </Link>
         </div>

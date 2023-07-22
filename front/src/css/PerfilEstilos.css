@@ -65,6 +65,26 @@
 .img-perfil{
     border-radius: 50% !important;
 }
+
+.btn-perfil-editar{
+    background-color: #F5F3ED;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 15px;
+    color:black;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    margin-right:5px;
+    text-decoration: none;
+}
+
+.btn-perfil-editar:hover{
+    background-color: #e3e3e3;
+    text-decoration: none;
+}
+
+
 @media ((max-width: 600px)) {
     .form-perfil{
         width: 90%;

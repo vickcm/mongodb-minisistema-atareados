@@ -8,18 +8,15 @@ import { Link } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import {toast} from 'react-toastify';
 
-
 // para hacer ** cuando el usuario ya tiene perfil creado, llevarlo a la pagina de desafios, si no lo tiene llevarlo a crear perfil
 
 function LoginPage() {
   const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [shown, setShown] = useState(false);
   const switchShown = () => setShown(!shown);
-
   
   const onChangeEmail = (event) => {
     setEmail(event.target.value);
@@ -34,7 +31,6 @@ function LoginPage() {
     console.log("submit", email, password);
     authService
       .login({ email, password })
-
       .then((data) => {
         console.log("data", data.responseAccount.token);
         setError("");

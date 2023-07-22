@@ -10,9 +10,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import AlertaCrearPerfilComponente from "../../components/AlertaCrearPerfilComponente";
 import { useSession } from "../../context/session.context";
-
 import "../../css/FormDesafioStyle.css";
-
 import desafioService from "../../service/desafio.service.js";
 import { toast } from "react-toastify";
 
@@ -45,7 +43,7 @@ function TeamMembers({ members, deleteMember }) {
     <div className="member-list">
       <p>Integrantes:</p>
       {members.length === 0 ? (
-        <p class="p-team-form">Todavía no hay integrantes en tu equipo</p>
+        <p className="p-team-form">Todavía no hay integrantes en tu equipo</p>
       ) : (
         members.map((member, index) => (
           <div key={index} className="member-item">

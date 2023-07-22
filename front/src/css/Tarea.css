@@ -42,7 +42,7 @@
     border: none;
     border-radius: 5px;
     padding: 6px 15px;
-    color:black;
+    color:#4f70b6;
     font-size: 14px;
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
@@ -70,6 +70,12 @@
 .btn-tareas-descompletar{
     font-size: 14px;
     color: #bd1b1b;
+}
+
+.btn-tareas-descompletar:hover{
+    font-size: 14px;
+    color: #8d1414;
+    text-decoration: none;
 }
 
 .div-btn-pts{
