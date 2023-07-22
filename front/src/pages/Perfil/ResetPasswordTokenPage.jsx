@@ -9,11 +9,12 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 function ResetPasswordToken() {
   const navigate = useNavigate();
-
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [shown, setShown] = useState(false);
+  const switchShown = () => setShown(!shown);
 
   const location = useLocation();
 
@@ -69,35 +70,38 @@ function ResetPasswordToken() {
   };
   return (
     <div className="page">
-      <div className="container">
-        <Form onSubmit={handleSubmit} className="form-login">
-          <h1 className="text-center">Restablecer Contraseña</h1>
-          <Form.Group className="col-mb-6">
+      <div className="container mt-5 form-reset-pasword">
+        <Form onSubmit={handleSubmit} className="row flex-column align-items-center">
+          <h1 className="text-center mb-3">Restablecer Contraseña</h1>
+          <Form.Group className="col-md-6">
             <Form.Label>Contraseña</Form.Label>
-            <Form.Control
-              type="password"
-              id="newPassword"
-              value={newPassword}
-              onChange={handlePasswordChange}
-            />
-          </Form.Group>
-          <Form.Group className="col-mb-6">
-            <Form.Label>Confirmar Contraseña</Form.Label>
-            <div className="input-with-icon">
               <Form.Control
-                type="password"
+                type={shown ? "text" : "password"}
+                id="newPassword"
+                value={newPassword}
+                onChange={handlePasswordChange}
+              />
+          </Form.Group>
+          <Form.Group className="col-md-6">
+            <Form.Label>Confirmar Contraseña</Form.Label>
+              <Form.Control
+                type={shown ? "text" : "password"}
                 id="confirmPassword"
                 placeholder="Confirmar contraseña"
                 value={confirmPassword}
                 onChange={handleConfirmPasswordChange}
               />
-            </div>
           </Form.Group>
+          <div className="col-md-6 mt-3">
+            <button type="button" onClick={switchShown} className="eye-icon-button">
+              Ver Constraseña {shown ? <AiFillEyeInvisible /> : <AiFillEye />}
+            </button>
+          </div>
           <div>
             {errorMessage && <p className="error-message">{errorMessage}</p>}
             {successMessage && <p className="success-message">{successMessage}</p>}
           </div>
-          <div className="row justify-content-center my-4">
+          <div className="col-md-6 justify-content-center my-4">
             <Button type="submit" className="btn mt-2">
               Restablecer Contraseña
             </Button>

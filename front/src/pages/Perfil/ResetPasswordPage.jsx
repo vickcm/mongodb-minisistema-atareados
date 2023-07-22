@@ -4,9 +4,6 @@ import Form from "react-bootstrap/Form";
 import "../../css/LoginPage.css";
 import { useNavigate } from "react-router-dom";
 import authService from "../../service/autentication.service.js";
-import { Link } from "react-router-dom";
-import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-
 
 // para hacer ** cuando el usuario ya tiene perfil creado, llevarlo a la pagina de desafios, si no lo tiene llevarlo a crear perfil
 
@@ -18,7 +15,6 @@ function ResetPassword() {
   const [shown, setShown] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-
   
   const onChangeEmail = (event) => {
     setEmail(event.target.value);
@@ -29,14 +25,14 @@ function ResetPassword() {
     console.log("submit", email);
     authService
       .resetPassword( email)
-
       .then((data) => {
         console.log("data", data.message);
-        setError("");
+        setErrorMessage("");
+        setSuccessMessage("El mail fue enviado con éxito.");
         setEmail("");
       })
       .catch((err) => {
-        setError(err.error.message);
+        setErrorMessage(err.error.message);
       });
   };
 
@@ -55,13 +51,15 @@ function ResetPassword() {
             />
           </Form.Group>
           <div className="row justify-content-center my-4">
-            <Button type="submit" className="button">
-              Enviar
-            </Button>
-            {errorMessage && <p className="error-message">{errorMessage}</p>}
-            {successMessage && <p className="success-message">{successMessage}</p>}
-            <p> {error} </p>
+              <Button type="submit" className="button">
+                Enviar
+              </Button>
           </div>
+          <div className="row justify-content-center my-4">
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
+          {successMessage && <p className="success-message">{successMessage}</p>}
+          </div>
+          
         </Form>
       </div>
     </div>
