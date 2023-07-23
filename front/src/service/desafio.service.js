@@ -44,6 +44,11 @@ async function getSuggestedTask() {
     return API.call({ uri: `sugerenciatareas`, method: 'GET' })
 }
 
+async function updateChallenge(id,challenge) {
+    return API.call({ uri: `desafios/${id}`, method: 'PATCH', body: challenge })
+}
+
+
 
 
 
@@ -59,6 +64,7 @@ export default {
     getTaskById, 
     updateTask, 
     getPoints,
-    getSuggestedTask
+    getSuggestedTask,
+    updateChallenge,
 
 }
