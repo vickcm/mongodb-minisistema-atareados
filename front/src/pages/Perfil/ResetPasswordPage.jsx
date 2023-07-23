@@ -2,8 +2,9 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "../../css/LoginPage.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import authService from "../../service/autentication.service.js";
+import { toast } from "react-toastify";
 
 // para hacer ** cuando el usuario ya tiene perfil creado, llevarlo a la pagina de desafios, si no lo tiene llevarlo a crear perfil
 
@@ -38,6 +39,7 @@ function ResetPassword() {
     // Reiniciar los campos y mostrar un mensaje de éxito
     setEmail("");
     setErrorMessage("");
+    setSuccessMessage("");
   };
 
   return (
@@ -60,8 +62,13 @@ function ResetPassword() {
             </Button>
           </div>
           <div className="row justify-content-center my-4">
-          {errorMessage && <p className="error-message">{errorMessage}</p>}
-          {successMessage && <p className="success-message">{successMessage}</p>}
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+            {successMessage && <p className="success-message">{successMessage}</p> 
+              && 
+              <Link to="/login" className="btn mt-2">
+                Volver a iniciar sesión
+              </Link>
+            }
           </div>
         </Form>
       </div>
