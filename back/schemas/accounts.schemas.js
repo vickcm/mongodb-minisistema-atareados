@@ -22,6 +22,17 @@ const loginAccountSchema = yup.object({
   password: yup.string().required()
 });
 
-export { accountSchema, loginAccountSchema };
+const resetPasswordSchema = yup.object({
+  password: yup
+    .string()
+    .min(6)
+    .required()
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]+$/,
+      'La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un número - 6 caracteres'
+    )
+});
+
+export { accountSchema, loginAccountSchema, resetPasswordSchema };
 
     

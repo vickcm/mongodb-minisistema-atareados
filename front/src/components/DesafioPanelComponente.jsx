@@ -32,7 +32,7 @@ function DesafioPanelComponente({ desafio }) {
               <ul className="list-unstyled">
                 {members.map((member) => (
                   <li key={member._id}>
-                    {member.username} ({member.age} años) - {member.email}
+                    {member.username}  - {member.email}
                   </li>
                 ))}
               </ul>

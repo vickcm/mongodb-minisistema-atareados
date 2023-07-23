@@ -24,7 +24,26 @@ function ResetPassword() {
   const onSubmit = (event) => {
     event.preventDefault();
     console.log("submit", email);
-    authService
+
+    if (!email) {
+      setErrorMessage("El email es obligatorio");
+      return;
+    }
+
+    const validateEmail = (email) => {
+      // Expresión regular para validar el formato del email
+      const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+      return emailRegex.test(email);
+    };
+
+    if (!validateEmail(email)) {
+      setErrorMessage("El email es inválido");
+      return;
+    }
+
+    if (validateEmail(email)) {
+
+      authService
       .resetPassword(email)
       .then((data) => {
         console.log("data", data.message);
@@ -40,6 +59,9 @@ function ResetPassword() {
     setEmail("");
     setErrorMessage("");
     setSuccessMessage("");
+    }
+    
+    
   };
 
   return (
@@ -67,7 +89,7 @@ function ResetPassword() {
               <div>
                 <p className="success-message">{successMessage}</p>
                 <Link to="/login" className="btn mt-2">
-                  Volver a iniciar sesión
+                  Volver a la página de inicio sesión
                 </Link>
               </div>
             )}

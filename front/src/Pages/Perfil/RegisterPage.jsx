@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import "../../css/LoginPage.css";
 import authService from "../../service/autentication.service.js";
 import { useNavigate } from "react-router-dom";
-import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 function RegisterPage() {
   const navigate = useNavigate();
@@ -87,7 +87,7 @@ function RegisterPage() {
                 onChange={onChangePassword}
               />
               <button type="button" onClick={switchShown} className="eye-icon-button">
-                {shown ? <AiFillEyeInvisible /> : <AiFillEye />}
+                {shown ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
               </button>
             </div>
           </Form.Group>
@@ -101,7 +101,7 @@ function RegisterPage() {
                 onChange={onChangeConfirmPassword}
               />
               <button type="button" onClick={switchShownConfirm} className="eye-icon-button">
-                {shownConfirm ? <AiFillEyeInvisible /> : <AiFillEye />}
+                {shownConfirm ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
               </button>
             </div>
           </Form.Group>

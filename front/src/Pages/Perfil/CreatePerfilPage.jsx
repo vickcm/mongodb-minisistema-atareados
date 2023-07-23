@@ -11,6 +11,8 @@ import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useProfile } from "../../context/session.context";
 import profileService from "../../service/profile.service";
+import { toast } from "react-toastify";
+
 
 function CreatePerfilPage() {
   const navigate = useNavigate();
@@ -36,6 +38,17 @@ function CreatePerfilPage() {
   const onSubmit = useCallback(
     (event) => {
       event.preventDefault();
+
+      if (!username) {
+        setError("El nombre de usuario es obligatorio");
+        return;
+      }
+
+      if (!nacimiento) {
+        setError("La fecha de nacimiento es obligatoria");
+        return;
+      }
+
       console.log("submit", username, nacimiento);
       const profileData = {
         username,
@@ -46,13 +59,13 @@ function CreatePerfilPage() {
         .then(() => {
           console.log("perfil creado");
           setError("");
+          toast.success(profileData.username + " tu perfil fue creado con éxito");
           // Actualizar el perfil en el contexto después de que se haya creado correctamente
           setProfile(profileData); // Llama a la función setProfile del contexto con el perfil recién creado
           navigate("/desafio", { replace: true });
         })
         .catch((error) => {
           setError(error.message); // Opción 1: usa err.error.message si el error se envía como { error: { message: "..."} }
-          // setError(err.message); // Opción 2: usa err.message si el error se envía como { message: "..."}
         });
     },
     [username, nacimiento, navigate, setError, setProfile]
@@ -93,14 +106,24 @@ function CreatePerfilPage() {
                 type="date"
               />
             </Form.Group>
+            
           </Row>
+
+          <div className="row justify-content-center my-4">
+          {error && <p className="error-message">{error}</p>}
+
+          </div>
+          
+         
+
+
           <div className="aling-button-desafio">
             <Button type="submit"  className="btn-desfio">
               Crear Perfil
             </Button>
           </div>
         </Form>
-        {error && <p>{error}</p>}
+      
       </Container>
     </>
   );

@@ -74,6 +74,7 @@ async function resetPassword (req, res) {
     })
     .catch((error) => {
       res.status(400).json({ error: { message: error.message } });
+      console.log("error:", error)
     });
 
 

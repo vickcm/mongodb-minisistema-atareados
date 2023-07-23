@@ -1,6 +1,6 @@
 import {Router} from 'express';
 import * as controllers from '../controllers/accounts.api.controllers.js';
-import {validateAccount, validateLogin} from '../../middlewares/accounts.validate.middleware.js';
+import {validateAccount, validateLogin, validateResetPassword} from '../../middlewares/accounts.validate.middleware.js';
 import {validateToken} from '../../middlewares/token.validate.middleware.js';
 
 

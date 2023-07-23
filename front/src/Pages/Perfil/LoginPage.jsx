@@ -5,19 +5,21 @@ import "../../css/LoginPage.css";
 import { useNavigate } from "react-router-dom";
 import authService from "../../service/autentication.service.js";
 import { Link } from "react-router-dom";
-import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import {toast} from 'react-toastify';
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { toast } from "react-toastify";
+import { useProfile } from "../../context/session.context";
 
 // para hacer ** cuando el usuario ya tiene perfil creado, llevarlo a la pagina de desafios, si no lo tiene llevarlo a crear perfil
 
 function LoginPage() {
   const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [shown, setShown] = useState(false);
   const switchShown = () => setShown(!shown);
-  
+
   const onChangeEmail = (event) => {
     setEmail(event.target.value);
   };
@@ -33,14 +35,18 @@ function LoginPage() {
       .login({ email, password })
       .then((data) => {
         console.log("data", data.responseAccount.token);
-        setError("");
+        setErrorMessage("");
         localStorage.setItem("token", data.responseAccount.token);
+
         toast.success("Bienvenido");
+
         navigate("/desafio", { replace: true });
       })
       .catch((err) => {
-        setError(err.error.message);
+        setErrorMessage(err.error.message);
       });
+
+    setErrorMessage("");
   };
 
   return (
@@ -49,7 +55,7 @@ function LoginPage() {
         <Form onSubmit={onSubmit} className="form-login">
           <h1 className="text-center">Iniciar Sesión</h1>
           <Form.Group className="col-mb-6">
-            <Form.Label>Email:</Form.Label>
+            <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
               placeholder="Tu email"
@@ -66,15 +72,22 @@ function LoginPage() {
                 value={password}
                 onChange={onChangePassword}
               />
-              <button type="button" onClick={switchShown} className="eye-icon-button">
-                {shown ? <AiFillEyeInvisible /> : <AiFillEye />}
+              <button
+                type="button"
+                onClick={switchShown}
+                className="eye-icon-button"
+              >
+                {shown ?  <AiOutlineEyeInvisible /> : <AiOutlineEye />}
               </button>
             </div>
             <Link to="/passwordreset" className="btn mt-2">
-              ¿Olvidaste tu contraseña? 
+              ¿Olvidaste tu contraseña?
             </Link>
           </Form.Group>
-          <p> {error} </p>
+
+          <div className="row justify-content-center my-4">
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+          </div>
           <div className="row justify-content-center my-4">
             <Button type="submit" className="button">
               Ingresar

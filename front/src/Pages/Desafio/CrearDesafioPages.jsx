@@ -47,7 +47,7 @@ function TeamMembers({ members, deleteMember }) {
       ) : (
         members.map((member, index) => (
           <div key={index} className="member-item">
-            <p class="p-team-form">{member}</p>
+            <p className="p-team-form">{member}</p>
             <a title="Eliminar" onClick={() => deleteMember(index)}><Image src={ImageDeleteMember} /></a>
           </div>
         ))
@@ -57,9 +57,7 @@ function TeamMembers({ members, deleteMember }) {
 }
 
 function FormDesafio() {
-  toast.success("Lorem ipsum dolor", {
-    theme: "colored"
-  })
+
   const navigate = useNavigate();
 
   //const {profile} = useSession()
@@ -129,12 +127,12 @@ function FormDesafio() {
       <Container className="container-desafio">
         <Form className="form-desafio" onSubmit={onSubmit}>
           <div className="titulo">
-            <h1>Crea tu desafio</h1>
+            <h1>Crea tu desafío</h1>
             <p>Carga los datos para crear el desafio</p>
           </div>
           <Row className="mb-3 rowDesafio">
             <Form.Group as={Col} sm="12" controlId="titulo">
-              <Form.Label>Título del Desafio</Form.Label>
+              <Form.Label>Título del Desafío</Form.Label>
               <Form.Control
                 type="titulo"
                 value={title}
@@ -161,7 +159,6 @@ function FormDesafio() {
             <Button className="btn-desfio">Crear Desafío</Button>
           </div>
         </Form>
-        <p>{error}</p>
       </Container>
     </>
   );
