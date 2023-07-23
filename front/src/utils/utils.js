@@ -8,6 +8,14 @@ function formatDeadline(date) {
   return `${day}/${month}/${year}`;
 }
 
+const formatDateForInput = (dateString) => {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${day}/${month}/${year}`;
+};
+
 function getDaysRemaining(deadline) {
   const now = new Date();
   const endDate = new Date(deadline);
@@ -46,4 +54,4 @@ function getAge(fechaNacimiento) {
 
 
 
-export { formatDeadline, getDaysRemaining, getMessage, getAge };
+export { formatDeadline, getDaysRemaining, getMessage, getAge, formatDateForInput };

@@ -16,7 +16,7 @@ import {
 } from "../../context/desafioContext";
 import TareaListItem from "../../components/TareaItemListComponente";
 import desafioService from "../../service/desafio.service";
-import { formatDeadline } from "../../utils/utils";
+import { formatDeadline, formatDateForInput } from "../../utils/utils";
 import "../../css/Tarea.css";
 import { FaEdit, FaSave } from "react-icons/fa"; // Importamos los iconos de edición y guardar
 
@@ -123,7 +123,7 @@ function TareasPanel() {
               <p>
                 Fecha del vencimiento:{" "}
                 <input
-                  type="text"
+                  type="date"
                   value={editedDeadline}
                   onChange={(e) => setEditedDeadline(e.target.value)}
                 />
