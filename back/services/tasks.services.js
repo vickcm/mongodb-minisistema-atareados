@@ -60,6 +60,10 @@ async function updateTask(challengeId, taskId, task) {
     // Buscar al responsable de la tarea en la lista de miembros del desafío
     const responsableDesafio = desafio.members.find((member) => member.username === responsible);
 
+    if (responsableDesafio.points < 0) {
+      responsableDesafio.points = 0;
+    }
+
     if (!responsableDesafio) {
       throw new Error("Responsable de la tarea no encontrado en los miembros del desafío");
     }
