@@ -28,12 +28,16 @@ function ResetPassword() {
       .then((data) => {
         console.log("data", data.message);
         setErrorMessage("");
-        setSuccessMessage("El mail fue enviado con éxito.");
         setEmail("");
+        setSuccessMessage("El mail fue enviado con éxito.");
       })
       .catch((err) => {
         setErrorMessage(err.error.message);
       });
+
+    // Reiniciar los campos y mostrar un mensaje de éxito
+    setEmail("");
+    setErrorMessage("");
   };
 
   return (
@@ -51,15 +55,14 @@ function ResetPassword() {
             />
           </Form.Group>
           <div className="row justify-content-center my-4">
-              <Button type="submit" className="button">
-                Enviar
-              </Button>
+            <Button type="submit" className="button">
+              Enviar
+            </Button>
           </div>
           <div className="row justify-content-center my-4">
           {errorMessage && <p className="error-message">{errorMessage}</p>}
           {successMessage && <p className="success-message">{successMessage}</p>}
           </div>
-          
         </Form>
       </div>
     </div>
