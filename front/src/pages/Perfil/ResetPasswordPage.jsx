@@ -16,7 +16,7 @@ function ResetPassword() {
   const [shown, setShown] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  
+
   const onChangeEmail = (event) => {
     setEmail(event.target.value);
   };
@@ -25,7 +25,7 @@ function ResetPassword() {
     event.preventDefault();
     console.log("submit", email);
     authService
-      .resetPassword( email)
+      .resetPassword(email)
       .then((data) => {
         console.log("data", data.message);
         setErrorMessage("");
@@ -63,12 +63,14 @@ function ResetPassword() {
           </div>
           <div className="row justify-content-center my-4">
             {errorMessage && <p className="error-message">{errorMessage}</p>}
-            {successMessage && <p className="success-message">{successMessage}</p> 
-              && 
-              <Link to="/login" className="btn mt-2">
-                Volver a iniciar sesión
-              </Link>
-            }
+            {successMessage && (
+              <div>
+                <p className="success-message">{successMessage}</p>
+                <Link to="/login" className="btn mt-2">
+                  Volver a iniciar sesión
+                </Link>
+              </div>
+            )}
           </div>
         </Form>
       </div>
