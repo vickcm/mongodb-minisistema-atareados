@@ -25,6 +25,13 @@
     font-family: 'Montserrat', sans-serif !important;
 }
 
+.password-requisitos {
+    font-size: 0.75rem;
+    color: gray;
+    line-height: 0.99;
+   
+}
+
 label{
     margin-top: 10px;
 }

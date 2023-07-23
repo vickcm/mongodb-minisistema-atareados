@@ -1,8 +1,8 @@
+import React, { useCallback, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "../../css/LoginPage.css";
 import authService from "../../service/autentication.service.js";
-import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
@@ -11,9 +11,14 @@ function RegisterPage() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [shown, setShown] = useState(false);
+  const [shownConfirm, setShownConfirm] = useState(false);
+
   const switchShown = () => setShown(!shown);
+  const switchShownConfirm = () => setShownConfirm(!shownConfirm);
+
 
   const onChangeEmail = (event) => {
     setEmail(event.target.value);
@@ -23,17 +28,27 @@ function RegisterPage() {
     setPassword(event.target.value);
   };
 
+  const onChangeConfirmPassword = (event) => {
+    setConfirmPassword(event.target.value);
+  };
+
   const onSubmit = useCallback(
     (event) => {
       event.preventDefault();
-      console.log("submit", email, password);
+      console.log("submit", email, password, confirmPassword);
+
+      if (password !== confirmPassword) {
+        setError("Las contraseñas no coinciden");
+        return;
+      }
+
       const account = {
         email,
         password,
       };
+
       authService
         .createAccount(account)
-
         .then(({ account }) => {
           console.log("cuenta creada", account);
           setError("");
@@ -43,7 +58,7 @@ function RegisterPage() {
           setError(err.error.message);
         });
     },
-    [email, password, navigate, setError]
+    [email, password, confirmPassword, navigate]
   );
 
   return (
@@ -52,7 +67,7 @@ function RegisterPage() {
         <Form className="form-login" onSubmit={onSubmit}>
           <h1 className="text-center">Registrarse</h1>
           <Form.Group className="col-mb-6">
-            <Form.Label>Email:</Form.Label>
+            <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
               placeholder="Tu email"
@@ -62,6 +77,8 @@ function RegisterPage() {
           </Form.Group>
           <Form.Group className="col-mb-6">
             <Form.Label>Contraseña</Form.Label>
+            <p className="password-requisitos">La contraseña debe contener mínimo 6 caracteres. Debe incluir números y letras, y por lo menos una mayúscula</p>
+
             <div className="input-with-icon">
               <Form.Control
                 type={shown ? "text" : "password"}
@@ -72,7 +89,21 @@ function RegisterPage() {
               <button type="button" onClick={switchShown} className="eye-icon-button">
                 {shown ? <AiFillEyeInvisible /> : <AiFillEye />}
               </button>
-            </div>{" "}
+            </div>
+          </Form.Group>
+          <Form.Group className="col-mb-6">
+            <Form.Label>Confirmar Contraseña</Form.Label>
+            <div className="input-with-icon">
+              <Form.Control
+                type={shownConfirm ? "text" : "password"}
+                placeholder="Confirmar clave"
+                value={confirmPassword}
+                onChange={onChangeConfirmPassword}
+              />
+              <button type="button" onClick={switchShownConfirm} className="eye-icon-button">
+                {shownConfirm ? <AiFillEyeInvisible /> : <AiFillEye />}
+              </button>
+            </div>
           </Form.Group>
           <p> {error} </p>
           <Button type="submit" className="button">
