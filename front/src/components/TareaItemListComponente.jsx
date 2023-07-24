@@ -113,7 +113,7 @@ function TareaListItem({ tarea }) {
   const handleDelete = useCallback(() => {
     // Actualizar la tarea para que no se liste más
     taskService
-      .updateTask(idDesafio, idTarea, { isDeleted: true }) // Enviar isListed al servidor
+      .updateTask(idDesafio, idTarea, { isDeleted: true }) // Enviar isDeleted al servidor
       .then(() => {
         console.log("Tarea borrada");
         setIsListed(false); // Actualizar el estado local para que la tarea no se muestre en la lista
