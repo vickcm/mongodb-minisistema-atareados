@@ -12,6 +12,7 @@ function TareasPanel() {
   const idTarea = params.idTarea;
   const idDesafio = params.idDesafio;
 
+
   const [tarea, setTarea] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 

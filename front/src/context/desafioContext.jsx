@@ -60,8 +60,8 @@ export function DesafioProvider({ children }) {
   }, []);
 
   const desafioValue = useMemo(
-    () => ({ desafio, desafioVersion }),
-    [desafio, desafioVersion]
+    () => ({ desafio }),
+    [desafio]
   );
   const setDesafioValue = useCallback((nuevoDesafio) => {
     setDesafio(nuevoDesafio);

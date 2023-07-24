@@ -5,7 +5,11 @@ const db = client.db("DB_ATAREADOS");
 const challengesCollection = db.collection("challenges");
 
 async function createChallenge(challenge, account) {
+
+  
   const { title, deadline, members } = challenge;
+  const deadlineWithoutTime = new Date(deadline);
+  deadlineWithoutTime.setHours(0, 0, 0, 0);
 
   const authenticatedUser = account; // Reemplaza req.account por el objeto que contiene los datos del usuario registrado
 
@@ -28,7 +32,7 @@ async function createChallenge(challenge, account) {
   // Guardar el desafío en la colección de desafíos
   const challengeData = {
     title,
-    deadline,
+    deadline: deadlineWithoutTime.toISOString().split("T")[0], // Obtener solo la parte de la fecha sin la hora
     members: validMembers,
     tasks: [],
     created_at: createdAt,
@@ -75,10 +79,14 @@ async function getChallengesByUserId(userId) {
 
 async function updateChallenge(challenge, id) {
   const { title, deadline } = challenge;
+
+  const deadlineWithoutTime = new Date(deadline);
+  deadlineWithoutTime.setHours(0, 0, 0, 0);
+
   const challengeId = new ObjectId(id);
   const challengeData = {
     title,
-    deadline,
+    deadline: deadlineWithoutTime.toISOString().split("T")[0], // Obtener solo la parte de la fecha sin la hora
   };
 
   await client.connect();

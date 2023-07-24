@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Spinner } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
 import { useDesafio } from "../../context/desafioContext";
@@ -10,7 +10,7 @@ import TablaPuntos from "../../components/TablaPuntosComponente";
 function TablaPuntosPage() {
   const [isLoading, setIsLoading] = useState(true);
   const { idDesafio } = useParams();
-  const { desafio } = useDesafio();
+  const [desafio, setDesafio] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -19,6 +19,9 @@ function TablaPuntosPage() {
       .then((fetchedDesafio) => {
         // Actualizar el desafío si es necesario
         // ...
+        // guardar el desafío en una constante
+        console.log("fetchedDesafio", fetchedDesafio);
+        setDesafio(fetchedDesafio);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -27,16 +30,10 @@ function TablaPuntosPage() {
       });
   }, [idDesafio]);
 
-  const formattedDeadline = useMemo(
-    () => formatDeadline(desafio?.deadline),
-    [desafio?.deadline]
-  );
-
   return (
     <Container>
       <div className="titulo mb-4">
         <h1>Desafío: {desafio?.title}</h1>
-        <p>Fecha del vencimiento: {formattedDeadline}</p>
         <h2>Tabla de Puntos</h2>
         <Link to={`/desafio/${idDesafio}`} className="btn-tareas">
           Volver a Tareas

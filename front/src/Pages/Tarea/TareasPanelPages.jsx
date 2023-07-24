@@ -6,6 +6,8 @@ import React, {
   useContext,
 } from "react";
 import { Container, Spinner } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+
 import { Link, useParams } from "react-router-dom";
 import {
   useDesafio,
@@ -16,9 +18,10 @@ import {
 } from "../../context/desafioContext";
 import TareaListItem from "../../components/TareaItemListComponente";
 import desafioService from "../../service/desafio.service";
-import { formatDeadline, formatDateForInput } from "../../utils/utils";
 import "../../css/Tarea.css";
 import { FaEdit, FaSave } from "react-icons/fa"; // Importamos los iconos de edición y guardar
+import { toast } from "react-toastify";
+
 
 
 function TareasPanel() {
@@ -27,17 +30,34 @@ function TareasPanel() {
   const [isEditing, setIsEditing] = useState(false); // Estado para alternar entre visualización y edición
   const [editedTitle, setEditedTitle] = useState("");
   const [editedDeadline, setEditedDeadline] = useState("");
+  const [title, setTitle] = useState("");
+  const [deadline, setDeadline] = useState("");
+
 
   const tareas = useTareas();
   const updateTareas = useUpdateTareas();
   const setDesafio = useContext(SetDesafioContext);
 
   const { idDesafio } = useParams();
-  const { desafio, desafioVersion } = useDesafio(); // Utilizar el desafío y la versión del contexto
+
+  // guardo el id del desafio en localStorage 
+  localStorage.setItem("idDesafio", idDesafio);
+
+  const [fetchedDesafio, setFetchedDesafio] = useState({});
+
+  const desafio = useDesafio();
+  console.log("desafio:", desafio);
 
 
 
   useEffect(() => {
+    if (!idDesafio) {
+      // Si no hay idDesafio, obtener el idDesafio del localStorage
+      const idDesafio = localStorage.getItem("idDesafio");
+      console.log("idDesafio:", idDesafio);
+    }
+    
+
     setIsLoading(true);
     desafioService
       .getTasks(idDesafio)
@@ -49,7 +69,9 @@ function TareasPanel() {
           .getChallengeById(idDesafio)
           .then((fetchedDesafio) => {
             const updatedDesafio = { ...fetchedDesafio };
-            setDesafio(updatedDesafio);
+            setFetchedDesafio(updatedDesafio);
+            setTitle (updatedDesafio.title);
+            setDeadline (updatedDesafio.deadline);
             console.log("Desafío actualizado:", updatedDesafio);
           })
           .catch((error) => {
@@ -60,30 +82,49 @@ function TareasPanel() {
         console.error("Error al cargar las tareas:", error);
         setIsLoading(false);
       });
-  }, [idDesafio, desafioVersion, updateTareas]);
+  }, [idDesafio, updateTareas]);
 
-  const formattedDeadline = useMemo(
-    () => formatDeadline(desafio?.deadline),
-    [desafio?.deadline]
-  );
+  const formatDeadline = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${day}-${month}-${year}`;
+  };
+
+  const formattedDeadline = 
+     formatDeadline(fetchedDesafio?.deadline) || "";
+    
+  ;
+
 
   const handleEdit = () => {
     // Al hacer clic en el botón de edición, activamos el modo de edición
     setIsEditing(true);
     // También guardamos los valores actuales del desafío en los estados de edición
-    setEditedTitle(desafio?.title || "");
-    setEditedDeadline(desafio?.deadline || "");
+    setEditedTitle(desafio?.desafio.title || "");
+    setEditedDeadline(desafio?.desafio.deadline || "");
+  
+   
+
   };
 
   const handleSave = () => {
     // Al hacer clic en el botón de guardar, desactivamos el modo de edición y guardamos los cambios
     setIsEditing(false);
+   
     // Actualizamos el desafío con los nuevos datos
-    setDesafio({
-      ...desafio,
+    const updatedDesafio = {
+      ...desafio.desafio,
       title: editedTitle,
       deadline: editedDeadline,
-    });
+    };
+  
+    setDesafio(updatedDesafio);
+  
+    // Actualizamos el desafío en local storage
+    localStorage.setItem("desafio", JSON.stringify(updatedDesafio));
+
 
     // llamar a la API para actualizar el desafío
     desafioService
@@ -93,10 +134,18 @@ function TareasPanel() {
       })
       .then((updatedDesafio) => {
         console.log("Desafío actualizado:", updatedDesafio);
+        setTitle(updatedDesafio.title);
+        setDeadline(updatedDesafio.deadline);
+        toast.success("Desafío actualizado con éxito.");
+
       })
       .catch((error) => {
         console.log("Error al actualizar el desafío:", error);
       });
+
+      
+
+
 
 
     // Aquí deberías realizar alguna lógica para guardar los datos editados, por ejemplo, utilizando desafioService para actualizar el desafío en la base de datos.
@@ -110,43 +159,38 @@ function TareasPanel() {
             // Modo edición
             <>
               <h1>
-                Desafío:{" "}
-                <input
+              
+                <Form.Control
                   type="text"
                   value={editedTitle}
                   onChange={(e) => setEditedTitle(e.target.value)}
                 />
-                <button onClick={handleSave}>
-                  <FaSave />
-                </button>
-              </h1>
+                </h1>
               <p>
                 Fecha del vencimiento:{" "}
-                <input
+                <Form.Control
                   type="date"
                   value={editedDeadline}
                   onChange={(e) => setEditedDeadline(e.target.value)}
                 />
-                <button onClick={handleSave}>
+               
+              </p>
+              <button onClick={handleSave}>
                   <FaSave />
                 </button>
-              </p>
             </>
           ) : (
             // Modo visualización
             <>
               <h1>
-                Desafío: {desafio?.title}{" "}
-                <button onClick={handleEdit}>
-                  <FaEdit />
-                </button>
-              </h1>
+                {desafio?.desafio.title}{" "}
+                             </h1>
               <p>
-                Fecha del vencimiento: {formattedDeadline}{" "}
-                <button onClick={handleEdit}>
+                Fecha del vencimiento: {desafio?.desafio.deadline}{" "}
+                            </p>
+              <button onClick={handleEdit}>
                   <FaEdit />
                 </button>
-              </p>
             </>
           )}
           <h2>Lista de Tareas</h2>

@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Table from "react-bootstrap/Table";
 import Image from "react-bootstrap/Image";
 import winner from "../imagenes/trofeo.png";
 import { useParams } from "react-router-dom";
 import desafioService from "../service/desafio.service.js";
+import { motion } from "framer-motion";
 
 function TablaPuntos() {
   const { idDesafio } = useParams();
@@ -30,36 +31,57 @@ function TablaPuntos() {
     fetchPoints();
   }, [idDesafio]);
 
-  const renderTable = useMemo(() => {
-    return (
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Responsable</th>
-            <th>Puntos</th>
-          </tr>
-        </thead>
-        <tbody>
-          {members.map((member, index) => (
-            <tr key={member._id}>
-              <td>
-                {index === 0 ? (
-                  <Image src={winner} alt="Copa" />
-                ) : (
-                  index + 1
-                )}
-              </td>
-              <td>{member.username}</td>
-              <td>{member.points}</td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-    );
-  }, [members]);
+  // Función para ordenar los miembros por puntaje de mayor a menor
+  const sortMembers = (members) => {
+    return [...members].sort((a, b) => b.points - a.points);
+  };
 
-  return <div>{renderTable}</div>;
+  const sortedMembers = useMemo(() => sortMembers(members), [members]);
+
+  return (
+    <Table striped bordered hover>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Responsable</th>
+          <th>Puntos</th>
+        </tr>
+      </thead>
+      <tbody>
+        {sortedMembers.map((member, index) => (
+          <motion.tr
+            key={member._id}
+            initial={{ backgroundColor: "transparent" }}
+            animate={{
+              backgroundColor: index === 0 ? "#FFD700" : "transparent",
+            }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            style={{
+              fontSize: index === 0 ? "1.1em" : "1em", // Aumenta el tamaño de fuente para el ganador
+              fontWeight: index === 0 ? "bold" : "normal", // Pone en negrita al ganador
+            }}
+          >
+            <td>
+              {index === 0 ? (
+                <motion.div
+                  initial={{ x: 0 }}
+                  animate={{ x: 100 }} // Desplazamiento de la copa solo para el ganador
+                  transition={{ duration: 0.5 }}
+                >
+                  <Image src={winner} alt="Copa" />
+                </motion.div>
+              ) : (
+                index + 1
+              )}
+            </td>
+            <td>{member.username}</td>
+            <td>{member.points}</td>
+          </motion.tr>
+        ))}
+      </tbody>
+    </Table>
+  );
 }
 
 export default TablaPuntos;

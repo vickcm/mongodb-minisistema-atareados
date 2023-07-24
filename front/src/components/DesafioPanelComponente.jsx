@@ -3,22 +3,23 @@ import { Link } from 'react-router-dom';
 import Accordion from "react-bootstrap/Accordion";
 import "../css/PanelDesafioEstilos.css";
 
-import { formatDeadline, getDaysRemaining, getMessage } from "../utils/utils";
+import { formatDeadline, getDaysRemaining, getMessage, formatDateForInput } from "../utils/utils";
 
 // desafio panel puro sin editar 
 function DesafioPanelComponente({ desafio }) {
   const { _id, title, deadline, members } = desafio;
+  console.log(desafio)
 
   const formattedDeadline = formatDeadline(deadline);
   const daysRemaining = getDaysRemaining(deadline);
   const message = getMessage(daysRemaining);
-  console.log(desafio)
+  console.log(desafio.deadline)
 
   return (
     <Accordion defaultActiveKey="0" className="acordion">
       <Accordion.Item eventKey="0">
         <Accordion.Header className="header-acordeon">
-          {title} {formattedDeadline}
+          {title} 
           <div className="iconos">
             {/* Iconos */}
           </div>
@@ -26,7 +27,7 @@ function DesafioPanelComponente({ desafio }) {
         <Accordion.Body>
           <div className="body-acordeon">
             <div className="body-acordeon-izq">
-              <p>Fecha de vencimiento: {formattedDeadline}</p>
+              <p>Fecha de vencimiento: {desafio.deadline}</p>
               <p>{message}</p>
               <p>Equipo:</p>
               <ul className="list-unstyled">

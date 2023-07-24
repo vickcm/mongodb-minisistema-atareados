@@ -17,9 +17,12 @@ function DesafioPanel() {
   useEffect(() => {
     desafioService.getChallenges().then((desafios) => {
       setDesafios(desafios);
+  
     });
   }, []);
 
+
+  console.log(desafios);
   // Obtener la fecha actual
   const fechaActual = new Date();
 

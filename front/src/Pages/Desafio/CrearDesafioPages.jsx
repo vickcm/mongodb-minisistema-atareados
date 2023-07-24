@@ -9,10 +9,11 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import AlertaCrearPerfilComponente from "../../components/AlertaCrearPerfilComponente";
-import { useSession } from "../../context/session.context";
+import { useSetDesafio } from "../../context/desafioContext";
 import "../../css/FormDesafioStyle.css";
 import desafioService from "../../service/desafio.service.js";
 import { toast } from "react-toastify";
+
 
 function TeamMembersInput({ memberInput, onChangeMemberInput, addMember, error }) {
   return (
@@ -57,6 +58,8 @@ function TeamMembers({ members, deleteMember }) {
 }
 
 function FormDesafio() {
+  const {setDesafio} = useSetDesafio();
+
 
   const navigate = useNavigate();
 
@@ -113,6 +116,8 @@ function FormDesafio() {
           toast.success("Desafío creado correctamente");
           setError("");
           navigate("/paneldesafio", { replace: true });
+          setDesafio(challenge);
+          
         })
         .catch((err) => {
           setError(err.error.message);

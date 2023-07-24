@@ -6,13 +6,13 @@ import "../css/TareaPanelComponente.css";
 import { Link } from "react-router-dom";
 import { useDesafio, useSetDesafio, useUpdateTareas } from "../context/desafioContext";
 import taskService from "../service/desafio.service";
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
 
 function TareaListItem({ tarea }) {
-  const notify = () => toast.success("Felicitaciones, tarea Completa, sumaste !" + tarea.points + " puntos)");
+ 
   const {desafio} = useDesafio();
   const {setDesafio} = useSetDesafio();
   const setTareas = useUpdateTareas();
@@ -21,11 +21,14 @@ function TareaListItem({ tarea }) {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const idTarea = tarea._id;
-  const idDesafio = desafio._id;
+  const idDesafio = localStorage.getItem("idDesafio");
   console.log("idTarea:", idTarea);
   console.log("idDesafio:", idDesafio);
-
+ 
   const handleComplete = useCallback(() => {
+
+    console.log("idTarea:", idTarea);
+    console.log("idDesafio:", idDesafio);
     if (!isComplete) {
       setIsButtonDisabled(true);
 
@@ -41,8 +44,11 @@ function TareaListItem({ tarea }) {
         .then(() => {
           console.log("Tarea actualizada");
           setIsComplete(true);
+          console.log("tareaActualizada:", tareaActualizada);
           // Aquí puedes realizar acciones adicionales después de completar la tarea
-          notify();
+          
+          toast.success( tarea.title + " ha sido completada " + " [ "  + tarea.responsible + "] " + "suma " + tarea.points + " puntos");
+          
           // Actualizar el estado del contexto desafio
           const updatedDesafio = { ...desafio };
           const updatedTasks = updatedDesafio.tasks.map((task) => {
@@ -143,7 +149,6 @@ function TareaListItem({ tarea }) {
       </Card.Body>
       <div>
       
-        <ToastContainer />
     
       </div>
     </Card>

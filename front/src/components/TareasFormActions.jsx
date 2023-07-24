@@ -15,6 +15,7 @@ function TareasFormActions({ tarea }) {
   const params = useParams();
   const desafio = useDesafio(); // Obtén el desafío del contexto
   const setDesafio = useSetDesafio();
+  console.log("desafio:", desafio);
 
   const navigate = useNavigate();
   const [title, setTitle] = useState(tarea ? tarea.title : "");
@@ -47,7 +48,7 @@ function TareasFormActions({ tarea }) {
     setPoints(event.target.value);
   };
 
-  console.log (desafio.desafio.members)
+ 
 
   const onSelectMember = (event) => {
     const memberId = event.target.value;
@@ -58,7 +59,15 @@ function TareasFormActions({ tarea }) {
   };
 
   const idTarea = params.idTarea;
-  const idDesafio = params.idDesafio;
+  //obtener de local storage el id del desafio
+  const idDesafio = localStorage.getItem("idDesafio");
+
+
+
+ 
+
+
+  
 
   const solicitarSugerencia = () => {
     if (sugerenciasCount < 5) {
@@ -80,6 +89,7 @@ function TareasFormActions({ tarea }) {
   };
 
   const onSubmit = (event) => {
+    
     event.preventDefault();
 
     if (tarea) {
@@ -98,7 +108,7 @@ function TareasFormActions({ tarea }) {
           // La tarea se ha actualizado exitosamente
           console.log("Tarea actualizada:", response);
           // Obtener las tareas actualizadas después de actualizar la tarea
-          return desafioService.getTasks(params.idDesafio);
+          return desafioService.getTasks(idDesafio);
         })
         .then((tareas) => {
           // Actualizar el estado de las tareas con las tareas obtenidas
@@ -108,7 +118,7 @@ function TareasFormActions({ tarea }) {
           setSelectedMember(null);
           setDesafio({ ...desafio, tasks: tareas });
 
-          navigate(`/desafio/${params.idDesafio}`, { replace: true });
+          navigate(`/desafio/${idDesafio}`, { replace: true });
         })
         .catch((error) => {
           // Error al actualizar la tarea
@@ -125,12 +135,12 @@ function TareasFormActions({ tarea }) {
       };
 
       desafioService
-        .createTask(params.idDesafio, nuevaTarea)
+        .createTask(idDesafio, nuevaTarea)
         .then((response) => {
           // La tarea se ha creado exitosamente
           console.log("Tarea creada:", response);
           // Obtener las tareas actualizadas después de crear la nueva tarea
-          return desafioService.getTasks(params.idDesafio);
+          return desafioService.getTasks(idDesafio);
         })
         .then((tareas) => {
           // Actualizar el estado de las tareas con las tareas obtenidas
@@ -138,9 +148,12 @@ function TareasFormActions({ tarea }) {
           setDescription("");
           setPoints(0);
           setSelectedMember(null);
-          setDesafio({ ...desafio, tasks: tareas });
+          // guardar en local storage el desafio actualizado
 
-          navigate(`/desafio/${params.idDesafio}`, { replace: true });
+          setDesafio({ ...desafio, tasks: tareas });
+          console.log("desafio:", desafio);
+
+          navigate(`/desafio/${idDesafio}`, { replace: true });
         })
         .catch((error) => {
           // Error al crear la tarea
@@ -158,16 +171,16 @@ function TareasFormActions({ tarea }) {
 
   useEffect(() => {
     // Obtener las tareas cuando el componente se monte
-    const id = params.idDesafio;
+   
     desafioService
-      .getTasks(id)
+      .getTasks(idDesafio)
       .then((response) => {
-        console.log("Tarea creada:", response);
+        console.log("Tareas cargadas", response);
       })
       .catch((error) => {
         console.error("Error al cargar las tareas:", error);
       });
-  }, [params.idDesafio]);
+  }, [idDesafio]);
 
   if (isLoading) {
     return <div>Cargando desafío...</div>; // Muestra un mensaje de carga mientras se carga el desafío
