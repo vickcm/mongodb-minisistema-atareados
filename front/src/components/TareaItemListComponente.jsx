@@ -118,6 +118,7 @@ function TareaListItem({ tarea }) {
         console.log("Tarea borrada");
         setIsListed(false); // Actualizar el estado local para que la tarea no se muestre en la lista
         // Aquí puedes realizar acciones adicionales después de borrar la tarea
+        toast.error( tarea.title + " ha sido borrada con éxito"  );
       })
       .catch((error) => {
         console.log("Error al borrar la tarea:", error);
