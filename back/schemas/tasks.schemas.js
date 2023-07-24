@@ -23,6 +23,7 @@ const updateTaskSchema = yup.object().shape({
     .min(1, 'Points must be greater than 0')
     .max(100, 'Points must not exceed 100'),
   isComplete: yup.boolean().default(false),
+  isDeleted: yup.boolean().default(false),
 
 });
 

@@ -183,7 +183,7 @@ function TareasPanel() {
             // Modo visualización
             <>
               <h1>
-                {desafio?.desafio.title}{" "}
+                {desafio?.desafio.title} {" "}
                              </h1>
               <p>
                 Fecha del vencimiento: {desafio?.desafio.deadline}{" "}

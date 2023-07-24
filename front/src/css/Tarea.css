@@ -37,6 +37,26 @@
     text-decoration: none;
 }
 
+.btn-tareas-borrar {
+    background-color: #bd1b1b;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 15px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    margin-right:5px;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+.btn-tareas-borrar:hover{
+    background-color: #8d1414;
+    color: #fff;
+    text-decoration: none;
+}
+
 .btn-tareas-editar{
     background-color: #F5F3ED;
     border: none;

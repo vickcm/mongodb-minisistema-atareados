@@ -16,9 +16,6 @@ function TareaListItem({ tarea }) {
   const {desafio} = useDesafio();
   const {setDesafio} = useSetDesafio();
   const setTareas = useUpdateTareas();
-  const [isListed, setIsListed] = useState(true); // Estado para controlar si la tarea debe ser lista o no
-
-
 
   const [isComplete, setIsComplete] = useState(tarea.isComplete);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
@@ -39,7 +36,6 @@ function TareaListItem({ tarea }) {
         isComplete: true,
         responsible: tarea.responsible,
         points: tarea.points,
-        isDeleted: false,
         // Agrega cualquier otro dato necesario para la actualización de la tarea
       };
 
@@ -79,7 +75,6 @@ function TareaListItem({ tarea }) {
         isComplete: false,
         responsible: tarea.responsible,
         points: tarea.points,
-        isComplete: false,
         // Agrega cualquier otro dato necesario para la actualización de la tarea
       };
 
@@ -110,26 +105,11 @@ function TareaListItem({ tarea }) {
     }
   }, [isComplete, tarea, idDesafio, idTarea, desafio, setDesafio]);
 
-  const handleDelete = useCallback(() => {
-    // Actualizar la tarea para que no se liste más
-    taskService
-      .updateTask(idDesafio, idTarea, { isDeleted: true }) // Enviar isListed al servidor
-      .then(() => {
-        console.log("Tarea borrada");
-        setIsListed(false); // Actualizar el estado local para que la tarea no se muestre en la lista
-        // Aquí puedes realizar acciones adicionales después de borrar la tarea
-      })
-      .catch((error) => {
-        console.log("Error al borrar la tarea:", error);
-        // Maneja el error de borrar la tarea si es necesario
-      });
-  }, [idDesafio, idTarea]);
-
   const completeButtonVariant = useMemo(() => {
     return isComplete ? "secondary" : "primary";
   }, [isComplete]);
 
-  return isListed ? (
+  return (
     <Card style={{ width: "18rem" }}>
       <Card.Body>
         <Card.Title className={`title-card ${isComplete ? "complete" : ""}`}>
@@ -162,18 +142,17 @@ function TareaListItem({ tarea }) {
             >
               Tarea Completada
             </Link>
-            <Link to={`/desafio/${idDesafio}/tareas/${idTarea}/editar`} className="btn-tareas-editar">
-              Editar
-            </Link>
-            <button onClick={handleDelete} className="btn-tareas-borrar">
-              Borrar
-            </button>
+            <Link to={`/desafio/${idDesafio}/tareas/${idTarea}/editar`} className="btn-tareas-editar"> Editar </Link>
           </div>
         )}
+        
       </Card.Body>
-      <div></div>
+      <div>
+      
+    
+      </div>
     </Card>
-  ) : null; // Si isListed es falso, no se muestra la tarjeta en la lista
+  );
 }
 
 export default TareaListItem;

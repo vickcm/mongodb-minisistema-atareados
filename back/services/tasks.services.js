@@ -39,15 +39,25 @@ async function getTasks(challengeId) {
     await client.connect();
     const challenge = await challengesCollection.findOne({ _id: new ObjectId(challengeId) });
     const tasksIds = challenge.tasks;
-    const tasks = await tasksCollection.find({ _id: { $in: tasksIds } }).toArray();
+    const tasks = await tasksCollection.find({ _id: { $in: tasksIds }, isDeleted: { $ne: true } }).toArray();
     return tasks;
 }
 
 async function updateTask(challengeId, taskId, task) {
+  
   await client.connect();
 
   // Obtener el estado anterior de la tarea antes de la edición
   const prevTask = await tasksCollection.findOne({ _id: new ObjectId(taskId) });
+
+  if (task.isDeleted === true) {
+    await tasksCollection.updateOne(
+      { _id: new ObjectId(taskId) },
+      { $set: { isDeleted: true } }
+    );
+    console.log("Tarea eliminada:", task.isDeleted);
+    return task;
+  }
 
   await tasksCollection.updateOne({ _id: new ObjectId(taskId) }, { $set: task });
 

@@ -33,7 +33,7 @@ function TablaPuntosPage() {
   return (
     <Container>
       <div className="titulo mb-4">
-        <h1>Desafío: {desafio?.title}</h1>
+        <h1> {desafio?.title}</h1>
         <h2>Tabla de Puntos</h2>
         <Link to={`/desafio/${idDesafio}`} className="btn-tareas">
           Volver a Tareas
