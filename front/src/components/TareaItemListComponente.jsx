@@ -8,33 +8,25 @@ import { useDesafio, useSetDesafio, useUpdateTareas } from "../context/desafioCo
 import taskService from "../service/desafio.service";
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-
+import { BsTrash3, BsFillPencilFill, BsCheckLg} from "react-icons/bs";
 
 function TareaListItem({ tarea }) {
- 
   const {desafio} = useDesafio();
   const {setDesafio} = useSetDesafio();
   const setTareas = useUpdateTareas();
   const [isListed, setIsListed] = useState(true); // Estado para controlar si la tarea debe ser lista o no
-
-
-
   const [isComplete, setIsComplete] = useState(tarea.isComplete);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-
   const idTarea = tarea._id;
   const idDesafio = localStorage.getItem("idDesafio");
-  console.log("idTarea:", idTarea);
-  console.log("idDesafio:", idDesafio);
- 
-  const handleComplete = useCallback(() => {
+  //console.log("idTarea:", idTarea);
+  //console.log("idDesafio:", idDesafio);
 
-    console.log("idTarea:", idTarea);
-    console.log("idDesafio:", idDesafio);
+  const handleComplete = useCallback(() => {
+    //console.log("idTarea:", idTarea);
+    //console.log("idDesafio:", idDesafio);
     if (!isComplete) {
       setIsButtonDisabled(true);
-
       const tareaActualizada = {
         isComplete: true,
         responsible: tarea.responsible,
@@ -150,14 +142,14 @@ function TareaListItem({ tarea }) {
           </div>
         ) : (
           <div className="d-flex flex-column align-items-start">
-            <Link variant={completeButtonVariant} disabled={isButtonDisabled} onClick={handleComplete} className="btn-tareas-completar">
-              Tarea Completada
+            <Link variant={completeButtonVariant} disabled={isButtonDisabled} onClick={handleComplete} className="btn-tareas-completar" title="tarea completada">
+              <BsCheckLg />
             </Link>
-            <Link to={`/desafio/${idDesafio}/tareas/${idTarea}/editar`} className="btn-tareas-editar mb-2">
-              Editar
+            <Link to={`/desafio/${idDesafio}/tareas/${idTarea}/editar`} className="btn-tareas-editar mb-2" title="editar">
+              <BsFillPencilFill />
             </Link>
-            <button onClick={handleDelete} className="btn-tareas-borrar">
-              Borrar
+            <button onClick={handleDelete} className="btn-tareas-borrar" title="borrar">
+              <BsTrash3 />
             </button>
           </div>
         )}

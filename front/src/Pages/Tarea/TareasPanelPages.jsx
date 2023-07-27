@@ -18,7 +18,7 @@ import {
 import TareaListItem from "../../components/TareaItemListComponente";
 import desafioService from "../../service/desafio.service";
 import "../../css/Tarea.css";
-import { BsCheckCircle, BsFillPencilFill, BsPlusSquare } from "react-icons/bs";
+import { BsCheckCircle, BsFillPencilFill} from "react-icons/bs";
 import { toast } from "react-toastify";
 
 function TareasPanel() {
@@ -165,7 +165,6 @@ function TareasPanel() {
                 <p>
                   {message} 
                 </p>
-                
               </>
             )}
           </div>
