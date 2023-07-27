@@ -17,10 +17,8 @@ function DesafioPanel() {
   useEffect(() => {
     desafioService.getChallenges().then((desafios) => {
       setDesafios(desafios);
-  
     });
   }, []);
-
 
   console.log(desafios);
   // Obtener la fecha actual
@@ -56,33 +54,26 @@ function DesafioPanel() {
   return (
     <>
       <AlertaCrearPerfilComponente />
-      <h1 className="titulo">Panel de Desafíos</h1>
-
-      <Container>
-        <Button className="btn btn-primary" onClick={toggleHistorial}>
-          {showHistorial ? "Desafíos Actuales" : "Historial de Desafíos"}
-        </Button>
-
-        {showHistorial
-          ? historialDesafios.map((desafio) => (
-              <DesafioPanelComponente key={desafio._id} desafio={desafio} />
-            ))
-          : currentDesafios.map((desafio) => (
-              <DesafioPanelComponente key={desafio._id} desafio={desafio} />
-            ))}
-
-        <div className="pagination">
-          <Button disabled={currentPage === 1} onClick={prevPage}>
-            <Image src={ImageArrowLeft} />
-          </Button>
-          <Button
-            disabled={currentDesafios.length < desafiosPerPage}
-            onClick={nextPage}
-          >
-            <Image src={ImageArrowRight} />
-          </Button>
+      <div className="container">
+        <div className="d-flex justify-content-between mt-4">
+          <h1 className="titulo">Panel de Desafíos</h1>
+          <button className="btn-ver-historial" onClick={toggleHistorial}>
+            {showHistorial ? "Historial de Desafíos" : "Desafíos Actuales"}
+          </button>
         </div>
-      </Container>
+        {showHistorial
+          ? historialDesafios.map((desafio) => (<DesafioPanelComponente key={desafio._id} desafio={desafio} />))
+          : currentDesafios.map((desafio) => (<DesafioPanelComponente key={desafio._id} desafio={desafio} />))
+        }
+      </div>
+      <div className="pagination">
+        <Button disabled={currentPage === 1} onClick={prevPage}>
+          <Image src={ImageArrowLeft} />
+        </Button>
+        <Button disabled={currentDesafios.length < desafiosPerPage} onClick={nextPage}>
+          <Image src={ImageArrowRight} />
+        </Button>
+      </div>
     </>
   );
 }

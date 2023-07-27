@@ -31,14 +31,17 @@ function TablaPuntosPage() {
   }, [idDesafio]);
 
   return (
-    <Container>
-      <div className="titulo mb-4">
-        <h1> {desafio?.title}</h1>
+    <>
+    <div className="container">
+      <h1 className="text-center mt-3 mb-3"> {desafio?.title}</h1>
+      <div className="d-flex justify-content-between mb-4">
         <h2>Tabla de Puntos</h2>
         <Link to={`/desafio/${idDesafio}`} className="btn-tareas">
           Volver a Tareas
         </Link>
       </div>
+    </div>
+    <Container>
       {isLoading ? (
         <Spinner animation="border" role="status">
           <span className="visually-hidden">Cargando...</span>
@@ -49,6 +52,7 @@ function TablaPuntosPage() {
         </>
       )}
     </Container>
+    </>
   );
 }
 

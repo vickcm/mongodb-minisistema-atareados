@@ -7,7 +7,6 @@ import React, {
 } from "react";
 import { Container, Spinner } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-
 import { Link, useParams } from "react-router-dom";
 import {
   useDesafio,
@@ -19,10 +18,8 @@ import {
 import TareaListItem from "../../components/TareaItemListComponente";
 import desafioService from "../../service/desafio.service";
 import "../../css/Tarea.css";
-import { FaEdit, FaSave } from "react-icons/fa"; // Importamos los iconos de edición y guardar
+import { BsCheckCircle, BsFillPencilFill, BsPlusSquare } from "react-icons/bs";
 import { toast } from "react-toastify";
-
-
 
 function TareasPanel() {
   const [isLoading, setIsLoading] = useState(true);
@@ -32,23 +29,18 @@ function TareasPanel() {
   const [editedDeadline, setEditedDeadline] = useState("");
   const [title, setTitle] = useState("");
   const [deadline, setDeadline] = useState("");
-
-
   const tareas = useTareas();
   const updateTareas = useUpdateTareas();
   const setDesafio = useContext(SetDesafioContext);
-
   const { idDesafio } = useParams();
 
   // guardo el id del desafio en localStorage 
   localStorage.setItem("idDesafio", idDesafio);
 
   const [fetchedDesafio, setFetchedDesafio] = useState({});
-
   const desafio = useDesafio();
+  const { members, message} = desafio;
   console.log("desafio:", desafio);
-
-
 
   useEffect(() => {
     if (!idDesafio) {
@@ -56,7 +48,6 @@ function TareasPanel() {
       const idDesafio = localStorage.getItem("idDesafio");
       console.log("idDesafio:", idDesafio);
     }
-    
 
     setIsLoading(true);
     desafioService
@@ -93,10 +84,8 @@ function TareasPanel() {
   };
 
   const formattedDeadline = 
-     formatDeadline(fetchedDesafio?.deadline) || "";
-    
+    formatDeadline(fetchedDesafio?.deadline) || "";
   ;
-
 
   const handleEdit = () => {
     // Al hacer clic en el botón de edición, activamos el modo de edición
@@ -104,15 +93,11 @@ function TareasPanel() {
     // También guardamos los valores actuales del desafío en los estados de edición
     setEditedTitle(desafio?.desafio.title || "");
     setEditedDeadline(desafio?.desafio.deadline || "");
-  
-   
-
   };
 
   const handleSave = () => {
     // Al hacer clic en el botón de guardar, desactivamos el modo de edición y guardamos los cambios
     setIsEditing(false);
-   
     // Actualizamos el desafío con los nuevos datos
     const updatedDesafio = {
       ...desafio.desafio,
@@ -125,7 +110,6 @@ function TareasPanel() {
     // Actualizamos el desafío en local storage
     localStorage.setItem("desafio", JSON.stringify(updatedDesafio));
 
-
     // llamar a la API para actualizar el desafío
     desafioService
       .updateChallenge(idDesafio, {
@@ -137,68 +121,69 @@ function TareasPanel() {
         setTitle(updatedDesafio.title);
         setDeadline(updatedDesafio.deadline);
         toast.success("Desafío actualizado con éxito.");
-
       })
       .catch((error) => {
         console.log("Error al actualizar el desafío:", error);
       });
-
-      
-
-
-
-
     // Aquí deberías realizar alguna lógica para guardar los datos editados, por ejemplo, utilizando desafioService para actualizar el desafío en la base de datos.
   };
 
   return (
     <>
     <Container>
-        <div className="titulo">
-          {isEditing ? (
-            // Modo edición
-            <>
-              <h1>
-              
-                <Form.Control
-                  type="text"
-                  value={editedTitle}
-                  onChange={(e) => setEditedTitle(e.target.value)}
-                />
+        <div className="row desafio-contenedor mt-3">
+          <div className="col-12 col-md-7 desafio-informacion">
+            {isEditing ? (
+              // Modo edición
+              <>
+                <h1>
+                  <Form.Control type="text" value={editedTitle} onChange={(e) => setEditedTitle(e.target.value)}/>
                 </h1>
-              <p>
-                Fecha del vencimiento:{" "}
-                <Form.Control
-                  type="date"
-                  value={editedDeadline}
-                  onChange={(e) => setEditedDeadline(e.target.value)}
-                />
-               
-              </p>
-              <button onClick={handleSave}>
-                  <FaSave />
+                <p>
+                  Fecha del vencimiento:{" "}
+                  <Form.Control type="date" value={editedDeadline} onChange={(e) => setEditedDeadline(e.target.value)}/>
+                </p>
+                <button onClick={handleSave}  className="btn-editar-desafio" title="guardar desafio">
+                  <BsCheckCircle />
                 </button>
-            </>
-          ) : (
-            // Modo visualización
-            <>
-              <h1>
-                {desafio?.desafio.title} {" "}
-                             </h1>
-              <p>
-                Fecha del vencimiento: {desafio?.desafio.deadline}{" "}
-                            </p>
-              <button onClick={handleEdit}>
-                  <FaEdit />
+              </>
+            ) : (
+              // Modo visualización
+              <>
+              <div className="d-flex justify-content-between">
+                <h1 className="me-3">
+                  {desafio?.desafio.title} {" "}
+                </h1>
+                <button onClick={handleEdit} className="btn-editar-desafio" title="editar desafio">
+                  <BsFillPencilFill />
                 </button>
-            </>
-          )}
-          <h2>Lista de Tareas</h2>
-          <Link
-            to={`/desafio/${idDesafio}/tareas/nueva`}
-            className="btn-tareas"
-          >
-            Crear Tareas
+              </div>
+                
+                <p>
+                  Fecha del vencimiento: {desafio?.desafio.deadline}{" "}
+                </p>
+                <p>
+                  {message} 
+                </p>
+                
+              </>
+            )}
+          </div>
+          <div className="col-12 col-md-4">
+            {/* <p>Equipo:</p>
+            <ul className="list-unstyled">
+              {members.map((member) => (
+                <li key={member._id}>
+                  {member.username}  - {member.email}
+                </li>
+              ))}
+            </ul> */}
+          </div>
+        </div>
+        <div className="d-flex title-tareas mt-5 justify-content-center">
+          <h2 className="me-3">Lista de Tareas</h2>
+          <Link to={`/desafio/${idDesafio}/tareas/nueva`} className="btn-tareas" title="Agregar tarea">
+            +
           </Link>
         </div>
         {isLoading ? (
@@ -210,21 +195,17 @@ function TareasPanel() {
             {tareas.length === 0 ? (
               <p className="p-none-tarea">No hay tareas disponibles.</p>
             ) : (
-              <div>
+              <div className="container">
                 <div className="div-btn-pts">
-                <Link variant="primary"
-                  to={`/desafio/${idDesafio}/tablapuntos`}
-                  className="link-tabla-puntos"
-                >
-                  Ver Tabla de Puntos
-                </Link>
+                  <Link variant="primary" to={`/desafio/${idDesafio}/tablapuntos`} className="link-tabla-puntos">
+                    Ver Tabla de Puntos
+                  </Link>
                 </div>
                 <div className="tareas-list-cards">
                   {tareas.map((tarea) => (
                     <TareaListItem key={tarea._id} tarea={tarea} />
                   ))}
                 </div>
-               
               </div>
             )}
           </>

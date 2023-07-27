@@ -38,17 +38,14 @@ function CreatePerfilPage() {
   const onSubmit = useCallback(
     (event) => {
       event.preventDefault();
-
       if (!username) {
         setError("El nombre de usuario es obligatorio");
         return;
       }
-
       if (!nacimiento) {
         setError("La fecha de nacimiento es obligatoria");
         return;
       }
-
       console.log("submit", username, nacimiento);
       const profileData = {
         username,
@@ -108,22 +105,15 @@ function CreatePerfilPage() {
             </Form.Group>
             
           </Row>
-
           <div className="row justify-content-center my-4">
-          {error && <p className="error-message">{error}</p>}
-
+            {error && <p className="error-message">{error}</p>}
           </div>
-          
-         
-
-
           <div className="aling-button-desafio">
             <Button type="submit"  className="btn-desfio">
               Crear Perfil
             </Button>
           </div>
         </Form>
-      
       </Container>
     </>
   );

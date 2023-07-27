@@ -131,39 +131,29 @@ function TareaListItem({ tarea }) {
   }, [isComplete]);
 
   return isListed ? (
-    <Card style={{ width: "18rem" }}>
-      <Card.Body>
-        <Card.Title className={`title-card ${isComplete ? "complete" : ""}`}>
-          {tarea.title}
-        </Card.Title>
-        <Card.Text>Descripción: {tarea.description}</Card.Text>
-        <p>Responsable: {tarea.responsible}</p>
-        <p>Puntos: {tarea.points}</p>
+    <Card>
+      <Card.Body className="d-flex justify-content-between">
+        <div>
+          <h2 className={`title-card ${isComplete ? "complete" : ""}`}>{tarea.title}</h2>
+          <p className="fw-semibold">Descripción: <span className="fw-normal"> {tarea.description} </span> </p>
+          <p className="fw-semibold">Responsable: <span className="fw-normal"> {tarea.responsible} </span></p>
+          <p className="fw-semibold">Puntos: <span className="fw-normal"> {tarea.points} </span></p>
+        </div>
         {isComplete ? (
           <div className="d-flex flex-column align-items-start">
             <span className="tarea-completada">
               Tarea Completa <Image src={ImageCheck} />
             </span>
-            <Link
-              variant={completeButtonVariant}
-              disabled={isButtonDisabled}
-              onClick={handleComplete}
-              className="btn-tareas-descompletar"
-            >
+            <Link variant={completeButtonVariant} disabled={isButtonDisabled} onClick={handleComplete} className="btn-tareas-descompletar">
               Quitar Completado
             </Link>
           </div>
         ) : (
           <div className="d-flex flex-column align-items-start">
-            <Link
-              variant={completeButtonVariant}
-              disabled={isButtonDisabled}
-              onClick={handleComplete}
-              className="btn-tareas-completar"
-            >
+            <Link variant={completeButtonVariant} disabled={isButtonDisabled} onClick={handleComplete} className="btn-tareas-completar">
               Tarea Completada
             </Link>
-            <Link to={`/desafio/${idDesafio}/tareas/${idTarea}/editar`} className="btn-tareas-editar">
+            <Link to={`/desafio/${idDesafio}/tareas/${idTarea}/editar`} className="btn-tareas-editar mb-2">
               Editar
             </Link>
             <button onClick={handleDelete} className="btn-tareas-borrar">

@@ -9,14 +9,11 @@ import { useDesafio, useSetDesafio } from "../context/desafioContext";
 import desafioService from "../service/desafio.service.js";
 import { useParams, useNavigate } from "react-router-dom";
 
-
 function TareasFormActions({ tarea }) {
-
   const params = useParams();
   const desafio = useDesafio(); // Obtén el desafío del contexto
   const setDesafio = useSetDesafio();
-  console.log("desafio:", desafio);
-
+  //console.log("desafio:", desafio);
   const navigate = useNavigate();
   const [title, setTitle] = useState(tarea ? tarea.title : "");
   const [description, setDescription] = useState(
@@ -28,7 +25,6 @@ function TareasFormActions({ tarea }) {
   );
   const [sugerencia, SetSugerencia] = useState("");
   const [sugerenciasCount, setSugerenciasCount] = useState(0);
-
 
   // Estado para almacenar el miembro seleccionado
   const [isLoading, setIsLoading] = useState(true); // Estado para indicar si se está cargando el desafío
@@ -48,8 +44,6 @@ function TareasFormActions({ tarea }) {
     setPoints(event.target.value);
   };
 
- 
-
   const onSelectMember = (event) => {
     const memberId = event.target.value;
     const selectedMember = desafio.desafio.members.find(
@@ -61,13 +55,6 @@ function TareasFormActions({ tarea }) {
   const idTarea = params.idTarea;
   //obtener de local storage el id del desafio
   const idDesafio = localStorage.getItem("idDesafio");
-
-
-
- 
-
-
-  
 
   const solicitarSugerencia = () => {
     if (sugerenciasCount < 5) {
@@ -89,7 +76,6 @@ function TareasFormActions({ tarea }) {
   };
 
   const onSubmit = (event) => {
-    
     event.preventDefault();
 
     if (tarea) {
@@ -151,8 +137,7 @@ function TareasFormActions({ tarea }) {
           // guardar en local storage el desafio actualizado
 
           setDesafio({ ...desafio, tasks: tareas });
-          console.log("desafio:", desafio);
-
+          //console.log("desafio:", desafio);
           navigate(`/desafio/${idDesafio}`, { replace: true });
         })
         .catch((error) => {
@@ -171,7 +156,6 @@ function TareasFormActions({ tarea }) {
 
   useEffect(() => {
     // Obtener las tareas cuando el componente se monte
-   
     desafioService
       .getTasks(idDesafio)
       .then((response) => {
