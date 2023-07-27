@@ -34,7 +34,6 @@ function useUpdateTareas() {
 export function DesafioProvider({ children }) {
   const [desafio, setDesafio] = useState({});
   const [tareas, setTareas] = useState([]);
-  const [desafioVersion, setDesafioVersion] = useState(0);
 
   const params = useParams();
 
@@ -44,7 +43,6 @@ export function DesafioProvider({ children }) {
       try {
         const fetchedDesafio = await desafioService.getChallengeById(idDesafio);
         setDesafio(fetchedDesafio);
-        setDesafioVersion((prevVersion) => prevVersion + 1);
       } catch (error) {
         console.log("Error al obtener el desafío:", error);
       }
