@@ -20,6 +20,7 @@ import desafioService from "../../service/desafio.service";
 import "../../css/Tarea.css";
 import { BsCheckCircle, BsFillPencilFill } from "react-icons/bs";
 import { toast } from "react-toastify";
+import { getMessage, getDaysRemaining } from "../../utils/utils";
 
 function TareasPanel() {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,12 +30,12 @@ function TareasPanel() {
   const [editedDeadline, setEditedDeadline] = useState("");
   const [title, setTitle] = useState("");
   const [deadline, setDeadline] = useState("");
-  const [message, setMessage] = useState("");
   const [members, setMembers] = useState([]); // [{username: "user1", email: "user1@mail"}
   const tareas = useTareas();
   const updateTareas = useUpdateTareas();
   const setDesafio = useContext(SetDesafioContext);
   const { idDesafio } = useParams();
+  const [message, setMessage] = useState("");
 
   // guardo el id del desafio en localStorage
   localStorage.setItem("idDesafio", idDesafio);
@@ -43,6 +44,7 @@ function TareasPanel() {
   const desafio = useDesafio();
 
   console.log("desafio:", desafio);
+  
 
   useEffect(() => {
     if (!idDesafio) {
@@ -66,6 +68,10 @@ function TareasPanel() {
             setTitle(updatedDesafio.title);
             setDeadline(updatedDesafio.deadline);
             setMembers(updatedDesafio.members);
+            const daysRemaining = getDaysRemaining(updatedDesafio.deadline);
+            const newMessage = getMessage(daysRemaining);
+            setMessage(newMessage);
+            
             console.log("Desafío actualizado:", updatedDesafio);
           })
           .catch((error) => {
@@ -129,7 +135,6 @@ function TareasPanel() {
     // Aquí deberías realizar alguna lógica para guardar los datos editados, por ejemplo, utilizando desafioService para actualizar el desafío en la base de datos.
   };
 
- 
   return (
     <>
       <Container>
@@ -176,7 +181,8 @@ function TareasPanel() {
                 </div>
 
                 <p>Fecha del vencimiento: {deadline || editedDeadline} </p>
-                <p>{/* {message}  */}</p>
+                <p> {message} </p>
+               
               </>
             )}
           </div>

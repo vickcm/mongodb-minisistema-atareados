@@ -3,6 +3,7 @@ body{
     font-family: 'Montserrat', sans-serif;
 }
 
+
 .logo-nav{
     margin-right: 30px !important;
     margin-left: 30px !important;
@@ -84,6 +85,17 @@ body{
     display: flex !important;
     align-items: center !important;
     margin: 5px !important;
+}
+
+/* Pisa colores toastify  */
+.Toastify__progress-bar--success {
+    background: #009688!important;
+}
+
+
+
+.Toastify__toast--success svg {
+    fill: #009688 !important;
 }
 
 @media ((max-width: 768px)) {
